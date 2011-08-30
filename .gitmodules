@@ -1,0 +1,48 @@
+[submodule "bundle/a"]
+	path = bundle/a
+	url = https://github.com/vim-scripts/a.vim.git
+[submodule "bundle/confluencewiki"]
+	path = bundle/confluencewiki
+	url = https://github.com/vim-scripts/confluencewiki.vim.git
+[submodule "bundle/errormarker"]
+	path = bundle/errormarker
+	url = https://github.com/vim-scripts/errormarker.vim.git
+[submodule "bundle/genutils"]
+	path = bundle/genutils
+	url = https://github.com/vim-scripts/genutils.git
+[submodule "bundle/Gundo"]
+	path = bundle/Gundo
+	url = https://github.com/vim-scripts/Gundo.git
+[submodule "bundle/LustyExplorer"]
+	path = bundle/LustyExplorer
+	url = https://github.com/vim-scripts/LustyExplorer.git
+[submodule "bundle/nerdcommenter"]
+	path = bundle/nerdcommenter
+	url = https://github.com/scrooloose/nerdcommenter.git
+[submodule "bundle/OmniCppComplete"]
+	path = bundle/OmniCppComplete
+	url = https://github.com/vim-scripts/OmniCppComplete.git
+[submodule "bundle/perforce"]
+	path = bundle/perforce
+	url = https://github.com/vim-scripts/perforce.git
+[submodule "bundle/taglist"]
+	path = bundle/taglist
+	url = https://github.com/vim-scripts/taglist.vim.git
+[submodule "bundle/TaskList"]
+	path = bundle/TaskList
+	url = https://github.com/vim-scripts/TaskList.vim.git
+[submodule "bundle/TWiki-Syntax"]
+	path = bundle/TWiki-Syntax
+	url = https://github.com/vim-scripts/TWiki-Syntax.git
+[submodule "bundle/UltiSnips"]
+	path = bundle/UltiSnips
+	url = https://github.com/vim-scripts/UltiSnips.git
+[submodule "bundle/git"]
+	path = bundle/git
+	url = git://github.com/motemen/git-vim.git
+[submodule "bundle/pyflakes"]
+	path = bundle/pyflakes
+	url = https://github.com/kevinw/pyflakes-vim.git
+[submodule "bundle/STL-improved"]
+	path = bundle/STL-improved
+	url = https://github.com/vim-scripts/STL-improved.git
