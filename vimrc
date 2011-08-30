@@ -398,6 +398,8 @@ set backspace=eol,start,indent
 " * Misc Applications
 " *
 
+let g:UltiSnipsSnippetDirectories = ["UltiSnips", "snippets"]
+
 let g:p4EnableRuler=1
 let g:p4EnableActiveStatus=1
 let g:p4OptimizeActiveStatus=1
