@@ -43,6 +43,3 @@
 [submodule "bundle/pyflakes"]
 	path = bundle/pyflakes
 	url = https://github.com/kevinw/pyflakes-vim.git
-[submodule "bundle/STL-improved"]
-	path = bundle/STL-improved
-	url = https://github.com/vim-scripts/STL-improved.git
