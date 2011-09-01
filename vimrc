@@ -113,7 +113,7 @@ let OmniCpp_ShowAccess = 1
 let OmniCpp_ShowPrototypeInAbbr = 1
 let OmniCpp_MayCompleteDot = 1
 let OmniCpp_MayCompleteArrow = 1
-let OmniCpp_MayCompleteScope = 1
+"let OmniCpp_MayCompleteScope = 1
 let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 
 " Automatically open and close the popup menu / preview window
@@ -399,6 +399,8 @@ set backspace=eol,start,indent
 " *
 
 let g:UltiSnipsSnippetDirectories = ["UltiSnips", "snippets"]
+"let g:UltiSnipsJumpForwardTrigger = "<c-k>"
+"let g:UltiSnipsJumpForwardTrigger = "<c-j>"
 
 let g:p4EnableRuler=1
 let g:p4EnableActiveStatus=1
@@ -412,7 +414,7 @@ let g:p4CurDirExpr="(isdirectory(expand('%')) ? substitute(expand('%:p'), '\\\\$
 "nmap <C-S><C-S> :setlocal spell!<CR>
 
 " Tag list
-map <C-j> :TlistToggle<CR>
+nmap <C-j> :TlistToggle<CR>
 let Tlist_Close_On_Select=1
 let Tlist_Display_Prototype=1
 let Tlist_Display_Tag_Scope=0
