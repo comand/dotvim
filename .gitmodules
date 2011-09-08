@@ -1,48 +1,64 @@
 [submodule "bundle/a"]
 	path = bundle/a
 	url = https://github.com/vim-scripts/a.vim.git
+    ignore = untracked
 [submodule "bundle/confluencewiki"]
 	path = bundle/confluencewiki
 	url = https://github.com/vim-scripts/confluencewiki.vim.git
+    ignore = untracked
 [submodule "bundle/errormarker"]
 	path = bundle/errormarker
 	url = https://github.com/vim-scripts/errormarker.vim.git
+    ignore = untracked
 [submodule "bundle/genutils"]
 	path = bundle/genutils
 	url = https://github.com/vim-scripts/genutils.git
+    ignore = untracked
 [submodule "bundle/Gundo"]
 	path = bundle/Gundo
 	url = https://github.com/vim-scripts/Gundo.git
+    ignore = untracked
 [submodule "bundle/LustyExplorer"]
 	path = bundle/LustyExplorer
 	url = https://github.com/vim-scripts/LustyExplorer.git
+    ignore = untracked
 [submodule "bundle/nerdcommenter"]
 	path = bundle/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
+    ignore = untracked
 [submodule "bundle/OmniCppComplete"]
 	path = bundle/OmniCppComplete
 	url = https://github.com/vim-scripts/OmniCppComplete.git
+    ignore = untracked
 [submodule "bundle/perforce"]
 	path = bundle/perforce
 	url = https://github.com/vim-scripts/perforce.git
+    ignore = untracked
 [submodule "bundle/taglist"]
 	path = bundle/taglist
 	url = https://github.com/vim-scripts/taglist.vim.git
+    ignore = untracked
 [submodule "bundle/TaskList"]
 	path = bundle/TaskList
 	url = https://github.com/vim-scripts/TaskList.vim.git
+    ignore = untracked
 [submodule "bundle/TWiki-Syntax"]
 	path = bundle/TWiki-Syntax
 	url = https://github.com/vim-scripts/TWiki-Syntax.git
+    ignore = untracked
 [submodule "bundle/UltiSnips"]
 	path = bundle/UltiSnips
 	url = https://github.com/vim-scripts/UltiSnips.git
+    ignore = untracked
 [submodule "bundle/pyflakes"]
 	path = bundle/pyflakes
 	url = https://github.com/kevinw/pyflakes-vim.git
+    ignore = untracked
 [submodule "bundle/SuperTab"]
 	path = bundle/SuperTab
 	url = https://github.com/vim-scripts/SuperTab.git
+    ignore = untracked
 [submodule "bundle/fugitive"]
 	path = bundle/fugitive
 	url = https://github.com/tpope/vim-fugitive.git
+    ignore = untracked
