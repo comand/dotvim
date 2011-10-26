@@ -46,3 +46,6 @@
 [submodule "bundle/SuperTab"]
 	path = bundle/SuperTab
 	url = https://github.com/vim-scripts/SuperTab.git
+[submodule "bundles/argtextobj"]
+	path = bundles/argtextobj
+	url = https://github.com/vim-scripts/argtextobj.vim.git
