@@ -26,4 +26,4 @@ set lines=50 columns=83
 set guioptions-=m
 set guioptions-=T
 
-let &titlestring=expand('%:p:h:t') . "/%t @ %{expand($TREE)}:%{expand($FLAVOR)}"
+let &titlestring="%{expand('%:p:h:t')}/%t @ %{expand($TREE)}:%{expand($FLAVOR)}"
