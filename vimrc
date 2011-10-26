@@ -113,8 +113,10 @@ let OmniCpp_ShowAccess = 1
 let OmniCpp_ShowPrototypeInAbbr = 1
 let OmniCpp_MayCompleteDot = 1
 let OmniCpp_MayCompleteArrow = 1
-"let OmniCpp_MayCompleteScope = 1
+let OmniCpp_MayCompleteScope = 1
 let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+
+"let g:SuperTabDefaultCompletionType = "context"
 
 " Automatically open and close the popup menu / preview window
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
