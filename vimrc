@@ -3,13 +3,28 @@
 
 let mapleader = ','
 
+if has('win32')
+    set directory=.,$TEMP
+endif
+
 " *
 " * Plugins
 " *
 
 filetype off
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+
+let g:pathogen_disabled = []
+
+if !has('ruby')
+    call add(g:pathogen_disabled, 'LustyExplorer')
+endif
+
+" XXX:comand 2011-12-18 WBN if this could check for 'p4' in $PATH.
+if !findfile('$HOME/bin/p4')
+    call add(g:pathogen_disabled, 'perforce')
+endif
+
+call pathogen#infect()
 
 " enable file type detection
 filetype plugin indent on
@@ -44,8 +59,16 @@ set hidden
 " status line configuration
 set report=0
 set noruler
-set statusline=[%F%a]\ %(%r%m%h%w%y%)%=%{perforce#RulerStatus()}\ [ROW\ %04l\,\ COL\ %04c]\ [%P]
 set laststatus=2
+
+function! ScvStatus()
+    if exists('perforce_loaded')
+        return perforce#RulerStatus()
+    endif
+    return ""
+endfunction
+
+set statusline=[%F%a]\ %(%r%m%h%w%y%)%=%{ScvStatus()}\ [ROW\ %04l\,\ COL\ %04c]\ [%P]
 
 " remember info for 10 files, no marks, don't rehighlight search patterns,
 " only save up to 100 lines of registers, restrict input buffer
