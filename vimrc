@@ -23,6 +23,9 @@ syntax enable
 syntax sync fromstart
 colorscheme comand
 
+" Turn off scroll bar.
+set guioptions-=r
+
 " No hilight search by default
 set nohlsearch
 
@@ -146,12 +149,12 @@ augroup END
 let g:load_doxygen_syntax = 1
 
 " in human-language files, automatically format to 78 chars
-autocmd FileType human set formatoptions+=t textwidth=78
+autocmd FileType human set fo+=t tw=78
 
 autocmd FileType perforce set textwidth=78 noet ts=4 sw=4
 
 " for C-like programming, turn on auto-indent, set options
-autocmd FileType c,cpp set cin cino=:0,g0,l1,t0,(0,W4,M1 fo=croq ts=4 et
+autocmd FileType c,cpp set cin cino=:0,g0,l1,t0,(0,W4,M1 fo=croq ts=4 et cc=+3
 
 " for actual C (not C++), if starting a new line in the middle of a
 " comment, automatically insert the comment leader chars.
@@ -189,7 +192,7 @@ nnoremap <M-g> :echo expand("%:p")<CR>
 augroup Python
     au!
     "au BufNewFile *.py 0read ~/.vim/templates/python.py
-    au FileType python set ai si sts=4 sw=4 tw=78 fo=croqt
+    au FileType python set ai si sts=4 sw=4 tw=78 fo=croqt cc=+3
     au FileType python inoremap # X#
     "nmap <F7> :w\|!pychecker %<cr>
     set omnifunc=pythoncomplete#Complete
@@ -537,4 +540,8 @@ if &diff
     nnoremap <C-Q> :confirm qa<CR>
     nnoremap <C-O> do
 endif
+
+" Man pages
+source $VIMRUNTIME/ftplugin/man.vim
+au FileType man set nomod nolist
 
