@@ -27,4 +27,7 @@ set lines=60 columns=83
 set guioptions-=m
 set guioptions-=T
 
+" Turn off scroll bar.
+set guioptions-=r
+
 let &titlestring="%{expand('%:p:h:t')}/%t @ %{expand($TREE)}:%{expand($FLAVOR)}"

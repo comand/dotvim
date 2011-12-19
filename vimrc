@@ -1,18 +1,11 @@
 " Vim/GVim RC file
 "
 
-let mapleader = ','
-
-if has('win32')
-    set directory=.,$TEMP
-endif
-
 " *
 " * Plugins
 " *
 
-filetype off
-
+runtime bundle/pathogen/autoload/pathogen.vim
 let g:pathogen_disabled = []
 
 if !has('ruby')
@@ -26,20 +19,28 @@ endif
 
 call pathogen#infect()
 
-" enable file type detection
-filetype plugin indent on
+" *
+" * Platform
+" *
+
+if has('win32')
+    set directory=.,$TEMP
+endif
 
 " *
 " * User Interface
 " *
 
+let mapleader = ','
+
 " turn on syntax highlighting
-syntax enable
+syntax on
+
+" enable file type detection
+filetype plugin indent on
+
 syntax sync fromstart
 colorscheme comand
-
-" Turn off scroll bar.
-set guioptions-=r
 
 " No hilight search by default
 set nohlsearch
