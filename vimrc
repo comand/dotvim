@@ -3,6 +3,10 @@
 
 let mapleader = ','
 
+if has('win32')
+    set directory=.,$TEMP
+endif
+
 " *
 " * Plugins
 " *
