@@ -12,9 +12,12 @@ if !has('ruby')
     call add(g:pathogen_disabled, 'LustyExplorer')
 endif
 
-" XXX:comand 2011-12-18 WBN if this could check for 'p4' in $PATH.
-if !findfile('$HOME/bin/p4')
-    call add(g:pathogen_disabled, 'perforce')
+" Only enable the Perforce plugin if we can find the p4 binary in $PATH.
+let p4path = findfile('p4', substitute($PATH, ':', ',', 'g'))
+if p4path != ""
+    if !executable(fnamemodify(p4path, ':p'))
+        call add(g:pathogen_disabled, 'perforce')
+    endif
 endif
 
 call pathogen#infect()
@@ -63,6 +66,10 @@ set noruler
 set laststatus=2
 
 function! ScvStatus()
+    " XXX:comand 2011-12-20 WBN if this detected what sort of client we have,
+    " and returned either the perforce ruler or the git ruler. It might be
+    " better still to detect what version control system we're currently using
+    " and disable other source control plugins altogether.
     if exists('perforce_loaded')
         return perforce#RulerStatus()
     endif
@@ -91,6 +98,10 @@ set listchars+=tab:>>,trail:-
 set wmw=0
 set wmh=0
 
+" Automatically open and close the popup menu / preview window
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+set completeopt=menuone,menu,longest,preview
+
 " *
 " * Text Formatting -- General
 " *
@@ -114,40 +125,8 @@ set textwidth=78
 " treat lines starting with a quote mark as comments (e.g. vimrc)
 set comments+=b:\"
 
-" Read tags
-set tags=$SRCROOT/dev/.tags
-set tags+=~/.vim/tags/cpp
-"set tags+=~/.vim/tags/opengl
-set tags+=~/.vim/tags/qt
-set tags+=~/.vim/tags/p4
-"set tags+=~/.vim/tags/oracle
-"set tags+=~/.vim/tags/boost
-
-" Refresh tags in the current tree.
-map <C-F12> :!cd $SRCROOT/dev && ctags -R .<CR>
-
 " Search and replace word under cursor.
 nnoremap <C-S> :,$s/\<<C-R><C-W>\>/
-
-" Reselect visual block after in/dedent.
-"vnoremap < <gv
-"vnoremap > >gv
-
-" OmniCppComplete
-let OmniCpp_NamespaceSearch = 1
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_ShowAccess = 1
-let OmniCpp_ShowPrototypeInAbbr = 1
-let OmniCpp_MayCompleteDot = 1
-let OmniCpp_MayCompleteArrow = 1
-let OmniCpp_MayCompleteScope = 1
-let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
-
-"let g:SuperTabDefaultCompletionType = "context"
-
-" Automatically open and close the popup menu / preview window
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-set completeopt=menuone,menu,longest,preview
 
 " *
 " * Text Formatting -- Specific File Formats
@@ -218,7 +197,6 @@ augroup Python
     "au BufNewFile *.py 0read ~/.vim/templates/python.py
     au FileType python set ai si sts=4 sw=4 tw=78 fo=croqt cc=+3
     au FileType python inoremap # X#
-    "nmap <F7> :w\|!pychecker %<cr>
     set omnifunc=pythoncomplete#Complete
     set comments-=:%
 augroup END
@@ -277,7 +255,7 @@ augroup END
 " * Search & Replace
 " *
 
-" make searches case-insensitive, unless there is an upcase letter
+" make searches case-insensitive, unless there is an upper case letter
 set ignorecase
 set smartcase
 
@@ -427,10 +405,25 @@ set backspace=eol,start,indent
 " * Misc Applications
 " *
 
+" OmniCppComplete
+let OmniCpp_NamespaceSearch = 1
+let OmniCpp_GlobalScopeSearch = 1
+let OmniCpp_ShowAccess = 1
+let OmniCpp_ShowPrototypeInAbbr = 1
+let OmniCpp_MayCompleteDot = 1
+let OmniCpp_MayCompleteArrow = 1
+let OmniCpp_MayCompleteScope = 1
+let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+
+" SuperTab
+"let g:SuperTabDefaultCompletionType = "context"
+
+" Snippets
 let g:UltiSnipsSnippetDirectories = ["UltiSnips", "snippets"]
 "let g:UltiSnipsJumpForwardTrigger = "<c-k>"
 "let g:UltiSnipsJumpForwardTrigger = "<c-j>"
 
+" Perforce
 let g:p4EnableRuler=1
 let g:p4EnableActiveStatus=1
 let g:p4OptimizeActiveStatus=1
@@ -441,6 +434,18 @@ let g:p4CurDirExpr="(isdirectory(expand('%')) ? substitute(expand('%:p'), '\\\\$
 " Spell checking
 "set spelllang=en_us
 "nmap <C-S><C-S> :setlocal spell!<CR>
+
+" Ctags
+set tags=$SRCROOT/dev/.tags
+set tags+=~/.vim/tags/cpp
+"set tags+=~/.vim/tags/opengl
+set tags+=~/.vim/tags/qt
+set tags+=~/.vim/tags/p4
+"set tags+=~/.vim/tags/oracle
+"set tags+=~/.vim/tags/boost
+
+" Refresh tags in the current tree.
+map <C-F12> :!cd $SRCROOT/dev && ctags -R .<CR>
 
 " Tag list
 nmap <C-j> :TlistToggle<CR>
@@ -457,9 +462,6 @@ let Tlist_WinWidth=50
 nmap <C-e> :LustyFilesystemExplorer<CR>
 
 " Buffer explorer
-"nmap <C-B> \be
-"let g:bufExplorerShowRelativePath=1
-"let g:bufExplorerSortBy='number'
 nmap <C-B> :LustyBufferExplorer<CR>
 nmap <C-f> :LustyBufferGrep<CR>
 
@@ -528,13 +530,12 @@ if has("cscope")
     endif
 
     set csverb
-
 endif
 
 " Find using cdpath
 let &path = ',' . substitute($CDPATH, ':', ',', 'g')
-map ,e :e <C-R>=expand("%:p:h") . "/" <CR>
 
+" Open Qt doc for class name under the cursor.
 function! QtClassDoc()
     let qt_dir = "/pixar/d2/sets/tools-37/doc/html/"
     let doc_file = qt_dir . tolower(expand("<cword>")) . ".html"
@@ -542,6 +543,7 @@ function! QtClassDoc()
 endfunction
 map ,c :call QtClassDoc()<CR>
 
+" Lxr for the symbol under the cursor.
 function! LxrSymbol()
     let qbase = "http://lxr.pixar.com/search?"
     let qtree  = "v=menv30"
@@ -552,8 +554,10 @@ function! LxrSymbol()
 endfunction
 map ,l :call LxrSymbol()<CR>
 
+" Quit with confirmation
 nnoremap ,q :confirm qa<CR>
 
+" Task list window position
 let g:tlWindowPosition = 1
 
 " Diff Mode
