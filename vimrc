@@ -12,7 +12,7 @@ if !has('ruby')
     call add(g:pathogen_disabled, 'LustyExplorer')
 endif
 
-" Only enable the Perforce plugin if we can find the p4 binary in $PATH.
+" Check and disable source control modules.
 let p4path = findfile('p4', substitute($PATH, ':', ',', 'g'))
 if p4path != ""
     if !executable(fnamemodify(p4path, ':p'))
@@ -65,18 +65,20 @@ set report=0
 set noruler
 set laststatus=2
 
-function! ScvStatus()
-    " XXX:comand 2011-12-20 WBN if this detected what sort of client we have,
-    " and returned either the perforce ruler or the git ruler. It might be
-    " better still to detect what version control system we're currently using
-    " and disable other source control plugins altogether.
-    if exists('perforce_loaded')
+let g:hasGit = -1
+function! ScmStatus() abort
+    if g:hasGit == -1
+        let g:hasGit = finddir('.git', '.;') != ""
+    endif
+    
+    if g:hasGit == 1
+        return fugitive#statusline()
+    else
         return perforce#RulerStatus()
     endif
-    return ""
 endfunction
 
-set statusline=[%F%a]\ %(%r%m%h%w%y%)%=%{ScvStatus()}\ [ROW\ %04l\,\ COL\ %04c]\ [%P]
+set statusline=[%F%a]\ %(%r%m%h%w%y%)%=%{ScmStatus()}\ [ROW\ %04l\,\ COL\ %04c]\ [%P]
 
 " remember info for 10 files, no marks, don't rehighlight search patterns,
 " only save up to 100 lines of registers, restrict input buffer
