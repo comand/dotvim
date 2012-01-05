@@ -1,7 +1,5 @@
+" * Pathogen {{{
 " *
-" * Pathogen
-" *
-"{{{
 
 runtime bundle/pathogen/autoload/pathogen.vim
 let g:pathogen_disabled = []
@@ -20,21 +18,17 @@ endif
 
 call pathogen#infect()
 
-"}}}
+" }}}
+" * Platform {{{
 " *
-" * Platform
-" *
-"{{{
 
 if has('win32')
     set directory=.,$TEMP
 endif
 
 "}}}
+" * User Interface {{{
 " *
-" * User Interface
-" *
-"{{{
 
 " Enable file type detection
 filetype plugin indent on
@@ -81,7 +75,6 @@ set statusline=[%F%a]\ %(%r%m%h%w%y%)%=%{ScmStatus()}\ [ROW\ %04l\,\ COL\ %04c]\
 " Find using cdpath
 let &path = ',' . substitute($CDPATH, ':', ',', 'g')
 
-
 " Remember info for 10 files, no marks, don't re-highlight search patterns,
 " only save up to 100 lines of registers, restrict input buffer
 "set viminfo=/10,'10,f0,h,\"100,@10
@@ -106,10 +99,8 @@ set completeopt=menuone,menu,longest,preview
 set nofoldenable
 
 "}}}
+" * Text Formatting {{{
 " *
-" * Text Formatting -- General
-" *
-"{{{
 
 " Don't automatically wrap text.
 set nowrap
@@ -141,10 +132,8 @@ set gdefault
 set backspace=eol,start,indent
 
 "}}}
+" * Build Configuration {{{
 " *
-" * Build Configuration
-" *
-"{{{
 
 " Ctags
 set tags=$SRCROOT/dev/.tags
@@ -158,10 +147,8 @@ nnoremap <F6> :make<CR>
 au QuickFixCmdPost make :cwin
 
 "}}}
+" * File Format Options {{{
 " *
-" * File Format Options
-" *
-"{{{
 
 autocmd FileType perl,tcl,css set smartindent
 autocmd FileType html,xhtml,css,xml set fo+=l ts=2 sw=2
@@ -169,18 +156,14 @@ autocmd FileType twiki,confluencewiki set tw=0 wrap fo+=l
 autocmd FileType sieve set ts=2 sw=2
 
 "}}}
+" * Keystrokes: General {{{
 " *
-" * Keystrokes -- General
-" *
-"{{{
 
 let mapleader = ','
 
 "}}}
+" * Keystrokes: Movement {{{
 " *
-" * Keystrokes -- Movement
-" *
-"{{{
 
 " have the h and l cursor keys wrap between lines (like <Space> and <BkSpc> do
 " by default), and ~ converts case over line breaks; also have cursor keys
@@ -202,10 +185,8 @@ omap <F1> <C-C><F1>
 map! <F1> <C-C><F1>
 
 "}}}
+" * Keystrokes: Formatting {{{
 " *
-" * Keystrokes -- Formatting
-" *
-"{{{
 
 " have Y behave analogously to D and C rather than to dd and cc (which is
 " already done by yy):
@@ -215,10 +196,8 @@ noremap Y y$
 nnoremap <C-S> :,$s/\<<C-R><C-W>\>/
 
 "}}}
+" * Keystrokes: Toggles {{{
 " *
-" * Keystrokes -- Toggles
-" *
-"{{{
 
 " Toggle list on/off and report the change.
 nnoremap \tl :set invlist list?<CR>
@@ -244,10 +223,8 @@ nnoremap \th :set invhls hls?<CR>
 nmap <F8> \th
 
 "}}}
+" * Keystrokes: Misc {{{
 " *
-" * Keystrokes -- Misc
-" *
-"{{{
 
 " Show the absolute path of the current buffer.
 nnoremap <M-g> :echo expand("%:p")<CR>
@@ -275,10 +252,8 @@ endfunction
 map ,l :call LxrSymbol()<CR>
 
 "}}}
+" * Plugin Configuration {{{
 " *
-" * Plugin Configuration
-" *
-"{{{
 
 " SuperTab
 "let g:SuperTabDefaultCompletionType = "context"
@@ -334,4 +309,3 @@ source $VIMRUNTIME/ftplugin/man.vim
 au FileType man set nomod nolist
 
 "}}}
-
