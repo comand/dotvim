@@ -170,31 +170,6 @@ autocmd FileType sieve set ts=2 sw=2
 
 "}}}
 " *
-" * Completion and Spelling
-" *
-"{{{
-
-" correct common typos in insert mode
-iabbrev alos        also
-iabbrev aslo        also
-iabbrev becuase     because
-iabbrev teh         the
-iabbrev bianry      binary
-iabbrev seperate    separate
-iabbrev tpyo        typo
-iabbrev colour      color
-iabbrev centre      center
-iabbrev cheque      check
-iabbrev prnt        print
-iabbrev prnit       print
-iabbrev wran        warn
-
-" quick replacements for dates
-iabbrev TODAY <C-R>=strftime("%B %e, %Y")<CR>
-iabbrev NOW <C-R>=strftime("%a %B %e %T %Y")<CR>
-
-"}}}
-" *
 " * Keystrokes -- General
 " *
 "{{{
