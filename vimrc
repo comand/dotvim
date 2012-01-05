@@ -149,6 +149,10 @@ set backspace=eol,start,indent
 " Ctags
 set tags=$SRCROOT/dev/.tags
 
+" Refresh tags in the current tree.
+map <C-F12> :!cd $SRCROOT/dev && ctags -R .<CR>
+
+" Make program
 set makeprg=/home/comand/bin/scons
 nnoremap <F6> :make<CR>
 au QuickFixCmdPost make :cwin
@@ -317,9 +321,6 @@ let g:p4EnableMenu=1
 let g:p4UseExpandedMenu=1
 let g:p4CurDirExpr="(isdirectory(expand('%')) ? substitute(expand('%:p'), '\\\\$', '', '') : '')"
 
-" Refresh tags in the current tree.
-map <C-F12> :!cd $SRCROOT/dev && ctags -R .<CR>
-
 " Tag list
 nmap <C-j> :TlistToggle<CR>
 let Tlist_Close_On_Select=1
@@ -331,7 +332,7 @@ let Tlist_GainFocus_On_ToggleOpen=1
 let Tlist_Show_One_File=1
 let Tlist_WinWidth=50
 
-" Directory Explorer Stuff
+" Directory explorer
 nmap <C-e> :LustyFilesystemExplorer<CR>
 
 " Buffer explorer
