@@ -160,6 +160,7 @@ autocmd FileType sieve set ts=2 sw=2
 " *
 
 let mapleader = ','
+let g:mapleader = ','
 
 "}}}
 " * Keystrokes: Movement {{{
@@ -230,7 +231,10 @@ nmap <F8> \th
 nnoremap <M-g> :echo expand("%:p")<CR>
 
 " Quit with confirmation
-nnoremap ,q :confirm qa<CR>
+nnoremap <leader>q :confirm qa<CR>
+
+" Change directory to current buffer
+map <leader>cd :cd %:p:h<CR>
 
 " Open Qt doc for class name under the cursor.
 function! QtClassDoc()
@@ -238,7 +242,7 @@ function! QtClassDoc()
     let doc_file = qt_dir . tolower(expand("<cword>")) . ".html"
     silent execute "!xdg-open " . doc_file | redraw!
 endfunction
-map ,c :call QtClassDoc()<CR>
+map <leader>qt :call QtClassDoc()<CR>
 
 " Lxr for the symbol under the cursor.
 function! LxrSymbol()
@@ -249,7 +253,7 @@ function! LxrSymbol()
     let qurl   = qbase . qtree . "&" . qfile . "&" . qopts . "&string=" . expand("<cword>")
     silent execute "!xdg-open \"" . qurl . "\"" | redraw!
 endfunction
-map ,l :call LxrSymbol()<CR>
+map <leader>lx :call LxrSymbol()<CR>
 
 "}}}
 " * Plugin Configuration {{{
@@ -260,8 +264,6 @@ map ,l :call LxrSymbol()<CR>
 
 " Snippets
 let g:UltiSnipsSnippetDirectories = ["UltiSnips", "snippets"]
-"let g:UltiSnipsJumpForwardTrigger = "<c-k>"
-"let g:UltiSnipsJumpForwardTrigger = "<c-j>"
 
 " Perforce
 let g:p4EnableRuler=1
@@ -272,7 +274,7 @@ let g:p4UseExpandedMenu=1
 let g:p4CurDirExpr="(isdirectory(expand('%')) ? substitute(expand('%:p'), '\\\\$', '', '') : '')"
 
 " Tag list
-nmap <C-j> :TlistToggle<CR>
+nmap <C-t> :TlistToggle<CR>
 let Tlist_Close_On_Select=1
 let Tlist_Display_Prototype=1
 let Tlist_Display_Tag_Scope=0
