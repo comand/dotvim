@@ -238,7 +238,7 @@ map <leader>cd :cd %:p:h<CR>
 
 " Open Qt doc for class name under the cursor.
 function! QtClassDoc()
-    let qt_dir = "/pixar/d2/sets/tools-37/doc/html/"
+    let qt_dir = "/pixar/d2/sets/tools-39/doc/html/"
     let doc_file = qt_dir . tolower(expand("<cword>")) . ".html"
     silent execute "!xdg-open " . doc_file | redraw!
 endfunction
