@@ -10,7 +10,7 @@ endif
 
 " Check and disable source control modules.
 let p4path = findfile('p4', substitute($PATH, ':', ',', 'g'))
-if p4path == ''
+if empty(p4path)
     call add(g:pathogen_disabled, 'perforce')
 elseif !executable(fnamemodify(p4path, ':p'))
     call add(g:pathogen_disabled, 'perforce')
