@@ -10,10 +10,10 @@ endif
 
 " Check and disable source control modules.
 let p4path = findfile('p4', substitute($PATH, ':', ',', 'g'))
-if p4path != ""
-    if !executable(fnamemodify(p4path, ':p'))
-        call add(g:pathogen_disabled, 'perforce')
-    endif
+if empty(p4path)
+    call add(g:pathogen_disabled, 'perforce')
+elseif !executable(fnamemodify(p4path, ':p'))
+    call add(g:pathogen_disabled, 'perforce')
 endif
 
 call pathogen#infect()
@@ -26,7 +26,7 @@ if has('win32')
     set directory=.,$TEMP
 endif
 
-"}}}
+" }}}
 " * User Interface {{{
 " *
 
@@ -101,7 +101,7 @@ set completeopt=menuone,menu,longest,preview
 " Disable folding by default
 set nofoldenable
 
-"}}}
+" }}}
 " * Text Formatting {{{
 " *
 
@@ -134,7 +134,7 @@ set gdefault
 " insertion, and over indentations:
 set backspace=eol,start,indent
 
-"}}}
+" }}}
 " * Build Configuration {{{
 " *
 
@@ -149,7 +149,7 @@ set makeprg=/home/comand/bin/scons
 nnoremap <F6> :make<CR>
 au QuickFixCmdPost make :cwin
 
-"}}}
+" }}}
 " * File Format Options {{{
 " *
 
@@ -158,14 +158,14 @@ autocmd FileType html,xhtml,css,xml set fo+=l ts=2 sw=2
 autocmd FileType twiki,confluencewiki set tw=0 wrap fo+=l
 autocmd FileType sieve set ts=2 sw=2
 
-"}}}
+" }}}
 " * Keystrokes: General {{{
 " *
 
 let mapleader = ','
 let g:mapleader = ','
 
-"}}}
+" }}}
 " * Keystrokes: Movement {{{
 " *
 
@@ -188,7 +188,7 @@ vmap <F1> <C-C><F1>
 omap <F1> <C-C><F1>
 map! <F1> <C-C><F1>
 
-"}}}
+" }}}
 " * Keystrokes: Formatting {{{
 " *
 
@@ -199,7 +199,7 @@ noremap Y y$
 " Search and replace word under cursor.
 nnoremap <C-S> :,$s/\<<C-R><C-W>\>/
 
-"}}}
+" }}}
 " * Keystrokes: Toggles {{{
 " *
 
@@ -226,7 +226,7 @@ nnoremap <F5> :GundoToggle<CR>
 nnoremap \th :set invhls hls?<CR>
 nmap <F8> \th
 
-"}}}
+" }}}
 " * Keystrokes: Misc {{{
 " *
 
@@ -241,7 +241,7 @@ map <leader>cd :cd %:p:h<CR>
 
 " Open Qt doc for class name under the cursor.
 function! QtClassDoc()
-    let qt_dir = "/pixar/d2/sets/tools-37/doc/html/"
+    let qt_dir = "/pixar/d2/sets/tools-39/doc/html/"
     let doc_file = qt_dir . tolower(expand("<cword>")) . ".html"
     silent execute "!xdg-open " . doc_file | redraw!
 endfunction
@@ -258,7 +258,7 @@ function! LxrSymbol()
 endfunction
 map <leader>lx :call LxrSymbol()<CR>
 
-"}}}
+" }}}
 " * Plugin Configuration {{{
 " *
 
@@ -365,4 +365,4 @@ endif
 source $VIMRUNTIME/ftplugin/man.vim
 au FileType man set nomod nolist
 
-"}}}
+" }}}
