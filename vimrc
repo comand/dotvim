@@ -36,6 +36,7 @@ filetype plugin indent on
 " Syntax highlighting
 syntax on
 syntax sync fromstart
+let g:is_posix = 1
 
 " Color scheme
 colorscheme comand
@@ -65,7 +66,7 @@ function! ScmStatus() abort
     if g:hasGit == -1
         let g:hasGit = finddir('.git', '.;') != ""
     endif
-    
+
     if g:hasGit == 1
         return fugitive#statusline()
     else
@@ -88,7 +89,10 @@ set wildmode=list:longest,full
 
 " When in list mode, keep tabs normal width, display arrows,
 " trailing spaces display '-' characters.
-set listchars+=tab:>>,trail:-
+"set listchars+=tab:>>,trail:-
+set listchars=tab:\ ·,eol:¬
+set listchars+=trail:·
+set listchars+=extends:»,precedes:«
 
 " Set window min width/height
 set wmw=0
