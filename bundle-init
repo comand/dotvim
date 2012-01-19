@@ -1,2 +1,6 @@
 #!/bin/sh
 git submodule update --init --recursive
+for bundle in $(dirname $0)/bundle/*
+do
+    ( cd $bundle ; git checkout master )
+done
