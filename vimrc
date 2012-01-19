@@ -228,7 +228,7 @@ nnoremap <F5> :GundoToggle<CR>
 
 " Toggle highlighting of search matches, and report the change.
 nnoremap \th :set invhls hls?<CR>
-nmap <F8> \th
+nmap <F7> \th
 
 " }}}
 " * Keystrokes: Misc {{{
@@ -281,7 +281,7 @@ let g:p4UseExpandedMenu=1
 let g:p4CurDirExpr="(isdirectory(expand('%')) ? substitute(expand('%:p'), '\\\\$', '', '') : '')"
 
 " Tag list
-nmap <C-t> :TlistToggle<CR>
+nmap <F4> :TlistToggle<CR>
 let Tlist_Close_On_Select=1
 let Tlist_Display_Prototype=1
 let Tlist_Display_Tag_Scope=0
