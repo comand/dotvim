@@ -9,10 +9,7 @@ if !has('ruby')
 endif
 
 " Check and disable source control modules.
-let p4path = findfile('p4', substitute($PATH, ':', ',', 'g'))
-if empty(p4path)
-    call add(g:pathogen_disabled, 'perforce')
-elseif !executable(fnamemodify(p4path, ':p'))
+if empty($P4CONFIG)
     call add(g:pathogen_disabled, 'perforce')
 endif
 
@@ -69,9 +66,11 @@ function! ScmStatus() abort
 
     if g:hasGit == 1
         return fugitive#statusline()
-    else
+    elseif !empty($P4CONFIG)
         return perforce#RulerStatus()
     endif
+
+    return ""
 endfunction
 
 set statusline=[%F%a]\ %(%r%m%h%w%y%)%=%{ScmStatus()}\ [ROW\ %04l\,\ COL\ %04c]\ [%P]
