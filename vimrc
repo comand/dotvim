@@ -141,14 +141,20 @@ set backspace=eol,start,indent
 " * Build Configuration {{{
 " *
 
-" Ctags
-set tags=$SRCROOT/dev/.tags
-
-" Refresh tags in the current tree.
-map <C-F12> :!cd $SRCROOT/dev && ctags -R .<CR>
+" Tags
+if !empty($SRCROOT)
+    set tags=$SRCROOT/dev/.tags
+else
+    set tags=.tags
+endif
 
 " Make program
-set makeprg=/home/comand/bin/scons
+if !empty(findfile('SConscript', '.')) || !empty(findfile('SConstruct', '.'))
+    set makeprg=scons
+elseif !empty(findfile('build.xml'))
+    set makeprg=ant
+endif
+
 nnoremap <F6> :make<CR>
 au QuickFixCmdPost make :cwin
 
