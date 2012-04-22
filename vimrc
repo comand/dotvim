@@ -274,7 +274,7 @@ map <leader>lx :call LxrSymbol()<CR>
 " *
 
 " SuperTab
-"let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabDefaultCompletionType = "context"
 
 " Snippets
 let g:UltiSnipsSnippetDirectories = ["UltiSnips", "snippets"]
