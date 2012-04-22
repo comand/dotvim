@@ -62,15 +62,11 @@
 	path = bundle/pathogen
 	url = https://github.com/tpope/vim-pathogen.git
 	ignore = untracked
-[submodule "bundle/eunuch"]
-	path = bundle/eunuch
-	url = https://github.com/tpope/vim-eunuch.git
-[submodule "bundle/tabular"]
-	path = bundle/tabular
-	url = https://github.com/godlygeek/tabular.git
 [submodule "bundle/supertab"]
 	path = bundle/supertab
 	url = git://github.com/ervandew/supertab.git
+    ignore = untracked
 [submodule "bundle/syntastic"]
 	path = bundle/syntastic
 	url = git://github.com/scrooloose/syntastic.git
+    ignore = untracked
