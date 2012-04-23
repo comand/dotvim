@@ -91,9 +91,9 @@ set wildmode=list:longest,full
 " When in list mode, keep tabs normal width, display arrows,
 " trailing spaces display '-' characters.
 "set listchars+=tab:>>,trail:-
-set listchars=tab:\ ·,eol:¬
-set listchars+=trail:·
-set listchars+=extends:»,precedes:«
+set listchars=tab:\ Â·,eol:Â¬
+set listchars+=trail:Â·
+set listchars+=extends:Â»,precedes:Â«
 
 " Set window min width/height
 set wmw=0
