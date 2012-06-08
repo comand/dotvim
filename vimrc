@@ -139,6 +139,9 @@ set gdefault
 " insertion, and over indentations:
 set backspace=eol,start,indent
 
+" Join sentences with one space, not two.
+set nojoinspaces
+
 " }}}
 " * Build Configuration {{{
 " *
@@ -151,7 +154,7 @@ else
 endif
 
 " Make program
-if !empty(findfile('SConscript', '.')) || !empty(findfile('SConstruct', '.'))
+if !empty(findfile('SConscript')) || !empty(findfile('SConstruct'))
     set makeprg=scons
 elseif !empty(findfile('build.xml'))
     set makeprg=ant
@@ -278,6 +281,13 @@ let g:SuperTabDefaultCompletionType = "context"
 
 " Snippets
 let g:UltiSnipsSnippetDirectories = ["UltiSnips", "snippets"]
+
+" Syntastic
+let g:syntastic_mode_map = { 'passive_filetypes' : ['cpp'] }
+"sign define SyntasticError text=» texthl=error
+"sign define SyntasticWarning text=» texthl=todo
+"sign define SyntasticStyleError text=» texthl=error
+"sign define SyntasticStyleWarning text=» texthl=todo
 
 " Perforce
 let g:p4EnableRuler=1
