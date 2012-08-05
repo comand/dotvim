@@ -160,8 +160,9 @@ elseif !empty(findfile('build.xml'))
     set makeprg=ant
 endif
 
-nnoremap <F6> :make<CR>
-au QuickFixCmdPost make :cwin
+"nnoremap <F6> :make<CR>
+"au QuickFixCmdPost make :cwin
+noremap <F6> :silent! :make \| :redraw! \| :botright :cw<cr>
 
 " }}}
 " * File Format Options {{{
