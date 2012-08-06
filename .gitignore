@@ -1,1 +1,3 @@
-bundle/eclim
+.bundle/eclim
+.netrwhist
+syntax/menva.vim

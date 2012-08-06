@@ -3,7 +3,7 @@
 " *
 
 " Formatting
-setlocal smartindent
+"setlocal smartindent
 setlocal softtabstop=4
 setlocal formatoptions=croqt
 setlocal colorcolumn=+3
