@@ -8,6 +8,10 @@ if !has('ruby')
     call add(g:pathogen_disabled, 'LustyExplorer')
 endif
 
+if !has('clientserver')
+    call add(g:pathogen_disabled, 'AsyncCommand')
+endif
+
 " Check and disable source control modules.
 if empty($P4CONFIG)
     call add(g:pathogen_disabled, 'perforce')
@@ -104,7 +108,9 @@ au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
 
 " Disable folding by default
-set nofoldenable
+if has('folding')
+    set nofoldenable
+endif
 
 " }}}
 " * Text Formatting {{{
@@ -160,9 +166,9 @@ elseif !empty(findfile('build.xml'))
     set makeprg=ant
 endif
 
-"nnoremap <F6> :make<CR>
-"au QuickFixCmdPost make :cwin
-noremap <F6> :silent! :make \| :redraw! \| :botright :cw<cr>
+nnoremap <F6> :make<CR>
+au QuickFixCmdPost make :cwin
+"noremap <F6> :silent! :make \| :redraw! \| :botright :cw<cr>
 
 " }}}
 " * File Format Options {{{
@@ -263,15 +269,15 @@ endfunction
 map <leader>qt :call QtClassDoc()<CR>
 
 " Lxr for the symbol under the cursor.
-function! LxrSymbol()
-    let qbase = "http://lxr.pixar.com/search?"
-    let qtree  = "v=menv30"
-    let qfile  = "filestring=.*\.%28h|cpp|py%29&advanced=1"
-    let qopts  = "advanced=1&casesensitive=1"
-    let qurl   = qbase . qtree . "&" . qfile . "&" . qopts . "&string=" . expand("<cword>")
-    silent execute "!xdg-open \"" . qurl . "\"" | redraw!
-endfunction
-map <leader>lx :call LxrSymbol()<CR>
+"function! LxrSymbol()
+    "let qbase = "http://lxr.pixar.com/search?"
+    "let qtree  = "v=menv30"
+    "let qfile  = "filestring=.*\.%28h|cpp|py%29&advanced=1"
+    "let qopts  = "advanced=1&casesensitive=1"
+    "let qurl   = qbase . qtree . "&" . qfile . "&" . qopts . "&string=" . expand("<cword>")
+    "silent execute "!xdg-open \"" . qurl . "\"" | redraw!
+"endfunction
+"map <leader>lx :call LxrSymbol()<CR>
 
 " }}}
 " * Plugin Configuration {{{
@@ -386,5 +392,10 @@ endif
 " Man pages
 source $VIMRUNTIME/ftplugin/man.vim
 au FileType man set nomod nolist
+
+" Grok
+let g:grok_project = 'mainline'
+map <leader>gf :call grok#FullSearch()<CR>
+map <leader>gx :call grok#XRef()<CR>
 
 " }}}
