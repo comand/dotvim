@@ -286,6 +286,12 @@ map <leader>qt :call QtClassDoc()<CR>
 " SuperTab
 let g:SuperTabDefaultCompletionType = "context"
 
+autocmd FileType *
+    \ if &omnifunc != '' |
+    \   call SuperTabChain(&omnifunc, "<c-p>") |
+    \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+    \ endif
+
 " Snippets
 let g:UltiSnipsSnippetDirectories = ["UltiSnips", "snippets"]
 
