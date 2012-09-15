@@ -70,3 +70,7 @@
 	path = bundle/syntastic
 	url = git://github.com/scrooloose/syntastic.git
     ignore = untracked
+[submodule "bundle/AsyncCommand"]
+	path = bundle/AsyncCommand
+	url = git://github.com/vim-scripts/AsyncCommand.git
+    ignore = untracked

@@ -1,1 +1,4 @@
 bundle/eclim
+bundle/Grok
+.netrwhist
+syntax/menva.vim

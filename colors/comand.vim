@@ -12,7 +12,7 @@ if exists("syntax_on")
 endif
 let g:colors_name = "comand"
 
-hi ColorColumn ctermbg=lightgrey guibg=lightgrey
+hi ColorColumn ctermbg=lightgrey guibg=#f0f0f0
 hi Comment term=bold ctermfg=Blue guifg=Blue
 hi Normal guifg=black guibg=white
 hi Constant term=underline ctermfg=Magenta guifg=Magenta
