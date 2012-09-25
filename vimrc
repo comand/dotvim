@@ -343,6 +343,9 @@ let g:tlWindowPosition = 1
 
 " Powerline
 let g:Powerline_symbols = 'fancy'
+let g:Powerline_theme = 'comand'
+let g:Powerline_colorscheme = 'comand'
+let g:Powerline_cache_file = '/var/tmp/Powerline_comand_comand_fancy.cache'
 
 " CScope support
 if has("cscope")

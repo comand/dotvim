@@ -82,3 +82,7 @@
 	path = bundle/abolish
 	url = git://github.com/tpope/vim-abolish.git
     ignore = untracked
+[submodule "bundle/powerline"]
+	path = bundle/powerline
+	url = git://github.com/Lokaltog/vim-powerline.git
+    ignore = untracked
