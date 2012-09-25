@@ -43,6 +43,7 @@ let g:is_posix = 1
 
 " Color scheme
 colorscheme comand
+set t_Co=256
 
 " No hilight search by default
 set nohlsearch
@@ -67,6 +68,7 @@ set laststatus=2
 " Allow the cursor to move freely in virtual block mode (Ctrl-V)
 set virtualedit=block
 
+" Customize the status bar if powerline is not loaded.
 let g:hasGit = -1
 function! ScmStatus() abort
     if g:hasGit == -1
@@ -82,7 +84,9 @@ function! ScmStatus() abort
     return ""
 endfunction
 
-set statusline=[%F%a]\ %(%r%m%h%w%y%)%=%{ScmStatus()}\ [ROW\ %04l\,\ COL\ %04c]\ [%P]
+if !exists('g:Powerline_loaded')
+    set statusline=[%F%a]\ %(%r%m%h%w%y%)%=%{ScmStatus()}\ [ROW\ %04l\,\ COL\ %04c]\ [%P]
+endif
 
 " Find using cdpath
 let &path = ',' . substitute($CDPATH, ':', ',', 'g')
@@ -336,6 +340,9 @@ nmap <C-H> :A<CR>
 
 " Task list window position
 let g:tlWindowPosition = 1
+
+" Powerline
+let g:Powerline_symbols = 'fancy'
 
 " CScope support
 if has("cscope")
