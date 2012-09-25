@@ -64,6 +64,9 @@ set report=0
 set noruler
 set laststatus=2
 
+" Allow the cursor to move freely in virtual block mode (Ctrl-V)
+set virtualedit=block
+
 let g:hasGit = -1
 function! ScmStatus() abort
     if g:hasGit == -1
@@ -268,16 +271,16 @@ function! QtClassDoc()
 endfunction
 map <leader>qt :call QtClassDoc()<CR>
 
-" Lxr for the symbol under the cursor.
-"function! LxrSymbol()
-    "let qbase = "http://lxr.pixar.com/search?"
-    "let qtree  = "v=menv30"
-    "let qfile  = "filestring=.*\.%28h|cpp|py%29&advanced=1"
-    "let qopts  = "advanced=1&casesensitive=1"
-    "let qurl   = qbase . qtree . "&" . qfile . "&" . qopts . "&string=" . expand("<cword>")
-    "silent execute "!xdg-open \"" . qurl . "\"" | redraw!
-"endfunction
-"map <leader>lx :call LxrSymbol()<CR>
+" Launch a terminal in the current working directory
+function! Terminal()
+    silent execute "!gnome-terminal --working-directory=" . getcwd() | redraw!
+endfunction
+map <leader>r :call Terminal()<CR>
+
+" Change working directory to buffer automatically
+"set autochdir
+" Switch directory back to buffer
+"nnoremap ,cd :cd %:p:h<CR>
 
 " }}}
 " * Plugin Configuration {{{
@@ -396,9 +399,11 @@ if &diff
 endif
 
 " Eclim mappings
-nnoremap <silent> <buffer> <leader>i :JavaImport<cr>
-nnoremap <silent> <buffer> <leader>d :JavaDocSearch -x declarations<cr>
-nnoremap <silent> <buffer> <cr> :JavaSearchContext<cr>
+if exists('g:vimplugin_running')
+    nnoremap <silent> <buffer> <leader>i :JavaImport<cr>
+    nnoremap <silent> <buffer> <leader>d :JavaDocSearch -x declarations<cr>
+    nnoremap <silent> <buffer> <cr> :JavaSearchContext<cr>
+endif
 
 " Man pages
 source $VIMRUNTIME/ftplugin/man.vim
