@@ -54,7 +54,7 @@ let g:Powerline#Colorschemes#comand#colorscheme = Pl#Colorscheme#Init([
 		\ 's': ['white', 'gray5', ['bold']],
 		\ }),
 	\
-	\ Pl#Hi#Segments(['branch', 'scrollpercent', 'raw', 'filesize'], {
+	\ Pl#Hi#Segments(['branch', 'status', 'scrollpercent', 'raw', 'filesize'], {
 		\ 'n': ['gray9', 'gray4'],
 		\ 'N': ['gray4', 'gray1'],
 		\ 'i': ['mediumcyan', 'darkblue'],
@@ -110,57 +110,34 @@ let g:Powerline#Colorschemes#comand#colorscheme = Pl#Colorscheme#Init([
 		\ 'n': ['white', 'brightred', ['bold']],
 		\ }),
 	\
-	\ Pl#Hi#Segments(['gundo:static_str.name', 'command_t:static_str.name'], {
+	\ Pl#Hi#Segments(['gundo:static_str.name'], {
 		\ 'n': ['white', 'mediumred', ['bold']],
 		\ 'N': ['brightred', 'darkestred', ['bold']],
 		\ }),
 	\
-	\ Pl#Hi#Segments(['gundo:static_str.buffer', 'command_t:raw.line'], {
+	\ Pl#Hi#Segments(['gundo:static_str.buffer'], {
 		\ 'n': ['white', 'darkred'],
 		\ 'N': ['brightred', 'darkestred'],
 		\ }),
 	\
-	\ Pl#Hi#Segments(['gundo:SPLIT', 'command_t:SPLIT'], {
+	\ Pl#Hi#Segments(['gundo:SPLIT'], {
 		\ 'n': ['white', 'darkred'],
 		\ 'N': ['white', 'darkestred'],
 		\ }),
 	\
-	\ Pl#Hi#Segments(['lustyexplorer:static_str.name'], {
+	\ Pl#Hi#Segments(['le_files:static_str.name', 'le_buffers:static_str.name', 'le_grep:static_str.name'], {
 		\ 'n': ['white', 'mediumgreen', ['bold']],
 		\ 'N': ['mediumgreen', 'darkestgreen', ['bold']],
 		\ }),
 	\
-	\ Pl#Hi#Segments(['lustyexplorer:static_str.buffer'], {
+	\ Pl#Hi#Segments(['le_files:static_str.buffer', 'le_buffers:static_str.buffer', 'le_grep:static_str.buffer'], {
 		\ 'n': ['brightgreen', 'darkgreen'],
 		\ 'N': ['mediumgreen', 'darkestgreen'],
 		\ }),
 	\
-	\ Pl#Hi#Segments(['lustyexplorer:SPLIT'], {
+	\ Pl#Hi#Segments(['le_files:SPLIT', 'le_buffers:SPLIT', 'le_grep:SPLIT'], {
 		\ 'n': ['white', 'darkgreen'],
 		\ 'N': ['white', 'darkestgreen'],
 		\ }),
 	\
-	\ Pl#Hi#Segments(['ctrlp:focus', 'ctrlp:byfname'], {
-		\ 'n': ['brightpurple', 'darkestpurple'],
-		\ }),
-	\
-	\ Pl#Hi#Segments(['ctrlp:prev', 'ctrlp:next', 'ctrlp:pwd'], {
-		\ 'n': ['white', 'mediumpurple'],
-		\ }),
-	\
-	\ Pl#Hi#Segments(['ctrlp:item'], {
-		\ 'n': ['darkestpurple', 'white', ['bold']],
-		\ }),
-	\
-	\ Pl#Hi#Segments(['ctrlp:marked'], {
-		\ 'n': ['brightestred', 'darkestpurple', ['bold']],
-		\ }),
-	\
-	\ Pl#Hi#Segments(['ctrlp:count'], {
-		\ 'n': ['darkestpurple', 'white'],
-		\ }),
-	\
-	\ Pl#Hi#Segments(['ctrlp:SPLIT'], {
-		\ 'n': ['white', 'darkestpurple'],
-		\ }),
 	\ ])

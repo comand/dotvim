@@ -6,7 +6,6 @@ let g:Powerline#Themes#comand#theme = Pl#Theme#Create(
 		\ , 'fileinfo'
 		\ , 'syntastic:errors'
 		\ , Pl#Segment#Truncate()
-		\ , 'tagbar:currenttag'
 		\ , Pl#Segment#Split()
 		\ , 'filetype'
 		\ , 'scrollpercent'
@@ -43,21 +42,21 @@ let g:Powerline#Themes#comand#theme = Pl#Theme#Create(
 		\ , 'scrollpercent'
 	\ ),
 	\
-	\ Pl#Theme#Buffer('lustyexplorer_buffers'
+	\ Pl#Theme#Buffer('le_buffers'
 		\ , ['static_str.name', 'LustyExplorer']
-		\ , ['static_str.buffer', 'Buffer list']
+		\ , ['static_str.buffer', 'Buffers']
 		\ , Pl#Segment#Truncate()
 		\ , Pl#Segment#Split()
 	\ ),
 	\
-	\ Pl#Theme#Buffer('lustyexplorer_buffergrep'
+	\ Pl#Theme#Buffer('le_grep'
 		\ , ['static_str.name', 'LustyExplorer']
-		\ , ['static_str.buffer', 'Buffer grep']
+		\ , ['static_str.buffer', 'Grep']
 		\ , Pl#Segment#Truncate()
 		\ , Pl#Segment#Split()
 	\ ),
 	\
-	\ Pl#Theme#Buffer('lustyexplorer_files'
+	\ Pl#Theme#Buffer('le_files'
 		\ , ['static_str.name', 'LustyExplorer']
 		\ , ['static_str.buffer', 'Files']
 		\ , Pl#Segment#Truncate()

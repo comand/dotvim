@@ -68,26 +68,6 @@ set laststatus=2
 " Allow the cursor to move freely in virtual block mode (Ctrl-V)
 set virtualedit=block
 
-" Customize the status bar if powerline is not loaded.
-let g:hasGit = -1
-function! ScmStatus() abort
-    if g:hasGit == -1
-        let g:hasGit = finddir('.git', '.;') != ""
-    endif
-
-    if g:hasGit == 1
-        return fugitive#statusline()
-    elseif !empty($P4CONFIG)
-        return perforce#RulerStatus()
-    endif
-
-    return ""
-endfunction
-
-if !exists('g:Powerline_loaded')
-    set statusline=[%F%a]\ %(%r%m%h%w%y%)%=%{ScmStatus()}\ [ROW\ %04l\,\ COL\ %04c]\ [%P]
-endif
-
 " Find using cdpath
 let &path = ',' . substitute($CDPATH, ':', ',', 'g')
 
@@ -310,11 +290,9 @@ let g:syntastic_mode_map = { 'passive_filetypes' : ['cpp'] }
 "sign define SyntasticStyleWarning text=» texthl=todo
 
 " Perforce
-let g:p4EnableRuler=1
+let g:p4EnableRuler=0
 let g:p4EnableActiveStatus=1
 let g:p4OptimizeActiveStatus=1
-let g:p4EnableMenu=1
-let g:p4UseExpandedMenu=1
 let g:p4CurDirExpr="(isdirectory(expand('%')) ? substitute(expand('%:p'), '\\\\$', '', '') : '')"
 
 " Tag list
