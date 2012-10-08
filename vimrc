@@ -270,7 +270,7 @@ map <leader>r :call Terminal()<CR>
 " * Plugin Configuration {{{
 " *
 
-" SuperTab
+" SuperTab {{{
 let g:SuperTabDefaultCompletionType = "context"
 
 autocmd FileType *
@@ -279,23 +279,26 @@ autocmd FileType *
     \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
     \ endif
 
-" Snippets
-let g:UltiSnipsSnippetDirectories = ["UltiSnips", "snippets"]
+" }}}
 
-" Syntastic
+" Snippets {{{
+let g:UltiSnipsSnippetDirectories = ["UltiSnips", "snippets"]
+" }}}
+
+" Syntastic {{{
 let g:syntastic_mode_map = { 'passive_filetypes' : ['cpp'] }
 "sign define SyntasticError text=» texthl=error
 "sign define SyntasticWarning text=» texthl=todo
 "sign define SyntasticStyleError text=» texthl=error
 "sign define SyntasticStyleWarning text=» texthl=todo
+" }}}
 
-" Perforce
+" Perforce {{{
 let g:p4EnableRuler=0
-let g:p4EnableActiveStatus=1
-let g:p4OptimizeActiveStatus=1
 let g:p4CurDirExpr="(isdirectory(expand('%')) ? substitute(expand('%:p'), '\\\\$', '', '') : '')"
+" }}}
 
-" Tag list
+" Tag list {{{
 nmap <F4> :TlistToggle<CR>
 let Tlist_Close_On_Select=1
 let Tlist_Display_Prototype=1
@@ -305,79 +308,50 @@ let Tlist_Exit_Only_Window=1
 let Tlist_GainFocus_On_ToggleOpen=1
 let Tlist_Show_One_File=1
 let Tlist_WinWidth=50
+" }}}
 
-" Directory explorer
+" Directory explorer {{{
 nmap <C-e> :LustyFilesystemExplorer<CR>
+" }}}
 
-" Buffer explorer
+" Buffer explorer {{{
 nmap <C-B> :LustyBufferExplorer<CR>
 nmap <C-f> :LustyBufferGrep<CR>
+" }}}
 
-" Alternate
+" Alternate {{{
 nmap <C-H> :A<CR>
+" }}}
 
-" Task list window position
+" Task list {{{
 let g:tlWindowPosition = 1
+" }}}
 
-" Powerline
+" Powerline {{{
 let g:Powerline_symbols = 'fancy'
 let g:Powerline_theme = 'comand'
 let g:Powerline_colorscheme = 'comand'
 let g:Powerline_cache_file = '/var/tmp/Powerline_comand_comand_fancy.cache'
+" }}}
 
-" CScope support
-if has("cscope")
-    " use both cscope and tags for 'ctrl-]', ':ta', and 'vim -t'
-    "set cscopetag
+" Grok {{{
+let g:grok_server = 'grok.pixar.com'
+let g:grok_project = 'mainline'
+map <leader>gf :call grok#FullSearch()<CR>
+map <leader>gd :call grok#DefinitionSearch()<CR>
+map <leader>gs :call grok#SymbolSearch()<CR>
+map <leader>gx :call grok#XRef()<CR>
+" }}}
 
-    " check cscope for definition of a symbol before checking ctags: set to 1
-    " if you want the reverse search order.
-    "set csto=1
-
-    " Search key bindings
-    " ctrl-/
-    "       +s: find all references to symbol under cursor
-    "       +g: find global definition of symbol under cursor
-    "       +c: find calls to function/method under cursor
-    "       +t: find text under cursor
-    "       +e: egrep search text under cursor
-    "       +d: find functions that function under the cursor calls
-    "       +f: open filename under cursor
-    "       +i: find files that include the filename under cursor
-    "
-    nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-    nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-    "
-    " display result in a hsplit
-    "
-    nmap <C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@>g :scs find g <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@>c :scs find c <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@>t :scs find t <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@>e :scs find e <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@>d :scs find d <C-R>=expand("<cword>")<CR><CR>
-    nmap <C-@>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
-    nmap <C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-
-    " add any database in the current directory
-    set nocsverb
-
-    if filereadable("cscope.out")
-        cs add cscope.out
-    elseif $CSCOPE_DB != ""
-        cs add $CSCOPE_DB
-    endif
-
-    set csverb
+" Eclim mappings {{{
+if exists('g:vimplugin_running')
+    nnoremap <silent> <buffer> <leader>i :JavaImport<cr>
+    nnoremap <silent> <buffer> <leader>d :JavaDocSearch -x declarations<cr>
+    nnoremap <silent> <buffer> <cr> :JavaSearchContext<cr>
 endif
+" }}}
 
-" Diff Mode
+" Diff Mode {{{
 if &diff
     nnoremap <C-R> :diffupdate<CR>
     nnoremap <C-N> ]c<CR>
@@ -385,21 +359,11 @@ if &diff
     nnoremap <C-Q> :confirm qa<CR>
     nnoremap <C-O> do
 endif
+" }}}
 
-" Eclim mappings
-if exists('g:vimplugin_running')
-    nnoremap <silent> <buffer> <leader>i :JavaImport<cr>
-    nnoremap <silent> <buffer> <leader>d :JavaDocSearch -x declarations<cr>
-    nnoremap <silent> <buffer> <cr> :JavaSearchContext<cr>
-endif
-
-" Man pages
+" Man mode {{{
 source $VIMRUNTIME/ftplugin/man.vim
 au FileType man set nomod nolist
-
-" Grok
-let g:grok_project = 'mainline'
-map <leader>gf :call grok#FullSearch()<CR>
-map <leader>gx :call grok#XRef()<CR>
+" }}}
 
 " }}}
