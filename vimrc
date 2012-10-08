@@ -335,12 +335,14 @@ let g:Powerline_cache_file = '/var/tmp/Powerline_comand_comand_fancy.cache'
 " }}}
 
 " Grok {{{
-let g:grok_server = 'grok.pixar.com'
-let g:grok_project = 'mainline'
-map <leader>gf :call grok#FullSearch()<CR>
-map <leader>gd :call grok#DefinitionSearch()<CR>
-map <leader>gs :call grok#SymbolSearch()<CR>
-map <leader>gx :call grok#XRef()<CR>
+if exists('g:loaded_grok')
+    let g:grok_server = 'grok.pixar.com'
+    let g:grok_project = 'mainline'
+    map <leader>gf :call grok#FullSearch()<CR>
+    map <leader>gd :call grok#DefinitionSearch()<CR>
+    map <leader>gs :call grok#SymbolSearch()<CR>
+    map <leader>gx :call grok#XRef()<CR>
+endif
 " }}}
 
 " Eclim mappings {{{
