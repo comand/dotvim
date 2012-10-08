@@ -335,22 +335,18 @@ let g:Powerline_cache_file = '/var/tmp/Powerline_comand_comand_fancy.cache'
 " }}}
 
 " Grok {{{
-if exists('g:loaded_grok')
-    let g:grok_server = 'grok.pixar.com'
-    let g:grok_project = 'mainline'
-    map <leader>gf :call grok#FullSearch()<CR>
-    map <leader>gd :call grok#DefinitionSearch()<CR>
-    map <leader>gs :call grok#SymbolSearch()<CR>
-    map <leader>gx :call grok#XRef()<CR>
-endif
+let g:grok_server = 'grok.pixar.com'
+let g:grok_project = 'mainline'
+map <leader>gf :call grok#FullSearch()<CR>
+map <leader>gd :call grok#DefinitionSearch()<CR>
+map <leader>gs :call grok#SymbolSearch()<CR>
+map <leader>gx :call grok#XRef()<CR>
 " }}}
 
 " Eclim mappings {{{
-if exists('g:vimplugin_running')
-    nnoremap <silent> <buffer> <leader>i :JavaImport<cr>
-    nnoremap <silent> <buffer> <leader>d :JavaDocSearch -x declarations<cr>
-    nnoremap <silent> <buffer> <cr> :JavaSearchContext<cr>
-endif
+nnoremap <silent> <buffer> <leader>i :JavaImport<cr>
+nnoremap <silent> <buffer> <leader>d :JavaDocSearch -x declarations<cr>
+nnoremap <silent> <buffer> <cr> :JavaSearchContext<cr>
 " }}}
 
 " Diff Mode {{{
