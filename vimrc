@@ -234,6 +234,10 @@ nnoremap <F5> :GundoToggle<CR>
 nnoremap \th :set invhls hls?<CR>
 nmap <F7> \th
 
+" Toggle fold open/close
+nnoremap <space> za
+vnoremap <space> zf
+
 " }}}
 " * Keystrokes: Misc {{{
 " *
@@ -308,6 +312,10 @@ let Tlist_Exit_Only_Window=1
 let Tlist_GainFocus_On_ToggleOpen=1
 let Tlist_Show_One_File=1
 let Tlist_WinWidth=50
+" }}}
+
+" Ack {{{
+let g:ackprg = 'ag --nogroup --nocolor --column'
 " }}}
 
 " Directory explorer {{{
