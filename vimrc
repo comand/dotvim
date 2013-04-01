@@ -291,10 +291,7 @@ let g:UltiSnipsSnippetDirectories = ["UltiSnips", "snippets"]
 
 " Syntastic {{{
 let g:syntastic_mode_map = { 'passive_filetypes' : ['cpp'] }
-"sign define SyntasticError text=» texthl=error
-"sign define SyntasticWarning text=» texthl=todo
-"sign define SyntasticStyleError text=» texthl=error
-"sign define SyntasticStyleWarning text=» texthl=todo
+let g:syntastic_check_on_open = 1
 " }}}
 
 " Perforce {{{
@@ -340,6 +337,13 @@ let g:Powerline_symbols = 'fancy'
 let g:Powerline_theme = 'comand'
 let g:Powerline_colorscheme = 'comand'
 let g:Powerline_cache_file = '/var/tmp/Powerline_comand_comand_fancy.cache'
+" }}}
+
+" IndentLine {{{
+let g:indentLine_char = "|"
+let g:indentLine_first_char = "|"
+let g:indentLine_fileType = ['python']
+let g:indentLine_color_gui = "Grey85"
 " }}}
 
 " Grok {{{
