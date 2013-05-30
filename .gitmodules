@@ -90,3 +90,6 @@
 	path = bundle/delimitMate
 	url = git://github.com/Raimondi/delimitMate.git
 	ignore = untracked
+[submodule "bundles/python-syntax"]
+	path = bundles/python-syntax
+	url = https://github.com/hdima/python-syntax.git
