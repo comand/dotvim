@@ -94,3 +94,7 @@
 	path = bundle/indentLine
 	url = git://github.com/Yggdroot/indentLine.git
 	ignore = untracked
+[submodule "bundle/delimitMate"]
+	path = bundle/delimitMate
+	url = git://github.com/Raimondi/delimitMate.git
+	ignore = untracked
