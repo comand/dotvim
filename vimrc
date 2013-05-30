@@ -92,7 +92,8 @@ set wmh=0
 
 " Automatically open and close the popup menu / preview window
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-set completeopt=menuone,menu,longest,preview
+"set completeopt=menuone,menu,longest,preview
+set completeopt=longest,menuone
 
 " Disable folding by default
 if has('folding')
@@ -228,11 +229,11 @@ imap <F4> <C-O>\tp
 set pastetoggle=<F4>
 
 " Toggle Gundo window.
-nnoremap <F5> :GundoToggle<CR>
+nnoremap <F8> :GundoToggle<CR>
 
 " Toggle highlighting of search matches, and report the change.
 nnoremap \th :set invhls hls?<CR>
-nmap <F7> \th
+nmap <F3> \th
 
 " Toggle fold open/close
 nnoremap <space> za
@@ -250,20 +251,6 @@ nnoremap <leader>q :confirm qa<CR>
 
 " Change directory to current buffer
 map <leader>cd :cd %:p:h<CR>
-
-" Open Qt doc for class name under the cursor.
-function! QtClassDoc()
-    let qt_dir = "/pixar/d2/sets/tools-39/doc/html/"
-    let doc_file = qt_dir . tolower(expand("<cword>")) . ".html"
-    silent execute "!xdg-open " . doc_file | redraw!
-endfunction
-map <leader>qt :call QtClassDoc()<CR>
-
-" Launch a terminal in the current working directory
-function! Terminal()
-    silent execute "!gnome-terminal --working-directory=" . getcwd() | redraw!
-endfunction
-map <leader>r :call Terminal()<CR>
 
 " Change working directory to buffer automatically
 "set autochdir
@@ -300,7 +287,7 @@ let g:p4CurDirExpr="(isdirectory(expand('%')) ? substitute(expand('%:p'), '\\\\$
 " }}}
 
 " Tag list {{{
-nmap <F4> :TlistToggle<CR>
+nmap <F7> :TlistToggle<CR>
 let Tlist_Close_On_Select=1
 let Tlist_Display_Prototype=1
 let Tlist_Display_Tag_Scope=0
@@ -330,6 +317,7 @@ nmap <C-H> :A<CR>
 
 " Task list {{{
 let g:tlWindowPosition = 1
+nnoremap <silent> <F9> :TaskList<CR>
 " }}}
 
 " Powerline {{{
@@ -377,3 +365,27 @@ au FileType man set nomod nolist
 " }}}
 
 " }}}
+" * Custom Functions {{{
+" *
+
+" Open Perforce timelapse view for the current file.
+function! P4vc_Tlv()
+    silent execute "!p4vc tlv " . expand("%")
+endfunction
+command! Tlv call P4vc_Tlv()
+
+" Open Qt doc for class name under the cursor.
+function! QtClassDoc()
+    let qt_dir = "/pixar/d2/sets/tools-39/doc/html/"
+    let doc_file = qt_dir . tolower(expand("<cword>")) . ".html"
+    silent execute "!xdg-open " . doc_file | redraw!
+endfunction
+map <leader>qt :call QtClassDoc()<CR>
+
+" Launch a terminal in the current working directory
+function! Terminal()
+    silent execute "!gnome-terminal --working-directory=" . getcwd() | redraw!
+endfunction
+map <leader>r :call Terminal()<CR>
+
+"}}}
