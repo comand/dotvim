@@ -70,10 +70,6 @@
 	path = bundle/AsyncCommand
 	url = git://github.com/vim-scripts/AsyncCommand.git
 	ignore = untracked
-[submodule "bundle/repeat"]
-	path = bundle/repeat
-	url = git://github.com/tpope/vim-repeat.git
-	ignore = untracked
 [submodule "bundle/abolish"]
 	path = bundle/abolish
 	url = git://github.com/tpope/vim-abolish.git
