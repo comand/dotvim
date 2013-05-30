@@ -55,6 +55,12 @@ hi link Delimiter	Special
 hi link SpecialComment Special
 hi link Debug		Special
 
+" Popup menu hightLight Group
+highlight Pmenu ctermbg=Blue guibg=LightGray
+highlight PmenuSel ctermbg=DarkRed guibg=DarkBlue guifg=White
+highlight PmenuSbar ctermbg=DarkGrey guibg=DarkGray
+highlight PmenuThumb guibg=Black
+
 hi FoldColumn  gui=bold    guifg=grey65     guibg=Grey90
 hi Folded      gui=italic  guifg=Black      guibg=Grey90
 hi LineNr      gui=NONE    guifg=grey60     guibg=Grey90
