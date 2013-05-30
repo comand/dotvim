@@ -279,6 +279,7 @@ let g:UltiSnipsSnippetDirectories = ["UltiSnips", "snippets"]
 " Syntastic {{{
 let g:syntastic_mode_map = { 'passive_filetypes' : ['cpp'] }
 let g:syntastic_check_on_open = 1
+let g:syntastic_python_checkers = ['pyflakes']
 " }}}
 
 " Perforce {{{
@@ -362,6 +363,10 @@ endif
 " Man mode {{{
 source $VIMRUNTIME/ftplugin/man.vim
 au FileType man set nomod nolist
+" }}}
+
+" Python-syntax {{{
+let b:python_version_2 = 1
 " }}}
 
 " }}}
