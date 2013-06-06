@@ -228,12 +228,12 @@ nmap <F4> \tp
 imap <F4> <C-O>\tp
 set pastetoggle=<F4>
 
-" Toggle Gundo window.
-nnoremap <F8> :GundoToggle<CR>
-
 " Toggle highlighting of search matches, and report the change.
 nnoremap \th :set invhls hls?<CR>
-nmap <F3> \th
+nmap <F5> \th
+
+" Toggle Gundo window.
+nnoremap <F8> :GundoToggle<CR>
 
 " Toggle fold open/close
 nnoremap <space> za
