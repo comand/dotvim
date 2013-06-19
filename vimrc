@@ -233,7 +233,7 @@ nnoremap \th :set invhls hls?<CR>
 nmap <F5> \th
 
 " Toggle Gundo window.
-nnoremap <F8> :GundoToggle<CR>
+nnoremap <F10> :GundoToggle<CR>
 
 " Toggle fold open/close
 nnoremap <space> za
@@ -288,7 +288,7 @@ let g:p4CurDirExpr="(isdirectory(expand('%')) ? substitute(expand('%:p'), '\\\\$
 " }}}
 
 " Tag list {{{
-nmap <F7> :TlistToggle<CR>
+nmap <F9> :TlistToggle<CR>
 let Tlist_Close_On_Select=1
 let Tlist_Display_Prototype=1
 let Tlist_Display_Tag_Scope=0
@@ -318,7 +318,7 @@ nmap <C-H> :A<CR>
 
 " Task list {{{
 let g:tlWindowPosition = 1
-nnoremap <silent> <F9> :TaskList<CR>
+nnoremap <silent> <F8> :TaskList<CR>
 " }}}
 
 " Powerline {{{
