@@ -85,4 +85,8 @@
 [submodule "bundle/python-syntax"]
 	path = bundle/python-syntax
 	url = https://github.com/hdima/python-syntax.git
-    ignore = untracked
+	ignore = untracked
+[submodule "bundle/ag"]
+	path = bundle/ag
+	url = https://github.com/epmatsw/ag.vim.git
+	ignore = untracked
