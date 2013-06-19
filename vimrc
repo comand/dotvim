@@ -380,12 +380,14 @@ endfunction
 command! Tlv call P4vc_Tlv()
 
 " Open Qt doc for class name under the cursor.
-function! QtClassDoc()
+function! QtClassDoc(classname)
     let qt_dir = "/pixar/d2/sets/tools-39/doc/html/"
-    let doc_file = qt_dir . tolower(expand("<cword>")) . ".html"
+    let doc_file = qt_dir . tolower(a:classname) . ".html"
     silent execute "!xdg-open " . doc_file | redraw!
 endfunction
-map <leader>qt :call QtClassDoc()<CR>
+
+map <leader>qt :call QtClassDoc(expand("<cword>"))<CR>
+command! -nargs=1 Qt call QtClassDoc(<f-args>)
 
 " Launch a terminal in the current working directory
 function! Terminal()
