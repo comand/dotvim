@@ -1,50 +1,9 @@
 " * NeoBundle {{{
 " *
 
-set nocompatible
-
-if has('vim_starting')
-    set runtimepath+=~/.vim/bundle/neobundle.vim
+if filereadable(expand('~/.vim/bundle.vim'))
+    source ~/.vim/bundle.vim
 endif
-
-call neobundle#rc(expand('~/.vim/bundle/'))
-
-" Let NeoBundle manage NeoBundle
-NeoBundleFetch 'Shugo/neobundle.vim'
-
-NeoBundle 'epmatsw/ag.vim'
-NeoBundle 'ervandew/supertab'
-NeoBundle 'hdima/python-syntax'
-NeoBundle 'Lokaltog/vim-powerline'
-NeoBundle 'pydave/vim-perforce'
-NeoBundle 'scrooloose/nerdcommenter'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'Shougo/vimproc'
-NeoBundle 'SirVer/ultisnips'
-NeoBundle 'sjbach/lusty'
-NeoBundle 'sjl/gundo.vim'
-NeoBundle 'tpope/vim-abolish'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'Yggdroot/indentLine'
-
-NeoBundle 'vim-scripts/argtextobj.vim'
-NeoBundle 'vim-scripts/a.vim'
-NeoBundle 'vim-scripts/genutils'
-NeoBundle 'vim-scripts/OmniCppComplete'
-NeoBundle 'vim-scripts/taglist.vim'
-NeoBundle 'vim-scripts/TaskList.vim'
-
-NeoBundle 'git://git-master/Grok.vim'
-
-" Check and disable source control modules.
-"if empty($P4CONFIG)
-    "call add(g:pathogen_disabled, 'perforce')
-"endif
-
-" Enable file type detection
-filetype plugin indent on
-
-NeoBundleCheck
 
 " }}}
 " * Platform {{{
@@ -78,11 +37,17 @@ set showcmd
 " Update the xterm title
 set title
 
-" Keep 50 lines of command history
-set history=50
+" Keep 1000 lines of command history
+set history=1000
 
 " Allow buffer switch without saving
 set hidden
+
+if has('persistent_undo')
+    set undofile
+    set undolevels=1000  " Maximum number of changes that can be undone.
+    set undoreload=10000 " Maximum number of lines to save for undo on a reload.
+endif
 
 " Status line configuration
 set report=0
@@ -286,18 +251,30 @@ map <leader>cd :cd %:p:h<CR>
 " * Plugin Configuration {{{
 " *
 
-" SuperTab {{{
-let g:SuperTabDefaultCompletionType = "context"
+" NeoComplete {{{
+let g:acp_enableAtStartup = 0
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
-autocmd FileType *
-    \ if &omnifunc != '' |
-    \   call SuperTabChain(&omnifunc, "<c-p>") |
-    \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-    \ endif
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 " }}}
 
-" Snippets {{{
+" UltiSnips {{{
 let g:UltiSnipsSnippetDirectories = ["UltiSnips", "snippets"]
 " }}}
 
@@ -324,21 +301,10 @@ let Tlist_Show_One_File=1
 let Tlist_WinWidth=50
 " }}}
 
-" Ack {{{
-let g:ackprg = 'ag --nogroup --nocolor --column'
-" }}}
-
-" Directory explorer {{{
+" Lusty {{{
 nmap <C-e> :LustyFilesystemExplorer<CR>
-" }}}
-
-" Buffer explorer {{{
 nmap <C-B> :LustyBufferExplorer<CR>
 nmap <C-f> :LustyBufferGrep<CR>
-" }}}
-
-" Alternate {{{
-nmap <C-H> :A<CR>
 " }}}
 
 " Task list {{{
@@ -369,12 +335,6 @@ map <leader>gs :call grok#SymbolSearch()<CR>
 map <leader>gx :call grok#XRef()<CR>
 " }}}
 
-" Eclim mappings {{{
-nnoremap <silent> <buffer> <leader>i :JavaImport<cr>
-nnoremap <silent> <buffer> <leader>d :JavaDocSearch -x declarations<cr>
-nnoremap <silent> <buffer> <cr> :JavaSearchContext<cr>
-" }}}
-
 " Diff Mode {{{
 if &diff
     nnoremap <C-R> :diffupdate<CR>
@@ -392,6 +352,7 @@ au FileType man set nomod nolist
 
 " Python-syntax {{{
 let b:python_version_2 = 1
+let python_highlight_all = 1
 " }}}
 
 " }}}
