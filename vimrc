@@ -166,6 +166,7 @@ autocmd FileType perl,tcl,css set smartindent
 autocmd FileType html,xhtml,css,xml set fo+=l ts=2 sw=2
 autocmd FileType twiki,confluencewiki set tw=0 wrap fo+=l
 autocmd FileType sieve set ts=2 sw=2
+autocmd FileType human set wrap linebreak tw=78
 
 " }}}
 " * Keystrokes: General {{{
