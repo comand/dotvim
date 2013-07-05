@@ -1,2 +1,3 @@
 .netrwhist
 syntax/menva.vim
+bundle/*
