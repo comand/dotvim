@@ -1,4 +1,0 @@
-#!/bin/sh
-git submodule add $1 $2
-git submodule update --init $2
-( cd $2 ; git checkout master )

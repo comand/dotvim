@@ -1,23 +1,21 @@
-" * Pathogen {{{
+" * NeoBundle {{{
 " *
 
-runtime bundle/pathogen/autoload/pathogen.vim
-let g:pathogen_disabled = []
+set nocompatible
 
-if !has('ruby')
-    call add(g:pathogen_disabled, 'LustyExplorer')
+if has('vim_starting')
+    set runtimepath += ~/.vim/bundle/neobundle.vim
 endif
 
-if !has('clientserver')
-    call add(g:pathogen_disabled, 'AsyncCommand')
-endif
+call neobundle#rc(expand('~/.vim/bundle'))
+
+" Let NeoBundle manage NeoBundle
+NeoBundleFetch 'Shugo/neobundle.vim'
 
 " Check and disable source control modules.
-if empty($P4CONFIG)
-    call add(g:pathogen_disabled, 'perforce')
-endif
-
-call pathogen#infect()
+"if empty($P4CONFIG)
+    "call add(g:pathogen_disabled, 'perforce')
+"endif
 
 " }}}
 " * Platform {{{
