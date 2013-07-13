@@ -49,7 +49,7 @@ NeoBundle 'vim-scripts/OmniCppComplete'
 NeoBundle 'vim-scripts/taglist.vim'
 NeoBundle 'vim-scripts/TaskList.vim'
 
-NeoBundle 'git://git-master/Grok.vim'
+"NeoBundle 'git://git-master/Grok.vim'
 
 if empty($P4CONFIG)
     NeoBundleDisable 'pydave/vim-perforce'
@@ -313,6 +313,7 @@ let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+let g:neocomplete#enable_auto_select = 0
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -320,6 +321,12 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Define keyword
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -330,13 +337,14 @@ let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
 let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
 " <CR> closes popup and saves indent
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
     return neocomplete#smart_close_popup() . "\<CR>"
     " For no inserting <CR> key.
     "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
 
-" Neocomplete.vim plugin key-mappings.
+" Key mappings.
 inoremap <expr><C-g> neocomplete#undo_completion()
 inoremap <expr><C-l> neocomplete#complete_common_string()
 " <TAB> completion
@@ -350,7 +358,6 @@ inoremap <expr><C-e> neocomplete#cancel_popup()
 " }}}
 
 " Jedi {{{
-let g:neocomplete#enable_auto_select = 0
 let g:jedi#popup_select_first = 0
 let g:jedi#auto_vim_configuration = 0
 "}}}
