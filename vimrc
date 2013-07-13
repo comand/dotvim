@@ -34,6 +34,7 @@ NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'sjbach/lusty'
 NeoBundle 'sjl/gundo.vim'
@@ -49,7 +50,7 @@ NeoBundle 'vim-scripts/OmniCppComplete'
 NeoBundle 'vim-scripts/taglist.vim'
 NeoBundle 'vim-scripts/TaskList.vim'
 
-"NeoBundle 'git://git-master/Grok.vim'
+NeoBundle 'git://git-master/Grok.vim'
 
 if empty($P4CONFIG)
     NeoBundleDisable 'pydave/vim-perforce'
