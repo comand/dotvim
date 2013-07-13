@@ -40,6 +40,7 @@ NeoBundle 'sjl/gundo.vim'
 NeoBundle 'tpope/vim-abolish'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'Yggdroot/indentLine'
+NeoBundle 'davidhalter/jedi-vim'
 
 NeoBundle 'vim-scripts/argtextobj.vim'
 NeoBundle 'vim-scripts/a.vim'
@@ -192,6 +193,8 @@ endif
 " Make program
 if !empty(findfile('SConscript')) || !empty(findfile('SConstruct'))
     set makeprg=scons
+elseif !empty(findfile('Makefile'))
+    set makeprg=gmake
 elseif !empty(findfile('build.xml'))
     set makeprg=ant
 endif
@@ -325,7 +328,32 @@ endif
 let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
 let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+" <CR> closes popup and saves indent
+function! s:my_cr_function()
+    return neocomplete#smart_close_popup() . "\<CR>"
+    " For no inserting <CR> key.
+    "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
+
+" Neocomplete.vim plugin key-mappings.
+inoremap <expr><C-g> neocomplete#undo_completion()
+inoremap <expr><C-l> neocomplete#complete_common_string()
+" <TAB> completion
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char
+inoremap <expr><C-h> neocomplete#smart_close_popup() . "\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup() . "\<C-h>"
+inoremap <expr><C-y> neocomplete#close_popup()
+inoremap <expr><C-e> neocomplete#cancel_popup()
+
 " }}}
+
+" Jedi {{{
+let g:neocomplete#enable_auto_select = 0
+let g:jedi#popup_select_first = 0
+let g:jedi#auto_vim_configuration = 0
+"}}}
 
 " UltiSnips {{{
 let g:UltiSnipsSnippetDirectories = ["UltiSnips", "snippets"]
