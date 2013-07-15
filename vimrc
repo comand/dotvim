@@ -92,17 +92,11 @@ set showcmd
 " Update the xterm title
 set title
 
-" Keep 1000 lines of command history
-set history=1000
+" Keep 50 lines of command history
+set history=50
 
 " Allow buffer switch without saving
 set hidden
-
-if has('persistent_undo')
-    set undofile
-    set undolevels=1000  " Maximum number of changes that can be undone.
-    set undoreload=10000 " Maximum number of lines to save for undo on a reload.
-endif
 
 " Status line configuration
 set report=0
@@ -308,6 +302,10 @@ map <leader>cd :cd %:p:h<CR>
 " * Plugin Configuration {{{
 " *
 
+" Alternate {{{
+nmap <C-H> :A<CR>
+"}}}
+
 " NeoComplete {{{
 let g:acp_enableAtStartup = 0
 let g:neocomplete#enable_at_startup = 1
@@ -441,7 +439,24 @@ au FileType man set nomod nolist
 
 " Python-syntax {{{
 let b:python_version_2 = 1
-let python_highlight_all = 1
+let python_highlight_builtins = 1
+let python_highlight_builtin_objs = 1
+let python_highlight_builtin_funcs = 1
+let python_highlight_exceptions = 1
+let python_highlight_string_formatting = 1
+let python_highlight_string_format = 1
+let python_highlight_string_templates = 1
+let python_highlight_indent_errors = 1
+let python_highlight_space_errors = 0
+let python_print_as_function = 1
+" }}}
+
+" YCM {{{
+"let g:ycm_add_preview_to_completeopt = 1
+"let g:ycm_autoclose_preview_window_after_completion = 1
+"let g:ycm_confirm_extra_conf = 0
+"let g:ycm_register_as_syntastic_checker = 0
+"let g:ycm_collect_identifiers_from_tags_files = 1
 " }}}
 
 " }}}
