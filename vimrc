@@ -89,6 +89,9 @@ set t_Co=256
 " No hilight search by default
 set nohlsearch
 
+" Don't prompt to hit enter as often
+set cmdheight=2
+
 " Show commands as they're typed
 set showcmd
 
