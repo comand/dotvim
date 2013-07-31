@@ -22,7 +22,7 @@ NeoBundle 'Shougo/vimproc', {
     \ 'build' : {
     \     'windows' : 'make -f make_mingw32.mak',
     \     'cygwin' : 'make -f make_cygwin.mak',
-    \     'unix' : 'make -f make_unit.mak',
+    \     'unix' : 'make -f make_unix.mak',
     \     },
     \ }
 
@@ -67,7 +67,10 @@ NeoBundleCheck
 set encoding=utf-8
 
 if has('win32')
+    let s:tempdir = expand('$TEMP')
     set directory=.,$TEMP
+else
+    let s:tempdir = '/var/tmp'
 endif
 
 " }}}
@@ -310,7 +313,7 @@ nmap <C-H> :A<CR>
 let g:acp_enableAtStartup = 0
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#sources#syntax#min_keyword_length = 2
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 let g:neocomplete#enable_auto_select = 0
 
@@ -318,7 +321,7 @@ let g:neocomplete#enable_auto_select = 0
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Define keyword
@@ -326,6 +329,14 @@ if !exists('g:neocomplete#keyword_patterns')
     let g:neocomplete#keyword_patterns = {}
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Configure python completion to use jedi.
+"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType python setlocal omnifunc=jedi#complete
+if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.python = '[^. \t]\.\w*'
 
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -357,8 +368,8 @@ inoremap <expr><C-e> neocomplete#cancel_popup()
 " }}}
 
 " Jedi {{{
-let g:jedi#popup_select_first = 0
 let g:jedi#auto_vim_configuration = 0
+let g:jedi#popup_select_first = 0
 "}}}
 
 " UltiSnips {{{
@@ -403,7 +414,7 @@ nnoremap <silent> <F8> :TaskList<CR>
 let g:Powerline_symbols = 'fancy'
 let g:Powerline_theme = 'comand'
 let g:Powerline_colorscheme = 'comand'
-let g:Powerline_cache_file = expand('$TEMP') . '/Powerline_comand_comand_fancy.cache'
+let g:Powerline_cache_file = s:tempdir . '/Powerline_comand_comand_fancy.cache'
 " }}}
 
 " IndentLine {{{
