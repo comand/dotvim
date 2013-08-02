@@ -1,7 +1,7 @@
 " local syntax file - set colors on a per-machine basis:
 " vim: tw=0 ts=4 sw=4
 " Vim color file
-" Maintainer:	Cory Omand <comand@pixar.com>
+" Maintainer:	Cory Omand <coryomand@gmail.com>
 " Last Change:	2006 June 29
 " Based On:     zellner.vim
 
