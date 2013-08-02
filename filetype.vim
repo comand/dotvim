@@ -9,7 +9,6 @@ augroup filetypedetect
     au! BufRead,BufNewFile *.menva setf menva
     au! BufRead,BufNewFile .sieverc setf sieve
     au! BufRead,BufNewFile SConscript*,SConstruct setf python
-    au! BufEnter */itsalltext/menv30-wiki.pixar.com*,*.twiki setf twiki
     au! BufEnter */itsalltext/wiki.pixar.com*,*.cwiki setf confluencewiki
 augroup END
 
