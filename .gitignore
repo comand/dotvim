@@ -1,3 +1,4 @@
 .netrwhist
 syntax/menva.vim
 bundle/*
+spell/*
