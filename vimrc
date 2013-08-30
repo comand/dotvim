@@ -463,15 +463,6 @@ let python_highlight_space_errors = 0
 let python_print_as_function = 1
 " }}}
 
-" YCM {{{
-"let g:ycm_add_preview_to_completeopt = 1
-"let g:ycm_autoclose_preview_window_after_completion = 1
-"let g:ycm_confirm_extra_conf = 0
-"let g:ycm_register_as_syntastic_checker = 0
-"let g:ycm_collect_identifiers_from_tags_files = 1
-" }}}
-
-" }}}
 " * Custom Functions {{{
 " *
 
