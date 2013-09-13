@@ -10,7 +10,8 @@ hi Comment gui=italic
 hi doxygenBrief gui=italic
 
 " Oooooh... pretty fonts.
-set guifont=SourceCodePro\ 10
+"set guifont=SourceCodePro\ 10
+set guifont=DroidSansMono\ 10
 "set guifont=Consolas\ 11
 "set guifont=Inconsolata\ 12
 "set guifont=Anonymous\ Pro\ 12

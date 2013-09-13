@@ -28,7 +28,7 @@ NeoBundle 'Shougo/vimproc', {
 
 NeoBundle 'epmatsw/ag.vim'
 NeoBundle 'hdima/python-syntax'
-NeoBundle 'Lokaltog/vim-powerline'
+NeoBundle 'bling/vim-airline'
 NeoBundle 'pydave/vim-perforce'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/syntastic'
@@ -115,10 +115,8 @@ set virtualedit=block
 " Find using cdpath
 let &path = ',' . substitute($CDPATH, ':', ',', 'g')
 
-" Remember info for 10 files, no marks, don't re-highlight search patterns,
-" only save up to 100 lines of registers, restrict input buffer
-"set viminfo=/10,'10,f0,h,\"100,@10
-set viminfo='50,\"1000,s100
+" Save more information
+set viminfo='50,<1000,s100
 
 " Command-line completion
 set wildmode=list:longest,full
@@ -131,8 +129,7 @@ set listchars+=trail:·
 set listchars+=extends:»,precedes:«
 
 " Set window min width/height
-set wmw=0
-set wmh=0
+set wmw=0 wmh=0
 
 " Automatically open and close the popup menu / preview window
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
@@ -308,6 +305,20 @@ map <leader>cd :cd %:p:h<CR>
 " * Plugin Configuration {{{
 " *
 
+" Airline {{{
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'light'
+
+let g:airline_symbols = {}
+let g:airline_left_sep = '⮀'
+let g:airline_left_alt_sep = '⮁'
+let g:airline_right_sep = '⮂'
+let g:airline_right_alt_sep = '⮃'
+let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.readonly = '⭤'
+let g:airline_symbols.linenr = '⭡'
+"}}}
+
 " Alternate {{{
 nmap <C-H> :A<CR>
 "}}}
@@ -371,6 +382,7 @@ inoremap <expr><C-e> neocomplete#cancel_popup()
 " Jedi {{{
 let g:jedi#auto_vim_configuration = 0
 let g:jedi#popup_select_first = 0
+let g:jedi#popup_on_dot = 0
 "}}}
 
 " UltiSnips {{{
@@ -409,13 +421,6 @@ nmap <C-f> :LustyBufferGrep<CR>
 " Task list {{{
 let g:tlWindowPosition = 1
 nnoremap <silent> <F8> :TaskList<CR>
-" }}}
-
-" Powerline {{{
-let g:Powerline_symbols = 'fancy'
-let g:Powerline_theme = 'comand'
-let g:Powerline_colorscheme = 'comand'
-let g:Powerline_cache_file = s:tempdir . '/Powerline_comand_comand_fancy.cache'
 " }}}
 
 " IndentLine {{{
