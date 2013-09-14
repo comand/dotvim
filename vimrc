@@ -121,6 +121,13 @@ set viminfo='50,<1000,s100
 " Command-line completion
 set wildmode=list:longest,full
 
+" Write to the unnamed register as well as the * and + registers.
+if has('unnamedplus')
+    set clipboard=unnamedplus
+else
+    set clipboard=unnamed
+endif
+
 " When in list mode, keep tabs normal width, display arrows,
 " trailing spaces display '-' characters.
 "set listchars+=tab:>>,trail:-
@@ -217,6 +224,8 @@ autocmd FileType human set wrap linebreak tw=78
 
 let mapleader = ','
 let g:mapleader = ','
+let maplocalleader = ','
+let g:maplocalleader = ','
 
 " }}}
 " * Keystrokes: Movement {{{
@@ -277,7 +286,7 @@ nnoremap \th :set invhls hls?<CR>
 nmap <F5> \th
 
 " Toggle Gundo window.
-nnoremap <F10> :GundoToggle<CR>
+nnoremap <F10> :<C-u>GundoToggle<CR>
 
 " Toggle fold open/close
 nnoremap <space> za
@@ -291,15 +300,13 @@ vnoremap <space> zf
 nnoremap <M-g> :echo expand("%:p")<CR>
 
 " Quit with confirmation
-nnoremap <leader>q :confirm qa<CR>
+nnoremap <Leader>q :confirm qa<CR>
 
 " Change directory to current buffer
-map <leader>cd :cd %:p:h<CR>
+nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR>
 
-" Change working directory to buffer automatically
-"set autochdir
-" Switch directory back to buffer
-"nnoremap ,cd :cd %:p:h<CR>
+" Close the current buffer
+nnoremap <Leader>w :bdelete<CR>
 
 " }}}
 " * Plugin Configuration {{{
@@ -308,6 +315,17 @@ map <leader>cd :cd %:p:h<CR>
 " Airline {{{
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'light'
+
+" Turn off extensions I won't use.
+let g:airline#extensions#bufferline#enabled = 0
+let g:airline#extensions#ctrlp#enabled = 0
+let g:airline#extensions#tagbar#enabled = 0
+let g:airline#extensions#hunks#enabled = 0
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#tabline#enabled = 0
+
+" Turn on others.
+let g:airline#extensions#unite#enabled = 1
 
 let g:airline_symbols = {}
 let g:airline_left_sep = '⮀'
@@ -393,6 +411,7 @@ let g:UltiSnipsSnippetDirectories = ["UltiSnips", "snippets"]
 let g:syntastic_mode_map = { 'passive_filetypes' : ['cpp'] }
 let g:syntastic_check_on_open = 1
 let g:syntastic_python_checkers = ['pyflakes']
+let g:syntastic_stl_format = "%E{Err: %e(%fe)}%B{, }%W{Warn: %w(%fw)}"
 " }}}
 
 " Perforce {{{
@@ -413,9 +432,9 @@ let Tlist_WinWidth=50
 " }}}
 
 " Lusty {{{
-nmap <C-e> :LustyFilesystemExplorer<CR>
-nmap <C-B> :LustyBufferExplorer<CR>
-nmap <C-f> :LustyBufferGrep<CR>
+"nmap <C-e> :LustyFilesystemExplorer<CR>
+"nmap <C-B> :LustyBufferExplorer<CR>
+"nmap <C-f> :LustyBufferGrep<CR>
 " }}}
 
 " Task list {{{
@@ -433,10 +452,10 @@ let g:indentLine_color_gui = "Grey85"
 " Grok {{{
 let g:grok_server = 'grok.pixar.com'
 let g:grok_project = 'mainline'
-map <leader>gf :call grok#FullSearch()<CR>
-map <leader>gd :call grok#DefinitionSearch()<CR>
-map <leader>gs :call grok#SymbolSearch()<CR>
-map <leader>gx :call grok#XRef()<CR>
+map <Leader>gf :call grok#FullSearch()<CR>
+map <Leader>gd :call grok#DefinitionSearch()<CR>
+map <Leader>gs :call grok#SymbolSearch()<CR>
+map <Leader>gx :call grok#XRef()<CR>
 " }}}
 
 " Diff Mode {{{
@@ -468,6 +487,19 @@ let python_highlight_space_errors = 0
 let python_print_as_function = 1
 " }}}
 
+" Unite {{{
+let g:unite_enable_start_insert = 1
+let g:unite_winheight = 10
+let g:unite_split_rule = 'botright'
+
+" Always use the fuzzy matcher.
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+
+nnoremap <C-e> :<C-u>Unite file_rec/async<CR>
+nnoremap <C-b> :<C-u>Unite buffer<CR>
+nnoremap <C-f> :<C-u>Unite grep:.<CR>
+" }}}
+
 " * Custom Functions {{{
 " *
 
@@ -484,13 +516,13 @@ function! QtClassDoc(classname)
     silent execute "!xdg-open " . doc_file | redraw!
 endfunction
 
-map <leader>qt :call QtClassDoc(expand("<cword>"))<CR>
+map <Leader>qt :call QtClassDoc(expand("<cword>"))<CR>
 command! -nargs=1 Qt call QtClassDoc(<f-args>)
 
 " Launch a terminal in the current working directory
 function! Terminal()
     silent execute "!gnome-terminal --working-directory=" . getcwd() | redraw!
 endfunction
-map <leader>r :call Terminal()<CR>
+map <Leader>r :call Terminal()<CR>
 
 "}}}
