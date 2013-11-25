@@ -404,7 +404,6 @@ function s:configure_include_sources()
             call neocomplete#util#set_default_dictionary(
                 \ 'g:neocomplete#sources#include#paths',
                 \ 'cpp,h', '/dist/shows/shared/include,' . idirs)
-            echo g:neocomplete#sources#include#paths
         endif
     endif
 endfunction
