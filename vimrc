@@ -26,7 +26,6 @@ NeoBundle 'Shougo/vimproc', {
     \     },
     \ }
 
-NeoBundle 'epmatsw/ag.vim'
 NeoBundle 'hdima/python-syntax'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'pydave/vim-perforce'
@@ -36,12 +35,11 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'SirVer/ultisnips'
-NeoBundle 'sjbach/lusty'
 NeoBundle 'sjl/gundo.vim'
 NeoBundle 'tpope/vim-abolish'
-NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'Yggdroot/indentLine'
 NeoBundle 'davidhalter/jedi-vim'
+NeoBundle 'h1mesuke/unite-outline'
 
 NeoBundle 'vim-scripts/argtextobj.vim'
 NeoBundle 'vim-scripts/a.vim'
@@ -323,6 +321,7 @@ let g:airline#extensions#tagbar#enabled = 0
 let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#enabled = 0
+let g:airline#extensions#branch#enabled = 0
 
 " Turn on others.
 let g:airline#extensions#unite#enabled = 1
@@ -348,6 +347,7 @@ let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#sources#syntax#min_keyword_length = 2
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 let g:neocomplete#enable_auto_select = 0
+let g:neocomplete#data_directory = '/var/tmp/neocomplete'
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -394,6 +394,22 @@ inoremap <expr><C-h> neocomplete#smart_close_popup() . "\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup() . "\<C-h>"
 inoremap <expr><C-y> neocomplete#close_popup()
 inoremap <expr><C-e> neocomplete#cancel_popup()
+
+" Source configuration
+function s:configure_include_sources()
+    let instdir = finddir('inst', '.;')
+    if !empty(instdir)
+        let idirs = join(split(globpath(instdir, '*/*/include'), '\n'), ',')
+        if !empty(idirs)
+            call neocomplete#util#set_default_dictionary(
+                \ 'g:neocomplete#sources#include#paths',
+                \ 'cpp,h', '/dist/shows/shared/include,' . idirs)
+            echo g:neocomplete#sources#include#paths
+        endif
+    endif
+endfunction
+
+au FileType cpp,h call s:configure_include_sources()
 
 " }}}
 
@@ -494,12 +510,19 @@ let g:unite_split_rule = 'botright'
 
 " Always use the fuzzy matcher.
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
 
-nnoremap <C-e> :<C-u>Unite file_rec/async<CR>
+" Disable mru
+let g:unite_source_mru_do_validate=0
+let g:unite_source_mru_update_interval=0
+
+"nnoremap <C-e> :<C-u>Unite file_rec/async<CR>
+nnoremap <C-e> :<C-u>Unite file<CR>
 nnoremap <C-b> :<C-u>Unite buffer<CR>
 nnoremap <C-f> :<C-u>Unite grep:.<CR>
 " }}}
 
+" * }}}
 " * Custom Functions {{{
 " *
 
