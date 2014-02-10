@@ -1,6 +1,5 @@
 " Antialiased text
 set anti
-colorscheme comand
 
 " Nice tab labels
 set guitablabel=%n\ %t\ %m

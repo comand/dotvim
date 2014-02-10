@@ -1,4 +1,4 @@
-" * NeoBundle {{{
+" * NeoBundle Setup {{{
 " *
 
 set nocompatible
@@ -25,6 +25,10 @@ NeoBundle 'Shougo/vimproc', {
     \     'unix' : 'make -f make_unix.mak',
     \     },
     \ }
+
+" }}}
+" * NeoBundles {{{
+" *
 
 NeoBundle 'hdima/python-syntax'
 NeoBundle 'bling/vim-airline'
@@ -54,6 +58,13 @@ if empty($P4CONFIG)
     NeoBundleDisable 'pydave/vim-perforce'
 endif
 
+NeoBundle 'chriskempson/base16-vim'
+NeoBundle 'altercation/vim-colors-solarized'
+
+" }}}
+" * NeoBundle Check {{{
+" *
+
 filetype plugin indent on
 
 NeoBundleCheck
@@ -81,7 +92,9 @@ syntax sync fromstart
 let g:is_posix = 1
 
 " Color scheme
-colorscheme comand
+"colorscheme comand
+colorscheme solarized
+let g:solarized_termcolors=256
 set t_Co=256
 
 " No hilight search by default
@@ -106,6 +119,7 @@ set hidden
 set report=0
 set noruler
 set laststatus=2
+set noshowmode
 
 " Allow the cursor to move freely in virtual block mode (Ctrl-V)
 set virtualedit=block
@@ -225,6 +239,13 @@ let g:mapleader = ','
 let maplocalleader = ','
 let g:maplocalleader = ','
 
+" Map semicolon to colon, and double semi-colon to a single semicolon.
+map ; :
+map ;; ;
+
+" Map QQ to quit, like ZQ, only easier to type.
+map QQ ZQ
+
 " }}}
 " * Keystrokes: Movement {{{
 " *
@@ -312,7 +333,7 @@ nnoremap <Leader>w :bdelete<CR>
 
 " Airline {{{
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'light'
+"let g:airline_theme = 'light'
 
 " Turn off extensions I won't use.
 let g:airline#extensions#bufferline#enabled = 0
