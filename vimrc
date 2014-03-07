@@ -440,13 +440,14 @@ let g:jedi#popup_on_dot = 0
 "}}}
 
 " UltiSnips {{{
-let g:UltiSnipsSnippetDirectories = ["UltiSnips", "snippets"]
+let g:UltiSnipsSnippetDirectories = ["UltiSnips", "snips"]
 " }}}
 
 " Syntastic {{{
-let g:syntastic_mode_map = { 'passive_filetypes' : ['cpp'] }
+"let g:syntastic_mode_map = { 'passive_filetypes' : ['cpp'] }
 let g:syntastic_check_on_open = 1
 let g:syntastic_python_checkers = ['pyflakes']
+let g:syntastic_cpp_checkers = ['cppcheck']
 let g:syntastic_stl_format = "%E{Err: %e(%fe)}%B{, }%W{Warn: %w(%fw)}"
 " }}}
 
@@ -567,5 +568,10 @@ function! Terminal()
     silent execute "!gnome-terminal --working-directory=" . getcwd() | redraw!
 endfunction
 map <Leader>r :call Terminal()<CR>
+
+function! RunTest()
+    execute "!echo " . expand('%:t:r') . " | scons -u runtest"
+endfunction
+map <F7> :call RunTest()<CR>
 
 "}}}
