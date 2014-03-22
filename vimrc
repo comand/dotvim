@@ -32,7 +32,6 @@ NeoBundle 'Shougo/vimproc', {
 
 NeoBundle 'hdima/python-syntax'
 NeoBundle 'bling/vim-airline'
-NeoBundle 'pydave/vim-perforce'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'Shougo/unite.vim'
@@ -49,13 +48,14 @@ NeoBundle 'vim-scripts/argtextobj.vim'
 NeoBundle 'vim-scripts/a.vim'
 NeoBundle 'vim-scripts/genutils'
 NeoBundle 'vim-scripts/OmniCppComplete'
-NeoBundle 'vim-scripts/taglist.vim'
+"NeoBundle 'vim-scripts/taglist.vim'
 NeoBundle 'vim-scripts/TaskList.vim'
 
-NeoBundle 'git://git-master/Grok.vim'
+"NeoBundle 'git://git-master/Grok.vim'
 
-if empty($P4CONFIG)
-    NeoBundleDisable 'pydave/vim-perforce'
+if exists($P4CONFIG)
+    echom "Enabling perforce support"
+    NeoBundle 'pydave/vim-perforce'
 endif
 
 NeoBundle 'chriskempson/base16-vim'
@@ -440,7 +440,7 @@ let g:jedi#popup_on_dot = 0
 "}}}
 
 " UltiSnips {{{
-let g:UltiSnipsSnippetDirectories = ["UltiSnips", "snippets"]
+let g:UltiSnipsSnippetDirectories = ["UltiSnips", "ultisnips"]
 " }}}
 
 " Syntastic {{{
