@@ -43,19 +43,20 @@ NeoBundle 'tpope/vim-abolish'
 NeoBundle 'Yggdroot/indentLine'
 NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'h1mesuke/unite-outline'
+NeoBundle 'honza/vim-snippets'
 
 NeoBundle 'vim-scripts/argtextobj.vim'
 NeoBundle 'vim-scripts/a.vim'
 NeoBundle 'vim-scripts/genutils'
 NeoBundle 'vim-scripts/OmniCppComplete'
-"NeoBundle 'vim-scripts/taglist.vim'
 NeoBundle 'vim-scripts/TaskList.vim'
 
-"NeoBundle 'git://git-master/Grok.vim'
+NeoBundle 'git://git-master/Grok.vim'
 
-if exists($P4CONFIG)
-    echom "Enabling perforce support"
+if !empty($P4CONFIG)
     NeoBundle 'pydave/vim-perforce'
+else
+    NeoBundleDisable 'pydave/vim-perforce'
 endif
 
 NeoBundle 'chriskempson/base16-vim'
@@ -456,24 +457,6 @@ let g:p4EnableRuler=0
 let g:p4CurDirExpr="(isdirectory(expand('%')) ? substitute(expand('%:p'), '\\\\$', '', '') : '')"
 " }}}
 
-" Tag list {{{
-nmap <F9> :TlistToggle<CR>
-let Tlist_Close_On_Select=1
-let Tlist_Display_Prototype=1
-let Tlist_Display_Tag_Scope=0
-let Tlist_Enable_Fold_Column=0
-let Tlist_Exit_Only_Window=1
-let Tlist_GainFocus_On_ToggleOpen=1
-let Tlist_Show_One_File=1
-let Tlist_WinWidth=50
-" }}}
-
-" Lusty {{{
-"nmap <C-e> :LustyFilesystemExplorer<CR>
-"nmap <C-B> :LustyBufferExplorer<CR>
-"nmap <C-f> :LustyBufferGrep<CR>
-" }}}
-
 " Task list {{{
 let g:tlWindowPosition = 1
 nnoremap <silent> <F8> :TaskList<CR>
@@ -528,6 +511,7 @@ let python_print_as_function = 1
 let g:unite_enable_start_insert = 1
 let g:unite_winheight = 10
 let g:unite_split_rule = 'botright'
+let g:unite_prompt = '» '
 
 " Always use the fuzzy matcher.
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
