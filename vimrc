@@ -209,11 +209,11 @@ else
 endif
 
 " Make program
-if !empty(findfile('SConscript')) || !empty(findfile('SConstruct'))
+if !empty(findfile('SConscript', '.')) || !empty(findfile('SConstruct', '.'))
     set makeprg=scons
-elseif !empty(findfile('Makefile'))
+elseif !empty(findfile('Makefile', '.'))
     set makeprg=gmake
-elseif !empty(findfile('build.xml'))
+elseif !empty(findfile('build.xml', '.'))
     set makeprg=ant
 endif
 
@@ -441,7 +441,7 @@ let g:jedi#popup_on_dot = 0
 "}}}
 
 " UltiSnips {{{
-let g:UltiSnipsSnippetDirectories = ["UltiSnips", "ultisnips"]
+let g:UltiSnipsSnipptsDir = "~/.vim/UltiSnips"
 " }}}
 
 " Syntastic {{{
