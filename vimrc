@@ -239,7 +239,7 @@ endfunction
 
 augroup ft_vimrc
     au!
-    au BufNewFile,BufRead .vimrc setlocal fen fdm=marker foldtext=VimrcFold()
+    au BufNewFile,BufRead vimrc,.vimrc,*.vim setlocal fen fdm=marker fdt=VimrcFold()
 augroup END
 
 augroup ft_make
@@ -284,8 +284,8 @@ augroup ft_cpp
     au FileType cpp let g:load_doxygen_syntax = 1
 
     " OmniCpp Setup 
-    au FileType cpp let OmniCpp_ShowPrototypeInAbbr = 1
-    au FileType cpp let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+    "au FileType cpp let OmniCpp_ShowPrototypeInAbbr = 1
+    "au FileType cpp let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 
     " Tag files
     au FileType cpp call AddTags('~/.vim/tags', ['boost', 'opengl', 'oracle'])
@@ -416,112 +416,18 @@ let g:airline_symbols.linenr = '⭡'
 nmap <C-H> :A<CR>
 
 " }}}
-" NeoComplete {{{
+" Diff Mode {{{
 
-let g:acp_enableAtStartup = 0
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 2
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-let g:neocomplete#enable_auto_select = 0
-let g:neocomplete#data_directory = '/var/tmp/neocomplete'
-
-" Enable omni completion.
-au FileType css setlocal omnifunc=csscomplete#CompleteCSS
-au FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-"au FileType python setlocal omnifunc=pythoncomplete#Complete
-au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Define keyword
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
+if &diff
+    nnoremap <C-R> :diffupdate<CR>
+    nnoremap <C-N> ]c<CR>
+    nnoremap <C-P> [c<CR>
+    nnoremap <C-Q> :confirm qa<CR>
+    nnoremap <C-O> do
 endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Configure python completion
-if !exists('g:neocomplete#force_omni_input_patterns')
-    let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#force_omni_input_patterns.python = '[^. \t]\.\w*'
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-" <CR> closes popup and saves indent
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-    return neocomplete#smart_close_popup() . "\<CR>"
-    " For no inserting <CR> key.
-    "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-endfunction
-
-" Key mappings.
-inoremap <expr><C-g> neocomplete#undo_completion()
-inoremap <expr><C-l> neocomplete#complete_common_string()
-" <TAB> completion
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char
-inoremap <expr><C-h> neocomplete#smart_close_popup() . "\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup() . "\<C-h>"
-inoremap <expr><C-y> neocomplete#close_popup()
-inoremap <expr><C-e> neocomplete#cancel_popup()
-
-" Source configuration
-"function s:configure_include_sources()
-    "let instdir = finddir('inst', '.;')
-    "if !empty(instdir)
-        "let idirs = join(split(globpath(instdir, '*/*/include'), '\n'), ',')
-        "if !empty(idirs)
-            "call neocomplete#util#set_default_dictionary(
-                "\ 'g:neocomplete#sources#include#paths',
-                "\ 'cpp,h', '/dist/shows/shared/include,' . idirs)
-        "endif
-    "endif
-"endfunction
-
-"au FileType cpp,h call s:configure_include_sources()
 
 " }}}
-" Jedi {{{
-
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#popup_select_first = 0
-let g:jedi#popup_on_dot = 0
-
-" }}}
-" UltiSnips {{{
-
-let g:UltiSnipsSnipptsDir = "~/.vim/UltiSnips"
-
-" }}}
-" Syntastic {{{
-
-"let g:syntastic_mode_map = { 'passive_filetypes' : ['cpp'] }
-let g:syntastic_enable_signs = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_python_checkers = ['pyflakes']
-let g:syntastic_cpp_checkers = ['cppcheck']
-let g:syntastic_stl_format = "%E{Err: %e(%fe)}%B{, }%W{Warn: %w(%fw)}"
-
-" }}}
-" Perforce {{{
-
-let g:p4EnableRuler=0
-let g:p4CurDirExpr="(isdirectory(expand('%')) ? substitute(expand('%:p'), '\\\\$', '', '') : '')"
-
-" }}}
-" IndentLine {{{
-
-let g:indentLine_char = "|"
-let g:indentLine_first_char = "|"
-let g:indentLine_fileType = ['python']
-let g:indentLine_color_gui = "Grey85"
+" Dispatch {{{
 
 " }}}
 " Grok {{{
@@ -534,21 +440,24 @@ map <Leader>gs :call grok#SymbolSearch()<CR>
 map <Leader>gx :call grok#XRef()<CR>
 
 " }}}
-" Diff Mode {{{
+" IndentLine {{{
 
-if &diff
-    nnoremap <C-R> :diffupdate<CR>
-    nnoremap <C-N> ]c<CR>
-    nnoremap <C-P> [c<CR>
-    nnoremap <C-Q> :confirm qa<CR>
-    nnoremap <C-O> do
-endif
+let g:indentLine_char = "|"
+let g:indentLine_first_char = "|"
+let g:indentLine_fileType = ['python']
+let g:indentLine_color_gui = "Grey85"
 
 " }}}
 " Man mode {{{
 
 source $VIMRUNTIME/ftplugin/man.vim
 au FileType man set nomod nolist
+
+" }}}
+" Perforce {{{
+
+let g:p4EnableRuler=0
+let g:p4CurDirExpr="(isdirectory(expand('%')) ? substitute(expand('%:p'), '\\\\$', '', '') : '')"
 
 " }}}
 " Python-syntax {{{
@@ -566,6 +475,25 @@ let python_highlight_space_errors = 0
 let python_print_as_function = 1
 
 " }}}
+" Syntastic {{{
+
+let g:syntastic_mode_map = { 'passive_filetypes' : ['cpp'] }
+let g:syntastic_check_on_open = 1
+let g:syntastic_python_checkers = ['pyflakes']
+let g:syntastic_stl_format = "%E{Err: %e(%fe)}%B{, }%W{Warn: %w(%fw)}"
+
+let g:syntastic_enable_signs = 1
+let g:syntastic_error_symbol = "➤"
+let g:syntastic_style_error_symbol = "▷"
+let g:syntastic_warning_symbol = "⚠"
+let g:syntastic_style_warning_symbol = "⚠"
+
+" }}}
+" UltiSnips {{{
+
+let g:UltiSnipsSnipptsDir = "~/.vim/UltiSnips"
+
+" }}}
 " Unite {{{
 
 let g:unite_enable_start_insert = 1
@@ -574,8 +502,8 @@ let g:unite_split_rule = 'botright'
 let g:unite_prompt = '» '
 
 " Always use the fuzzy matcher.
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
+"call unite#filters#matcher_default#use(['matcher_fuzzy'])
+"call unite#filters#sorter_default#use(['sorter_rank'])
 
 " Disable mru
 let g:unite_source_mru_do_validate=0
@@ -586,6 +514,16 @@ nnoremap <C-e> :<C-u>Unite file<CR>
 nnoremap <C-b> :<C-u>Unite buffer<CR>
 nnoremap <C-f> :<C-u>Unite grep:.<CR>
 nnoremap <leader>t :<C-u>Unite tasklist<CR>
+
+" }}}
+" YouCompleteMe {{{
+
+let g:ycm_global_ycm_extra_conf = '~/.managed/dotfiles/ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_always_populate_location_list = 1
+
+nnoremap <Leader>j :YcmCompleter GoToDefinition<CR>
+nnoremap <Leader>dd :YcmDiags<CR>
 
 " }}}
 
