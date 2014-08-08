@@ -35,7 +35,7 @@ endif
 set encoding=utf-8
 
 let g:is_posix = 1
-set synmaxcol=160
+"set synmaxcol=160
 syntax on
 
 " Color scheme
@@ -378,8 +378,8 @@ nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR>
 nnoremap <Leader>w :bdelete<CR>
 
 " Always use magic regexes
-nnoremap / /\v
-vnoremap / /\v
+"nnoremap / /\v
+"vnoremap / /\v
 
 " }}}
 " Plugin Configuration --------------------------------------------------- {{{
@@ -425,9 +425,6 @@ if &diff
     nnoremap <C-Q> :confirm qa<CR>
     nnoremap <C-O> do
 endif
-
-" }}}
-" Dispatch {{{
 
 " }}}
 " Grok {{{
@@ -521,6 +518,9 @@ nnoremap <leader>t :<C-u>Unite tasklist<CR>
 let g:ycm_global_ycm_extra_conf = '~/.managed/dotfiles/ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_always_populate_location_list = 1
+
+"let g:ycm_server_use_vim_stdout = 1
+"let g:ycm_server_log_level = 'debug'
 
 nnoremap <Leader>j :YcmCompleter GoToDefinition<CR>
 nnoremap <Leader>dd :YcmDiags<CR>
