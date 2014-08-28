@@ -17,6 +17,14 @@ NeoBundleFetch 'Shugo/neobundle.vim'
 
 " }}}
 
+NeoBundle 'Shougo/vimproc', {
+    \ 'build' : {
+    \     'windows' : 'make -f make_mingw32.mak',
+    \     'cygwin' : 'make -f make_cygwin.mak',
+    \     'unix' : 'make -f make_unix.mak',
+    \     },
+    \ }
+
 NeoBundle 'ervandew/supertab'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'bling/vim-airline'
@@ -34,14 +42,6 @@ NeoBundle 'vim-scripts/argtextobj.vim'
 NeoBundle 'vim-scripts/a.vim'
 NeoBundle 'vim-scripts/genutils'
 NeoBundle 'Yggdroot/indentLine'
-
-NeoBundle 'Shougo/vimproc', {
-    \ 'build' : {
-    \     'windows' : 'make -f make_mingw32.mak',
-    \     'cygwin' : 'make -f make_cygwin.mak',
-    \     'unix' : 'make -f make_unix.mak',
-    \     },
-    \ }
 
 if v:version < 703 || (v:version == 703 && !has('patch584'))
     NeoBundleDisable 'Valloric/YouCompleteMe'
