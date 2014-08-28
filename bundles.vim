@@ -17,6 +17,7 @@ NeoBundleFetch 'Shugo/neobundle.vim'
 
 " }}}
 
+NeoBundle 'ervandew/supertab'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'git://git-master/Grok.vim'

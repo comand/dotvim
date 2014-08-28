@@ -515,7 +515,7 @@ nnoremap <leader>t :<C-u>Unite tasklist<CR>
 " }}}
 " YouCompleteMe {{{
 
-let g:ycm_global_ycm_extra_conf = '~/.managed/dotfiles/ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/lib/ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_always_populate_location_list = 1
 
@@ -524,6 +524,16 @@ let g:ycm_always_populate_location_list = 1
 
 nnoremap <Leader>j :YcmCompleter GoToDefinition<CR>
 nnoremap <Leader>dd :YcmDiags<CR>
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " }}}
 
