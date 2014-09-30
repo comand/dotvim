@@ -1,15 +1,18 @@
 " Preamble --------------------------------------------------------------- {{{
 
 if has('vim_starting')
+    set nocompatible
+
     if has('win32') || has('win64')
         " Use ~/.vim for user runtime on windows too.
         let &runtimepath=substitute(&runtimepath,
         \ '\(Documents and Settings\|Users\)[\\/][^\\/,]*[\\/]\zsvimfiles\>',
         \ '.vim', 'g')
     endif
+
+    set runtimepath+=~/.vim/bundle/neobundle.vim
 endif
 
-set runtimepath+=~/.vim/bundle/neobundle.vim
 call neobundle#rc(expand('~/.vim/bundle/'))
 
 " Let NeoBundle manage NeoBundle
@@ -55,3 +58,8 @@ else
     NeoBundleDisable 'pydave/vim-perforce'
 endif
 
+" Postamble -------------------------------------------------------------- {{{
+
+call neobundle#end()
+
+" }}}

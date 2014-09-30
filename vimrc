@@ -3,7 +3,6 @@
 filetype off
 source ~/.vim/bundles.vim
 filetype plugin indent on
-set nocompatible
 
 " }}}
 " Paths ------------------------------------------------------------------ {{{
@@ -500,7 +499,7 @@ let g:unite_prompt = '» '
 
 " Always use the fuzzy matcher.
 "call unite#filters#matcher_default#use(['matcher_fuzzy'])
-"call unite#filters#sorter_default#use(['sorter_rank'])
+call unite#filters#sorter_default#use(['sorter_rank'])
 
 " Disable mru
 let g:unite_source_mru_do_validate=0
