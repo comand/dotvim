@@ -505,6 +505,12 @@ call unite#filters#sorter_default#use(['sorter_rank'])
 let g:unite_source_mru_do_validate=0
 let g:unite_source_mru_update_interval=0
 
+if executable('ag')
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+    let g:unite_source_grep_recursive_opt = ''
+endif
+
 "nnoremap <C-e> :<C-u>Unite file_rec/async<CR>
 nnoremap <C-e> :<C-u>Unite file<CR>
 nnoremap <C-b> :<C-u>Unite buffer<CR>
