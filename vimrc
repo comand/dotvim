@@ -50,7 +50,7 @@ set nohlsearch
 set lazyredraw
 
 " Window title
-let &titlestring="%{expand('%:p:h:t')}/%t @ %{expand($TREE)}:%{expand($FLAVOR)}"
+let &titlestring="%{expand('%:p:h:t')}/%t @ %{expand($TREE)}:%{expand($OPTLEVEL)}"
 set title
 
 " History
@@ -301,6 +301,7 @@ let g:maplocalleader = ','
 
 " Map QQ to quit, like ZQ, only easier to type.
 map QQ ZQ
+map Q q
 
 " }}}
 " Keystrokes: Movement --------------------------------------------------- {{{
@@ -444,6 +445,12 @@ let g:indentLine_fileType = ['python']
 let g:indentLine_color_gui = "Grey85"
 
 " }}}
+" JSON {{{
+
+let g:vim_json_syntax_conceal = 0
+let g:vim_json_warnings = 0
+
+" }}}
 " Man mode {{{
 
 source $VIMRUNTIME/ftplugin/man.vim
@@ -477,6 +484,7 @@ let g:syntastic_mode_map = { 'passive_filetypes' : ['cpp'] }
 let g:syntastic_check_on_open = 1
 let g:syntastic_python_checkers = ['pyflakes']
 let g:syntastic_stl_format = "%E{Err: %e(%fe)}%B{, }%W{Warn: %w(%fw)}"
+let g:syntastic_python_python_exec = '$HOME/.vim/bin/python'
 
 let g:syntastic_enable_signs = 1
 let g:syntastic_error_symbol = "➤"
@@ -498,8 +506,11 @@ let g:unite_split_rule = 'botright'
 let g:unite_prompt = '» '
 
 " Always use the fuzzy matcher.
-"call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
+call unite#custom#source(
+    \ 'file,file/new,buffer,line',
+    \ 'matchers', 'matcher_fuzzy')
 
 " Disable mru
 let g:unite_source_mru_do_validate=0
@@ -514,8 +525,9 @@ endif
 "nnoremap <C-e> :<C-u>Unite file_rec/async<CR>
 nnoremap <C-e> :<C-u>Unite file<CR>
 nnoremap <C-b> :<C-u>Unite buffer<CR>
-nnoremap <C-f> :<C-u>Unite grep:.<CR>
-nnoremap <leader>t :<C-u>Unite tasklist<CR>
+nnoremap <C-g> :<C-u>Unite grep:.<CR>
+nnoremap <C-t> :<C-u>Unite tasklist<CR>
+nnoremap <C-f> :<C-u>Unite -buffer-name=search -start-insert line<CR>
 
 " }}}
 " YouCompleteMe {{{
@@ -553,7 +565,7 @@ else
 endif
 
 " Make program
-if !empty(findfile('SConscript', '.')) || !empty(findfile('SConstruct', '.'))
+if !empty(findfile('SConscript', '.;')) || !empty(findfile('SConstruct', '.;'))
     set makeprg=scons
 elseif !empty(findfile('Makefile', '.'))
     set makeprg=gmake
