@@ -3,4 +3,5 @@ bundle/*
 spell/*
 syntax
 UltiSnips
-build-ycmd.sh
+bin/build-ycmd.sh
+bin/python
