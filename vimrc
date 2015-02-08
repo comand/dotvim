@@ -118,7 +118,7 @@ if has('gui_running')
         set guifont=Consolas:h11
     else
         set guifont=Consolas\ 11
-    fi
+    endif
 
     " Enable spell checking.
     set spell
