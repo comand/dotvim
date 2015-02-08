@@ -114,11 +114,11 @@ if has('gui_running')
     hi doxygenBrief gui=italic
 
     " Oooooh... pretty fonts.
-    "set guifont=SourceCodePro\ 10
-    "set guifont=DroidSansMono\ 10
-    set guifont=Consolas\ 11
-    "set guifont=Inconsolata\ Medium\ 12
-    "set guifont=Anonymous\ Pro\ 12
+    if has('win32')
+        set guifont=Consolas:h11
+    else
+        set guifont=Consolas\ 11
+    fi
 
     " Enable spell checking.
     set spell
