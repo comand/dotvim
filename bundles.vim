@@ -28,11 +28,11 @@ NeoBundle 'Shougo/vimproc', {
     \     },
     \ }
 
-NeoBundle 'ervandew/supertab'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'bling/vim-airline'
+NeoBundle 'chrisbra/Recover.vim'
 NeoBundle 'elzr/vim-json'
-NeoBundle 'git://git-master/Grok.vim'
+NeoBundle 'ervandew/supertab'
 NeoBundle 'hdima/python-syntax'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'junkblocker/unite-tasklist'
@@ -43,10 +43,16 @@ NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'tpope/vim-abolish'
 NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'vim-scripts/argtextobj.vim'
 NeoBundle 'vim-scripts/a.vim'
 NeoBundle 'vim-scripts/genutils'
 NeoBundle 'Yggdroot/indentLine'
+
+NeoBundle 'kana/vim-textobj-user'
+NeoBundle 'kana/vim-textobj-function'
+NeoBundle 'bps/vim-textobj-python'
+NeoBundle 'sgur/vim-textobj-parameter'
+
+NeoBundle 'git://git-master/Grok.vim'
 
 if v:version < 703 || (v:version == 703 && !has('patch584'))
     NeoBundleDisable 'Valloric/YouCompleteMe'
