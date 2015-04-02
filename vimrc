@@ -276,6 +276,21 @@ augroup ft_cpp
 augroup END
 
 " }}}
+" Build Configuration ---------------------------------------------------- {{{
+
+" Make program
+if !empty(findfile('SConscript', '.;')) || !empty(findfile('SConstruct', '.;'))
+    set makeprg=scons
+elseif !empty(findfile('Makefile', '.'))
+    set makeprg=gmake
+elseif !empty(findfile('build.xml', '.'))
+    set makeprg=ant
+endif
+
+nnoremap <F6> :make<CR>
+au QuickFixCmdPost make :cwin
+
+" }}}
 " Keystrokes: General ---------------------------------------------------- {{{
 
 " Leader
@@ -515,20 +530,5 @@ let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " }}}
-
-" }}}
-" Build Configuration ---------------------------------------------------- {{{
-
-" Make program
-if !empty(findfile('SConscript', '.;')) || !empty(findfile('SConstruct', '.;'))
-    set makeprg=scons
-elseif !empty(findfile('Makefile', '.'))
-    set makeprg=gmake
-elseif !empty(findfile('build.xml', '.'))
-    set makeprg=ant
-endif
-
-nnoremap <F6> :make<CR>
-au QuickFixCmdPost make :cwin
 
 " }}}
