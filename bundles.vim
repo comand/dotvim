@@ -46,13 +46,12 @@ NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'vim-scripts/a.vim'
 NeoBundle 'vim-scripts/genutils'
 NeoBundle 'Yggdroot/indentLine'
+NeoBundle 'Mizuchi/STL-Syntax'
 
 NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'kana/vim-textobj-function'
 NeoBundle 'bps/vim-textobj-python'
 NeoBundle 'sgur/vim-textobj-parameter'
-
-NeoBundle 'git://git-master/Grok.vim'
 
 if v:version < 703 || (v:version == 703 && !has('patch584'))
     NeoBundleDisable 'Valloric/YouCompleteMe'
@@ -60,10 +59,9 @@ else
     NeoBundle 'Valloric/YouCompleteMe'
 endif
 
-if !empty($P4CONFIG)
-    NeoBundle 'pydave/vim-perforce'
-else
-    NeoBundleDisable 'pydave/vim-perforce'
+let g:sitebundles=expand('~/.vim/bundles-site.vim')
+if filereadable(g:sitebundles)
+    execute 'source' g:sitebundles
 endif
 
 " Postamble -------------------------------------------------------------- {{{

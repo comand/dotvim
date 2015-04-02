@@ -49,10 +49,6 @@ set nohlsearch
 " Don't redraw the screen when executing macros.
 set lazyredraw
 
-" Window title
-let &titlestring="%{expand('%:p:h:t')}/%t @ %{expand($TREE)}:%{expand($OPTLEVEL)}"
-set title
-
 " History
 set history=1000
 
@@ -191,10 +187,6 @@ set nojoinspaces
 " }}}
 " File Format Options ---------------------------------------------------- {{{
 
-augroup filetypedetect
-    au! BufRead,BufNewFile *.dox setf doxygen
-augroup END
-
 augroup ft_perl
     au!
     au BufNewFile,BufRead *.t setf perl
@@ -204,12 +196,6 @@ augroup END
 augroup ft_web
     au!
     au FileType html,xhtml,css,xml setlocal fo+=l ts=2 sw=2
-augroup END
-
-augroup ft_sieve
-    au!
-    au BufNewFile,BufRead .sieverc setf sieve
-    au FileType sieve setlocal ts=2 sw=2
 augroup END
 
 augroup ft_human
@@ -238,7 +224,7 @@ endfunction
 
 augroup ft_vimrc
     au!
-    au BufNewFile,BufRead vimrc,.vimrc,*.vim setlocal fen fdm=marker fdt=VimrcFold()
+    au FileType vim setlocal fen fdm=marker fdt=VimrcFold()
 augroup END
 
 augroup ft_make
@@ -253,7 +239,6 @@ augroup END
 
 augroup ft_python
     au!
-    au BufNewFile,BufRead SConscript*,SConstruct* setf python
     au FileType python setlocal fo=croqt colorcolumn=+3 comments-=:%
 augroup END
 
@@ -427,16 +412,6 @@ if &diff
 endif
 
 " }}}
-" Grok {{{
-
-let g:grok_server = 'grok.pixar.com'
-let g:grok_project = 'mainline'
-map <Leader>gf :call grok#FullSearch()<CR>
-map <Leader>gd :call grok#DefinitionSearch()<CR>
-map <Leader>gs :call grok#SymbolSearch()<CR>
-map <Leader>gx :call grok#XRef()<CR>
-
-" }}}
 " IndentLine {{{
 
 let g:indentLine_char = "|"
@@ -455,12 +430,6 @@ let g:vim_json_warnings = 0
 
 source $VIMRUNTIME/ftplugin/man.vim
 au FileType man set nomod nolist
-
-" }}}
-" Perforce {{{
-
-let g:p4EnableRuler=0
-let g:p4CurDirExpr="(isdirectory(expand('%')) ? substitute(expand('%:p'), '\\\\$', '', '') : '')"
 
 " }}}
 " Python-syntax {{{
@@ -484,18 +453,12 @@ let g:syntastic_mode_map = { 'passive_filetypes' : ['cpp'] }
 let g:syntastic_check_on_open = 1
 let g:syntastic_python_checkers = ['pyflakes']
 let g:syntastic_stl_format = "%E{Err: %e(%fe)}%B{, }%W{Warn: %w(%fw)}"
-let g:syntastic_python_python_exec = '$HOME/.vim/bin/python'
 
 let g:syntastic_enable_signs = 1
 let g:syntastic_error_symbol = "➤"
 let g:syntastic_style_error_symbol = "▷"
 let g:syntastic_warning_symbol = "⚠"
 let g:syntastic_style_warning_symbol = "⚠"
-
-" }}}
-" UltiSnips {{{
-
-let g:UltiSnipsSnipptsDir = "~/.vim/UltiSnips"
 
 " }}}
 " Unite {{{
@@ -532,7 +495,6 @@ nnoremap <C-f> :<C-u>Unite -buffer-name=search -start-insert line<CR>
 " }}}
 " YouCompleteMe {{{
 
-let g:ycm_global_ycm_extra_conf = '~/lib/ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_always_populate_location_list = 1
 
@@ -557,13 +519,6 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 " }}}
 " Build Configuration ---------------------------------------------------- {{{
 
-" Tags
-if !empty($SRCROOT)
-    set tags=$SRCROOT/dev/.tags
-else
-    set tags=.tags
-endif
-
 " Make program
 if !empty(findfile('SConscript', '.;')) || !empty(findfile('SConstruct', '.;'))
     set makeprg=scons
@@ -575,35 +530,5 @@ endif
 
 nnoremap <F6> :make<CR>
 au QuickFixCmdPost make :cwin
-
-" }}}
-" Custom Functions ------------------------------------------------------- {{{
-
-" Open Perforce timelapse view for the current file.
-function! P4vc_Tlv()
-    silent execute "!p4vc tlv " . expand("%")
-endfunction
-command! Tlv call P4vc_Tlv()
-
-" Open Qt doc for class name under the cursor.
-function! QtClassDoc(classname)
-    let qt_dir = "/pixar/d2/sets/tools-39/doc/html/"
-    let doc_file = qt_dir . tolower(a:classname) . ".html"
-    silent execute "!xdg-open " . doc_file | redraw!
-endfunction
-
-map <Leader>qt :call QtClassDoc(expand("<cword>"))<CR>
-command! -nargs=1 Qt call QtClassDoc(<f-args>)
-
-" Launch a terminal in the current working directory
-function! Terminal()
-    silent execute "!gnome-terminal --working-directory=" . getcwd() | redraw!
-endfunction
-map <Leader>r :call Terminal()<CR>
-
-function! RunTest()
-    execute "!echo " . expand('%:t:r') . " | scons -u runtest"
-endfunction
-map <F7> :call RunTest()<CR>
 
 " }}}
