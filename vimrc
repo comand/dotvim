@@ -368,9 +368,6 @@ vnoremap <space> zf
 " Show the absolute path of the current buffer.
 nnoremap <M-g> :echo expand("%:p")<CR>
 
-" Quit with confirmation
-nnoremap <Leader>q :confirm qa<CR>
-
 " Change directory to current buffer
 nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR>
 
@@ -439,6 +436,12 @@ let g:indentLine_color_gui = "Grey85"
 
 let g:vim_json_syntax_conceal = 0
 let g:vim_json_warnings = 0
+
+" }}}
+" ListToggle {{{
+
+let g:lt_location_list_toggle_map = '<leader>l'
+let g:lt_quickfix_list_toggle_map = '<leader>f'
 
 " }}}
 " Man mode {{{
