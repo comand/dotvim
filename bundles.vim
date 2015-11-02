@@ -30,16 +30,12 @@ NeoBundle 'Shougo/vimproc', {
 
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'bling/vim-airline'
-NeoBundle 'bps/vim-textobj-python'
 NeoBundle 'chrisbra/Recover.vim'
-NeoBundle 'elzr/vim-json'
 NeoBundle 'ervandew/supertab'
-NeoBundle 'hdima/python-syntax'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'junkblocker/unite-tasklist'
 NeoBundle 'kana/vim-textobj-function'
 NeoBundle 'kana/vim-textobj-user'
-NeoBundle 'Mizuchi/STL-Syntax'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'sgur/vim-textobj-parameter'
@@ -52,6 +48,16 @@ NeoBundle 'tsukkee/unite-tag'
 NeoBundle 'Valloric/ListToggle'
 NeoBundle 'vim-scripts/a.vim'
 NeoBundle 'Yggdroot/indentLine'
+
+NeoBundleLazy 'bps/vim-textobj-python'
+NeoBundleLazy 'hdima/python-syntax'
+autocmd FileType python NeoBundleSource vim-textobj-python python-syntax
+
+NeoBundleLazy 'elzr/vim-json'
+autocmd FileType json NeoBundleSource vim-json
+
+NeoBundleLazy 'Mizuchi/STL-Syntax'
+autocmd FileType cpp NeoBundleSource STL-Syntax
 
 if v:version < 703 || (v:version == 703 && !has('patch584'))
     NeoBundleDisable 'Valloric/YouCompleteMe'

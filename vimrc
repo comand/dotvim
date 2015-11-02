@@ -113,7 +113,8 @@ if has('gui_running')
     if has('win32')
         set guifont=Consolas:h11
     else
-        set guifont=Consolas\ 11
+        "set guifont=Consolas\ 11
+        set guifont=Inconsolata\ 11
     endif
 
     " Enable spell checking.
@@ -234,7 +235,8 @@ augroup END
 
 augroup ft_perforce
     au!
-    au FileType perforce setlocal noet ts=4 sw=4 tw=78
+    au FileType p4change setlocal noet tw=78
+    au FileType p4client setlocal noet tw=0
 augroup END
 
 augroup ft_python
@@ -333,7 +335,7 @@ map! <F1> <C-C><F1>
 noremap Y y$
 
 " Search and replace word under cursor.
-nnoremap <C-S> :,$s/\<<C-R><C-W>\>/
+nnoremap <C-S> :%s/\<<C-R><C-W>\>/
 
 " }}}
 " Keystrokes: Toggles ---------------------------------------------------- {{{
@@ -467,7 +469,7 @@ let python_print_as_function = 1
 " }}}
 " Syntastic {{{
 
-let g:syntastic_mode_map = { 'passive_filetypes' : ['cpp'] }
+let g:syntastic_mode_map = { 'passive_filetypes' : ['cpp', 'spec'] }
 let g:syntastic_check_on_open = 1
 let g:syntastic_python_checkers = ['pyflakes']
 let g:syntastic_stl_format = "%E{Err: %e(%fe)}%B{, }%W{Warn: %w(%fw)}"
