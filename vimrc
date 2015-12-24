@@ -487,6 +487,7 @@ let g:unite_enable_start_insert = 1
 let g:unite_winheight = 10
 let g:unite_split_rule = 'botright'
 let g:unite_prompt = '» '
+let g:unite_marked_icon = '+'
 
 " Always use the fuzzy matcher.
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
@@ -501,7 +502,8 @@ let g:unite_source_mru_update_interval=0
 
 if executable('ag')
     let g:unite_source_grep_command = 'ag'
-    let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+    let g:unite_source_grep_default_opts =
+        \ '--nogroup --nocolor --column --hidden'
     let g:unite_source_grep_recursive_opt = ''
 endif
 
@@ -510,6 +512,7 @@ nnoremap <C-e> :<C-u>Unite file<CR>
 nnoremap <C-b> :<C-u>Unite buffer<CR>
 nnoremap <C-g> :<C-u>Unite grep:.<CR>
 nnoremap <C-t> :<C-u>Unite tasklist<CR>
+nnoremap <C-o> :<C-u>Unite outline<CR>
 nnoremap <C-f> :<C-u>Unite -buffer-name=search -start-insert line<CR>
 
 " }}}
