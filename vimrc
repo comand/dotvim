@@ -244,20 +244,6 @@ augroup ft_python
     au FileType python setlocal fo=croqt colorcolumn=+3 comments-=:%
 augroup END
 
-function! AddTags(tagdir, disabled)
-    if exists("g:did_add_cpp_tag_files")
-        return
-    endif
-    let tagfiles = split(globpath(a:tagdir, '*'), '\n')
-    for tagfile in tagfiles
-        if index(a:disabled, fnamemodify(tagfile, ":t")) == -1
-            if filereadable(tagfile)
-                let &tags=&tags . ',' . tagfile
-            endif
-        endif
-    endfor
-endfunction
-
 augroup ft_cpp
     au!
     au FileType cpp setlocal cin cino=':0,g0,l1,t0,(0,W4,M1'
@@ -268,13 +254,6 @@ augroup ft_cpp
     au FileType cpp setlocal comments-=://
     au FileType cpp setlocal comments+=://!,:///,://
     au FileType cpp let g:load_doxygen_syntax = 1
-
-    " OmniCpp Setup 
-    "au FileType cpp let OmniCpp_ShowPrototypeInAbbr = 1
-    "au FileType cpp let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
-
-    " Tag files
-    au FileType cpp call AddTags('~/.vim/tags', ['boost', 'opengl', 'oracle'])
 augroup END
 
 " }}}
