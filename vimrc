@@ -194,6 +194,11 @@ augroup ft_perl
     au FileType perl,tcl,css setlocal smartindent
 augroup END
 
+augroup ft_crontab
+    au!
+    au FileType crontab setlocal tw=0 nowrap
+augroup END
+
 augroup ft_web
     au!
     au FileType html,xhtml,css,xml setlocal fo+=l ts=2 sw=2
@@ -242,6 +247,7 @@ augroup END
 augroup ft_python
     au!
     au FileType python setlocal fo=croqt colorcolumn=+3 comments-=:%
+    au FileType python BracelessEnable +indent
 augroup END
 
 augroup ft_cpp
@@ -475,6 +481,10 @@ call unite#custom#source(
     \ 'file,file/new,buffer,line',
     \ 'matchers', 'matcher_fuzzy')
 
+" Ignore patterns
+call unite#custom#source('file', 'ignore_pattern',
+    \ '\.\(git\|gitignore\|gdb_history\)$')
+
 " Disable mru
 let g:unite_source_mru_do_validate=0
 let g:unite_source_mru_update_interval=0
@@ -491,7 +501,7 @@ nnoremap <C-e> :<C-u>Unite file<CR>
 nnoremap <C-b> :<C-u>Unite buffer<CR>
 nnoremap <C-g> :<C-u>Unite grep:.<CR>
 nnoremap <C-t> :<C-u>Unite tasklist<CR>
-nnoremap <C-o> :<C-u>Unite outline<CR>
+"nnoremap <C-o> :<C-u>Unite outline<CR>
 nnoremap <C-f> :<C-u>Unite -buffer-name=search -start-insert line<CR>
 
 " }}}
@@ -500,8 +510,10 @@ nnoremap <C-f> :<C-u>Unite -buffer-name=search -start-insert line<CR>
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_always_populate_location_list = 1
 
+" debugging flags
 "let g:ycm_server_use_vim_stdout = 1
 "let g:ycm_server_log_level = 'debug'
+"let g:ycm_server_keep_logfiles = 1
 
 nnoremap <Leader>j :YcmCompleter GoToDefinition<CR>
 nnoremap <Leader>dd :YcmDiags<CR>

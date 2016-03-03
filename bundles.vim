@@ -29,41 +29,52 @@ NeoBundle 'Shougo/vimproc', {
     \ }
 
 NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'bling/vim-airline'
 NeoBundle 'chrisbra/Recover.vim'
 NeoBundle 'ervandew/supertab'
-NeoBundle 'honza/vim-snippets'
-NeoBundle 'junkblocker/unite-tasklist'
-NeoBundle 'kana/vim-textobj-function'
-NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/syntastic'
-NeoBundle 'sgur/vim-textobj-parameter'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/unite-outline'
-NeoBundle 'SirVer/ultisnips'
 NeoBundle 'tpope/vim-abolish'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-repeat'
-NeoBundle 'tsukkee/unite-tag'
 NeoBundle 'Valloric/ListToggle'
 NeoBundle 'vim-scripts/a.vim'
 NeoBundle 'Yggdroot/indentLine'
 
-NeoBundleLazy 'bps/vim-textobj-python'
-NeoBundleLazy 'hdima/python-syntax'
-autocmd FileType python NeoBundleSource vim-textobj-python python-syntax
+NeoBundle 'vim-airline/vim-airline'
+NeoBundle 'vim-airline/vim-airline-themes', {'depends': 'ultisnips'}
 
-NeoBundleLazy 'elzr/vim-json'
-autocmd FileType json NeoBundleSource vim-json
+NeoBundle 'kana/vim-textobj-function'
+NeoBundle 'kana/vim-textobj-user'
+NeoBundle 'sgur/vim-textobj-parameter'
 
-NeoBundleLazy 'Mizuchi/STL-Syntax'
-autocmd FileType cpp NeoBundleSource STL-Syntax
+NeoBundle 'SirVer/ultisnips'
+NeoBundle 'honza/vim-snippets', {'depends': 'ultisnips'}
 
-if v:version < 703 || (v:version == 703 && !has('patch584'))
-    NeoBundleDisable 'Valloric/YouCompleteMe'
-else
-    NeoBundle 'Valloric/YouCompleteMe'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/unite-outline', {'depends': 'unite.vim'}
+NeoBundle 'junkblocker/unite-tasklist', {'depends': 'unite.vim'}
+NeoBundle 'tsukkee/unite-tag', {'depends': 'unite.vim'}
+
+NeoBundleLazy 'bps/vim-textobj-python',
+    \ {'autoload':{'filetypes':['python']}}
+NeoBundleLazy 'hdima/python-syntax',
+    \ {'autoload':{'filetypes':['python']}}
+NeoBundleLazy 'tweekmonster/braceless.vim',
+    \ {'autoload':{'filetypes':['python']}}
+
+NeoBundleLazy 'elzr/vim-json',
+    \ {'autoload': {'filetypes':['json']}}
+NeoBundleLazy 'Mizuchi/STL-Syntax',
+    \ {'autoload': {'filetypes':['cpp']}}
+
+if v:version >= 703
+    NeoBundleLazy 'Valloric/YouCompleteMe',
+        \ {
+        \ 'autoload': {'filetypes': ['c', 'cpp', 'python']},
+        \ 'insert': 1,
+        \ 'augroup': 'YcmStart',
+        \ 'install_process_timeout': 400
+        \ }
 endif
 
 let g:sitebundles=expand('~/.vim/bundles-site.vim')

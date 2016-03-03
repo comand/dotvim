@@ -2,6 +2,6 @@
 bundles-site.vim
 bundle/*
 spell/*
-bin/build-ycmd.sh
+bin/rebuild-ycmd.sh
 bin/python
 tmp/*
