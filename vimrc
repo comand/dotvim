@@ -498,11 +498,11 @@ endif
 
 "nnoremap <C-e> :<C-u>Unite file_rec/async<CR>
 nnoremap <C-e> :<C-u>Unite file<CR>
+nnoremap <C-f> :<C-u>Unite -buffer-name=search -start-insert line<CR>
 nnoremap <C-b> :<C-u>Unite buffer<CR>
 nnoremap <C-g> :<C-u>Unite grep:.<CR>
-nnoremap <C-t> :<C-u>Unite tasklist<CR>
-"nnoremap <C-o> :<C-u>Unite outline<CR>
-nnoremap <C-f> :<C-u>Unite -buffer-name=search -start-insert line<CR>
+nnoremap <Leader>t :<C-u>Unite tasklist<CR>
+nnoremap <Leader>o :<C-u>Unite outline<CR>
 
 " }}}
 " YouCompleteMe {{{
@@ -521,7 +521,9 @@ nnoremap <Leader>dd :YcmDiags<CR>
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
+"let g:SuperTabDefaultCompletionType = '<C-n>'
+let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabContextDefaultCompletionType = '<C-n>'
 
 " better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
