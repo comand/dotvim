@@ -113,8 +113,8 @@ if has('gui_running')
     set guitablabel=%n\ %t\ %m
 
     " Italic comments
-    hi Comment gui=italic
-    hi doxygenBrief gui=italic
+    highlight Comment gui=italic
+    highlight doxygenBrief gui=italic
 
     " Oooooh... pretty fonts.
     if has('win32')
@@ -213,7 +213,7 @@ augroup END
 
 augroup ft_human
     autocmd!
-    autocmd BufNewFile,BufRead *.txt setf human
+    autocmd BufNewFile,BufRead *.txt setfiletype human
     autocmd FileType human setlocal wrap linebreak tw=78
 augroup END
 
@@ -237,29 +237,31 @@ endfunction
 
 augroup ft_vimrc
     autocmd!
-    autocmd FileType vim setlocal fen fdm=marker fdt=VimrcFold()
+    autocmd FileType vim setlocal foldenable foldmethod=marker
+    autocmd FileType vim setlocal foldtext=VimrcFold()
 augroup END
 
 augroup ft_make
     autocmd!
-    autocmd FileType make setlocal noet ts=8 sw=8 list
+    autocmd FileType make setlocal noexpandtab tabstop=8 shiftwidth=8 list
 augroup END
 
 augroup ft_perforce
     autocmd!
-    autocmd FileType p4change setlocal noet tw=78
-    autocmd FileType p4client setlocal noet tw=0
+    autocmd FileType p4change setlocal noexpandtab tw=78
+    autocmd FileType p4client setlocal noexpandtab tw=0
 augroup END
 
 augroup ft_python
     autocmd!
-    autocmd FileType python setlocal fo=croqt colorcolumn=+3 comments-=:%
+    autocmd FileType python setlocal formatoptions=croqt
+    autocmd FileType python setlocal colorcolumn=+3 comments-=:%
     autocmd FileType python BracelessEnable +indent
 augroup END
 
 augroup ft_cpp
     autocmd!
-    autocmd FileType cpp setlocal cin cino=':0,g0,l1,t0,(0,W4,M1'
+    autocmd FileType cpp setlocal cindent cinoptions=':0,g0,l1,t0,(0,W4,M1'
     autocmd FileType cpp setlocal formatoptions=croql
     autocmd FileType cpp setlocal colorcolumn=+3
 
@@ -284,7 +286,7 @@ endif
 nnoremap <F6> :make<CR>
 augroup QuickFix
     autocmd!
-    autocmd QuickFixCmdPost make :cwin
+    autocmd QuickFixCmdPost make :cwindow
 augroup END
 
 " }}}
@@ -352,7 +354,7 @@ imap <F4> <C-O>\tp
 set pastetoggle=<F4>
 
 " Toggle highlighting of search matches, and report the change.
-nnoremap \th :set invhls hls?<CR>
+nnoremap \th :set invhls hlsearch?<CR>
 nmap <F5> \th
 
 " Toggle fold open/close
@@ -458,7 +460,7 @@ let python_print_as_function = 1
 " }}}
 " Syntastic {{{
 
-let g:syntastic_mode_map = { 'passive_filetypes' : ['cpp', 'spec'] }
+let g:syntastic_mode_map = { 'passive_filetypes' : ['spec'] }
 let g:syntastic_check_on_open = 1
 let g:syntastic_python_checkers = ['pyflakes']
 let g:syntastic_stl_format = "%E{Err: %e(%fe)}%B{, }%W{Warn: %w(%fw)}"
