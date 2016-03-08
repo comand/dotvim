@@ -68,11 +68,8 @@ NeoBundleLazy 'Mizuchi/STL-Syntax',
     \ {'autoload': {'filetypes':['cpp']}}
 
 if v:version >= 703
-    NeoBundleLazy 'Valloric/YouCompleteMe',
+    NeoBundle 'Valloric/YouCompleteMe',
         \ {
-        \ 'autoload': {'filetypes': ['c', 'cpp', 'python']},
-        \ 'insert': 1,
-        \ 'augroup': 'YcmStart',
         \ 'install_process_timeout': 400
         \ }
 endif
