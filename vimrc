@@ -90,10 +90,17 @@ endif
 set wmw=0 wmh=0
 
 " Resize splits when the window is resized.
-au VimResized * :wincmd =
+augroup WinSize
+    autocmd!
+    autocmd VimResized * :wincmd =
+augroup END
 
 " Automatically open and close the popup menu / preview window
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+augroup Completion
+    autocmd!
+    autocmd CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+augroup END
+
 "set completeopt=menuone,menu,longest,preview
 set completeopt=longest,menuone
 
@@ -189,30 +196,30 @@ set nojoinspaces
 " File Format Options ---------------------------------------------------- {{{
 
 augroup ft_perl
-    au!
-    au BufNewFile,BufRead *.t setf perl
-    au FileType perl,tcl,css setlocal smartindent
+    autocmd!
+    autocmd BufNewFile,BufRead *.t setf perl
+    autocmd FileType perl,tcl,css setlocal smartindent
 augroup END
 
 augroup ft_crontab
-    au!
-    au FileType crontab setlocal tw=0 nowrap
+    autocmd!
+    autocmd FileType crontab setlocal tw=0 nowrap
 augroup END
 
 augroup ft_web
-    au!
-    au FileType html,xhtml,css,xml setlocal fo+=l ts=2 sw=2
+    autocmd!
+    autocmd FileType html,xhtml,css,xml setlocal fo+=l ts=2 sw=2
 augroup END
 
 augroup ft_human
-    au!
-    au BufNewFile,BufRead *.txt setf human
-    au FileType human setlocal wrap linebreak tw=78
+    autocmd!
+    autocmd BufNewFile,BufRead *.txt setf human
+    autocmd FileType human setlocal wrap linebreak tw=78
 augroup END
 
 augroup ft_quickfix
-    au!
-    au FileType qf setlocal colorcolumn=0 nolist nocursorline nowrap tw=0
+    autocmd!
+    autocmd FileType qf setlocal colorcolumn=0 nolist nocursorline nowrap tw=0
 augroup END
 
 function! VimrcFold()
@@ -229,37 +236,37 @@ function! VimrcFold()
 endfunction
 
 augroup ft_vimrc
-    au!
-    au FileType vim setlocal fen fdm=marker fdt=VimrcFold()
+    autocmd!
+    autocmd FileType vim setlocal fen fdm=marker fdt=VimrcFold()
 augroup END
 
 augroup ft_make
-    au!
-    au FileType make setlocal noet ts=8 sw=8 list
+    autocmd!
+    autocmd FileType make setlocal noet ts=8 sw=8 list
 augroup END
 
 augroup ft_perforce
-    au!
-    au FileType p4change setlocal noet tw=78
-    au FileType p4client setlocal noet tw=0
+    autocmd!
+    autocmd FileType p4change setlocal noet tw=78
+    autocmd FileType p4client setlocal noet tw=0
 augroup END
 
 augroup ft_python
-    au!
-    au FileType python setlocal fo=croqt colorcolumn=+3 comments-=:%
-    au FileType python BracelessEnable +indent
+    autocmd!
+    autocmd FileType python setlocal fo=croqt colorcolumn=+3 comments-=:%
+    autocmd FileType python BracelessEnable +indent
 augroup END
 
 augroup ft_cpp
-    au!
-    au FileType cpp setlocal cin cino=':0,g0,l1,t0,(0,W4,M1'
-    au FileType cpp setlocal formatoptions=croql
-    au FileType cpp setlocal colorcolumn=+3
+    autocmd!
+    autocmd FileType cpp setlocal cin cino=':0,g0,l1,t0,(0,W4,M1'
+    autocmd FileType cpp setlocal formatoptions=croql
+    autocmd FileType cpp setlocal colorcolumn=+3
 
     " Doxygen comments
-    au FileType cpp setlocal comments-=://
-    au FileType cpp setlocal comments+=://!,:///,://
-    au FileType cpp let g:load_doxygen_syntax = 1
+    autocmd FileType cpp setlocal comments-=://
+    autocmd FileType cpp setlocal comments+=://!,:///,://
+    autocmd FileType cpp let g:load_doxygen_syntax = 1
 augroup END
 
 " }}}
@@ -275,7 +282,10 @@ elseif !empty(findfile('build.xml', '.'))
 endif
 
 nnoremap <F6> :make<CR>
-au QuickFixCmdPost make :cwin
+augroup QuickFix
+    autocmd!
+    autocmd QuickFixCmdPost make :cwin
+augroup END
 
 " }}}
 " Keystrokes: General ---------------------------------------------------- {{{
@@ -431,12 +441,6 @@ let g:lt_location_list_toggle_map = '<leader>l'
 let g:lt_quickfix_list_toggle_map = '<leader>f'
 
 " }}}
-" Man mode {{{
-
-source $VIMRUNTIME/ftplugin/man.vim
-au FileType man set nomod nolist
-
-" }}}
 " Python-syntax {{{
 
 let b:python_version_2 = 1
@@ -507,22 +511,15 @@ nnoremap <Leader>o :<C-u>Unite outline<CR>
 " }}}
 " YouCompleteMe {{{
 
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_always_populate_location_list = 1
-let g:ycm_complete_in_comments = 1
-let g:ycm_max_diagnostics_to_display = 100
-
-" XXX Move these to site config
-" XXX Used for jedi, maybe use python from the project, uses ycn)_path_to_python_interpreter
-" XXX if not set.
-"let g:ycm_python_binary_path = '/usr/bin/python3'
-" XXX Used for ycmd, use python2.7 if it's not already...
-"let g:ycm_path_to_python_interpreter = ''
-
 " debugging flags
 "let g:ycm_server_use_vim_stdout = 1
 "let g:ycm_server_log_level = 'debug'
 "let g:ycm_server_keep_logfiles = 1
+
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_always_populate_location_list = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_max_diagnostics_to_display = 100
 
 nnoremap <Leader>gd :YcmCompleter GetDoc<CR>
 nnoremap <Leader>jd :YcmCompleter GoToImprecise<CR>
