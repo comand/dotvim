@@ -509,13 +509,24 @@ nnoremap <Leader>o :<C-u>Unite outline<CR>
 
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_always_populate_location_list = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_max_diagnostics_to_display = 100
+
+" XXX Move these to site config
+" XXX Used for jedi, maybe use python from the project, uses ycn)_path_to_python_interpreter
+" XXX if not set.
+"let g:ycm_python_binary_path = '/usr/bin/python3'
+" XXX Used for ycmd, use python2.7 if it's not already...
+"let g:ycm_path_to_python_interpreter = ''
 
 " debugging flags
 "let g:ycm_server_use_vim_stdout = 1
 "let g:ycm_server_log_level = 'debug'
 "let g:ycm_server_keep_logfiles = 1
 
-nnoremap <Leader>j :YcmCompleter GoToDefinition<CR>
+nnoremap <Leader>gd :YcmCompleter GetDoc<CR>
+nnoremap <Leader>jd :YcmCompleter GoToImprecise<CR>
+nnoremap <Leader>yf :YcmCompleter FixIt<CR>
 nnoremap <Leader>dd :YcmDiags<CR>
 
 " make YCM compatible with UltiSnips (using supertab)
