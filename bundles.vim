@@ -64,7 +64,9 @@ NeoBundleLazy 'tweekmonster/braceless.vim',
 
 NeoBundleLazy 'elzr/vim-json',
     \ {'autoload': {'filetypes':['json']}}
-NeoBundleLazy 'Mizuchi/STL-Syntax',
+"NeoBundleLazy 'Mizuchi/STL-Syntax',
+"    \ {'autoload': {'filetypes':['cpp']}}
+NeoBundleLazy 'octol/vim-cpp-enhanced-highlight',
     \ {'autoload': {'filetypes':['cpp']}}
 
 if v:version >= 703
