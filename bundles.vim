@@ -66,6 +66,8 @@ NeoBundleLazy 'elzr/vim-json',
     \ {'autoload': {'filetypes':['json']}}
 NeoBundleLazy 'Mizuchi/STL-Syntax',
     \ {'autoload': {'filetypes':['cpp']}}
+NeoBundleLazy 'lepture/vim-jinja',
+    \ {'autoload': {'filetypes':['html','jinja']}}
 
 if v:version >= 703
     NeoBundle 'Valloric/YouCompleteMe',
