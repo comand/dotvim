@@ -201,6 +201,12 @@ augroup ft_perl
     autocmd FileType perl,tcl,css setlocal smartindent
 augroup END
 
+augroup ft_xml
+    autocmd!
+    autocmd FileType xml let g:xml_syntax_folding=1
+    autocmd FileType xml setlocal foldmethod=syntax
+augroup END
+
 augroup ft_crontab
     autocmd!
     autocmd FileType crontab setlocal tw=0 nowrap
@@ -382,6 +388,7 @@ nnoremap <Leader>w :bdelete<CR>
 
 " Airline {{{
 
+let g:airline_detect_spell = 0
 let g:airline_powerline_fonts = 1
 "let g:airline_theme = 'light'
 
@@ -460,7 +467,7 @@ let python_print_as_function = 1
 " }}}
 " Syntastic {{{
 
-let g:syntastic_mode_map = { 'passive_filetypes' : ['spec'] }
+let g:syntastic_mode_map = { 'passive_filetypes' : ['cpp', 'spec'] }
 let g:syntastic_check_on_open = 1
 let g:syntastic_python_checkers = ['pyflakes']
 let g:syntastic_stl_format = "%E{Err: %e(%fe)}%B{, }%W{Warn: %w(%fw)}"
