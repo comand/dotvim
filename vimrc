@@ -139,6 +139,18 @@ if has('gui_running')
     set guioptions-=r
 endif
 
+" http://vim.wikia.com/wiki/Automatically_quit_Vim_if_quickfix_window_is_the_last
+au BufEnter * call MyLastWindow()
+function! MyLastWindow()
+    " If the window is quickfix go on
+    if &buftype == 'quickfix'
+        " If this window is last on screen quit without warning.
+        if winbufnr(2) == -1
+            quit!
+        endif
+    endif
+endfunction
+
 " }}}
 " Folding ---------------------------------------------------------------- {{{
 
@@ -262,7 +274,6 @@ augroup ft_python
     autocmd!
     autocmd FileType python setlocal formatoptions=croqt
     autocmd FileType python setlocal colorcolumn=+3 comments-=:%
-    autocmd FileType python BracelessEnable +indent
 augroup END
 
 augroup ft_cpp
@@ -285,14 +296,12 @@ if !empty(findfile('SConscript', '.;')) || !empty(findfile('SConstruct', '.;'))
     set makeprg=scons
 elseif !empty(findfile('Makefile', '.'))
     set makeprg=gmake
-elseif !empty(findfile('build.xml', '.'))
-    set makeprg=ant
 endif
 
-nnoremap <F6> :make<CR>
+command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
+nnoremap <F6> :Make<CR>
 augroup QuickFix
-    autocmd!
-    autocmd QuickFixCmdPost make :cwindow
+    autocmd User AsyncRunStart call asyncrun#quickfix_toggle(8, 1)
 augroup END
 
 " }}}
@@ -469,7 +478,7 @@ let python_print_as_function = 1
 
 let g:syntastic_mode_map = { 'passive_filetypes' : ['cpp', 'spec'] }
 let g:syntastic_check_on_open = 1
-let g:syntastic_python_checkers = ['pyflakes']
+let g:syntastic_python_checkers = ['frosted']
 let g:syntastic_stl_format = "%E{Err: %e(%fe)}%B{, }%W{Warn: %w(%fw)}"
 
 let g:syntastic_enable_signs = 1
@@ -511,11 +520,14 @@ endif
 
 "nnoremap <C-e> :<C-u>Unite file_rec/async<CR>
 nnoremap <C-e> :<C-u>Unite file<CR>
-nnoremap <C-f> :<C-u>Unite -buffer-name=search -start-insert line<CR>
+"nnoremap <C-f> :<C-u>Unite -buffer-name=search -start-insert line<CR>
+nnoremap <C-f> :<C-u>Unite grep:$buffers -start-insert<CR>
 nnoremap <C-b> :<C-u>Unite buffer<CR>
 nnoremap <C-g> :<C-u>Unite grep:.<CR>
 nnoremap <Leader>t :<C-u>Unite tasklist<CR>
 nnoremap <Leader>o :<C-u>Unite outline<CR>
+nnoremap <Leader>* :execute
+    \ 'Unite grep:$buffers::' . expand("<cword>") . ' -start-insert'<CR>
 
 " }}}
 " YouCompleteMe {{{
@@ -546,6 +558,12 @@ let g:SuperTabContextDefaultCompletionType = '<C-n>'
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+" }}}
+" Vim-G {{{
+
+nnoremap <Leader>gg :Google<CR>
+vnoremap <Leader>gg :Google<CR>
 
 " }}}
 

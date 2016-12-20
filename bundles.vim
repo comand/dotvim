@@ -34,11 +34,13 @@ NeoBundle 'ervandew/supertab'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'tpope/vim-abolish'
-NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'Valloric/ListToggle'
 NeoBundle 'vim-scripts/a.vim'
 NeoBundle 'Yggdroot/indentLine'
+NeoBundle 'szw/vim-g'
+NeoBundle 'jiangmiao/auto-pairs'
+NeoBundle 'skywind3000/asyncrun.vim'
 
 NeoBundle 'vim-airline/vim-airline'
 NeoBundle 'vim-airline/vim-airline-themes', {'depends': 'ultisnips'}
@@ -59,13 +61,11 @@ NeoBundleLazy 'bps/vim-textobj-python',
     \ {'autoload':{'filetypes':['python']}}
 NeoBundleLazy 'hdima/python-syntax',
     \ {'autoload':{'filetypes':['python']}}
-NeoBundleLazy 'tweekmonster/braceless.vim',
-    \ {'autoload':{'filetypes':['python']}}
 
 NeoBundleLazy 'elzr/vim-json',
     \ {'autoload': {'filetypes':['json']}}
-"NeoBundleLazy 'Mizuchi/STL-Syntax',
-"    \ {'autoload': {'filetypes':['cpp']}}
+NeoBundleLazy 'Mizuchi/STL-Syntax',
+    \ {'autoload': {'filetypes':['cpp']}}
 NeoBundleLazy 'octol/vim-cpp-enhanced-highlight',
     \ {'autoload': {'filetypes':['cpp']}}
 NeoBundleLazy 'lepture/vim-jinja',
