@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 exec gvim \
     --cmd 'profile start profile.log' \

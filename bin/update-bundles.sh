@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 NEOBUNDLEDIR=~/.vim/bundle/neobundle.vim
 
 if [[ ! -d $NEOBUNDLEDIR ]]; then
