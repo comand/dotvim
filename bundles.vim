@@ -41,6 +41,7 @@ NeoBundle 'Yggdroot/indentLine'
 NeoBundle 'szw/vim-g'
 NeoBundle 'jiangmiao/auto-pairs'
 NeoBundle 'skywind3000/asyncrun.vim'
+NeoBundle 'romainl/vim-qf'
 
 NeoBundle 'vim-airline/vim-airline'
 NeoBundle 'vim-airline/vim-airline-themes', {'depends': 'ultisnips'}

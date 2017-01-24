@@ -300,9 +300,9 @@ endif
 
 command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 nnoremap <F6> :Make<CR>
-augroup QuickFix
-    autocmd User AsyncRunStart call asyncrun#quickfix_toggle(8, 1)
-augroup END
+"augroup QuickFix
+"    autocmd User AsyncRunStart call asyncrun#quickfix_toggle(8, 1)
+"augroup END
 
 " }}}
 " Keystrokes: General ---------------------------------------------------- {{{
@@ -387,6 +387,9 @@ nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR>
 
 " Close the current buffer
 nnoremap <Leader>w :bdelete<CR>
+
+nmap <F7> <Plug>QfCtoggle
+nmap <F8> <Plug>QfLtoggle
 
 " Always use magic regexes
 "nnoremap / /\v
