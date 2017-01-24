@@ -121,7 +121,7 @@ if has('gui_running')
         set guifont=Consolas:h11
     else
         "set guifont=Consolas\ 11
-        set guifont=Inconsolata\ 11
+        set guifont=Inconsolata\ for\ Powerline\ 12
     endif
 
     " Enable spell checking.
@@ -416,14 +416,14 @@ let g:airline#extensions#branch#enabled = 0
 " Turn on others.
 let g:airline#extensions#unite#enabled = 1
 
-let g:airline_symbols = {}
-let g:airline_left_sep = '⮀'
-let g:airline_left_alt_sep = '⮁'
-let g:airline_right_sep = '⮂'
-let g:airline_right_alt_sep = '⮃'
-let g:airline_symbols.branch = '⭠'
-let g:airline_symbols.readonly = '⭤'
-let g:airline_symbols.linenr = '⭡'
+"let g:airline_symbols = {}
+"let g:airline_left_sep = '⮀'
+"let g:airline_left_alt_sep = '⮁'
+"let g:airline_right_sep = '⮂'
+"let g:airline_right_alt_sep = '⮃'
+"let g:airline_symbols.branch = '⭠'
+"let g:airline_symbols.readonly = '⭤'
+"let g:airline_symbols.linenr = '⭡'
 
 " }}}
 " Alternate {{{
