@@ -9,83 +9,61 @@ if has('vim_starting')
         \ '\(Documents and Settings\|Users\)[\\/][^\\/,]*[\\/]\zsvimfiles\>',
         \ '.vim', 'g')
     endif
-
-    set runtimepath+=~/.vim/bundle/neobundle.vim
 endif
 
-call neobundle#begin(expand('~/.vim/bundle/'))
-
-" Let NeoBundle manage NeoBundle
-NeoBundleFetch 'Shugo/neobundle.vim'
+call plug#begin('~/.vim/bundles')
 
 " }}}
 
-NeoBundle 'Shougo/vimproc', {
-    \ 'build' : {
-    \     'windows' : 'make -f make_mingw32.mak',
-    \     'cygwin' : 'make -f make_cygwin.mak',
-    \     'unix' : 'make -f make_unix.mak',
-    \     },
-    \ }
+Plug 'altercation/vim-colors-solarized'
+Plug 'chrisbra/Recover.vim'
+Plug 'ervandew/supertab'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-repeat'
+Plug 'Valloric/ListToggle'
+Plug 'vim-scripts/a.vim'
+Plug 'Yggdroot/indentLine'
+Plug 'szw/vim-g'
+Plug 'jiangmiao/auto-pairs'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'romainl/vim-qf'
 
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'chrisbra/Recover.vim'
-NeoBundle 'ervandew/supertab'
-NeoBundle 'scrooloose/nerdcommenter'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'tpope/vim-abolish'
-NeoBundle 'tpope/vim-repeat'
-NeoBundle 'Valloric/ListToggle'
-NeoBundle 'vim-scripts/a.vim'
-NeoBundle 'Yggdroot/indentLine'
-NeoBundle 'szw/vim-g'
-NeoBundle 'jiangmiao/auto-pairs'
-NeoBundle 'skywind3000/asyncrun.vim'
-NeoBundle 'romainl/vim-qf'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-NeoBundle 'vim-airline/vim-airline'
-NeoBundle 'vim-airline/vim-airline-themes', {'depends': 'ultisnips'}
+Plug 'kana/vim-textobj-function'
+Plug 'kana/vim-textobj-user'
+Plug 'sgur/vim-textobj-parameter'
 
-NeoBundle 'kana/vim-textobj-function'
-NeoBundle 'kana/vim-textobj-user'
-NeoBundle 'sgur/vim-textobj-parameter'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
-NeoBundle 'SirVer/ultisnips'
-NeoBundle 'honza/vim-snippets', {'depends': 'ultisnips'}
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/unite-outline'
+Plug 'junkblocker/unite-tasklist'
+Plug 'tsukkee/unite-tag'
 
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/unite-outline', {'depends': 'unite.vim'}
-NeoBundle 'junkblocker/unite-tasklist', {'depends': 'unite.vim'}
-NeoBundle 'tsukkee/unite-tag', {'depends': 'unite.vim'}
+Plug 'bps/vim-textobj-python', {'for': 'python'}
+Plug 'hdima/python-syntax', {'for': 'python'}
 
-NeoBundleLazy 'bps/vim-textobj-python',
-    \ {'autoload':{'filetypes':['python']}}
-NeoBundleLazy 'hdima/python-syntax',
-    \ {'autoload':{'filetypes':['python']}}
+Plug 'elzr/vim-json', {'for': 'json'}
+Plug 'Mizuchi/STL-Syntax', {'for': 'cpp'}
+Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
+Plug 'lepture/vim-jinja', {'for': ['html', 'jinja']}
 
-NeoBundleLazy 'elzr/vim-json',
-    \ {'autoload': {'filetypes':['json']}}
-NeoBundleLazy 'Mizuchi/STL-Syntax',
-    \ {'autoload': {'filetypes':['cpp']}}
-NeoBundleLazy 'octol/vim-cpp-enhanced-highlight',
-    \ {'autoload': {'filetypes':['cpp']}}
-NeoBundleLazy 'lepture/vim-jinja',
-    \ {'autoload': {'filetypes':['html','jinja']}}
+Plug 'Valloric/YouCompleteMe',
+    \ {'do': 'CC=clang CXX=clang++ ' .
+    \ './install.py --clang-completer --tern-completer --golang-completer' }
 
-if v:version >= 703
-    NeoBundle 'Valloric/YouCompleteMe',
-        \ {
-        \ 'install_process_timeout': 400
-        \ }
-endif
+" Postamble -------------------------------------------------------------- {{{
 
 let g:sitebundles=expand('~/.vim/bundles-site.vim')
 if filereadable(g:sitebundles)
     execute 'source' g:sitebundles
 endif
 
-" Postamble -------------------------------------------------------------- {{{
-
-call neobundle#end()
+call plug#end()
 
 " }}}

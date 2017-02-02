@@ -1,7 +1,8 @@
-.netrwhist
-bundles-site.vim
-bundle/*
-spell/*
-bin/rebuild-ycmd.sh
+autoload/plug.vim
 bin/python
+bin/rebuild-ycmd.sh
+bundles/*
+bundles-site.vim
+.netrwhist
+spell/*
 tmp/*

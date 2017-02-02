@@ -1,8 +1,8 @@
 " Preamble --------------------------------------------------------------- {{{
 
-filetype off
 source ~/.vim/bundles.vim
 filetype plugin indent on
+syntax enable
 
 " }}}
 " Paths ------------------------------------------------------------------ {{{
@@ -35,7 +35,6 @@ set encoding=utf-8
 
 let g:is_posix = 1
 "set synmaxcol=160
-syntax on
 
 " Color scheme
 "colorscheme comand
