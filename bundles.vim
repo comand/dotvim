@@ -55,7 +55,7 @@ Plug 'lepture/vim-jinja', {'for': ['html', 'jinja']}
 
 Plug 'Valloric/YouCompleteMe',
     \ {'do': 'CC=clang CXX=clang++ ' .
-    \ './install.py --clang-completer --tern-completer --golang-completer' }
+    \ './install.py --clang-completer --tern-completer --gocode-completer' }
 
 " Postamble -------------------------------------------------------------- {{{
 
