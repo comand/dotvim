@@ -11,6 +11,12 @@ if has('vim_starting')
     endif
 endif
 
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -s -fLo ~/.vim/autoload/plug.vim --create dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.vim/bundles')
 
 " }}}
@@ -31,31 +37,27 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'romainl/vim-qf'
 
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+  Plug 'vim-airline/vim-airline-themes'
 
-Plug 'kana/vim-textobj-function'
 Plug 'kana/vim-textobj-user'
-Plug 'sgur/vim-textobj-parameter'
+  Plug 'kana/vim-textobj-function'
+  Plug 'sgur/vim-textobj-parameter'
 
 Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+  Plug 'honza/vim-snippets'
 
 Plug 'Shougo/unite.vim'
-Plug 'Shougo/unite-outline'
-Plug 'junkblocker/unite-tasklist'
-Plug 'tsukkee/unite-tag'
+  Plug 'Shougo/unite-outline'
+  Plug 'junkblocker/unite-tasklist'
+  Plug 'tsukkee/unite-tag'
 
 Plug 'bps/vim-textobj-python', {'for': 'python'}
 Plug 'hdima/python-syntax', {'for': 'python'}
-
 Plug 'elzr/vim-json', {'for': 'json'}
 Plug 'Mizuchi/STL-Syntax', {'for': 'cpp'}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 Plug 'lepture/vim-jinja', {'for': ['html', 'jinja']}
-
-Plug 'Valloric/YouCompleteMe',
-    \ {'do': 'CC=clang CXX=clang++ ' .
-    \ './install.py --clang-completer --tern-completer --gocode-completer' }
+Plug 'Valloric/YouCompleteMe'
 
 " Postamble -------------------------------------------------------------- {{{
 
