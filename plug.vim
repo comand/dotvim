@@ -17,7 +17,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-call plug#begin('~/.vim/bundles')
+call plug#begin('~/.vim/plugdir')
 
 " }}}
 
@@ -28,13 +28,12 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-repeat'
-Plug 'Valloric/ListToggle'
 Plug 'vim-scripts/a.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'szw/vim-g'
 Plug 'jiangmiao/auto-pairs'
 Plug 'skywind3000/asyncrun.vim'
-Plug 'romainl/vim-qf'
+Plug 'romainl/vim-qf', {'branch': 'issue#34'}
 
 Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
@@ -61,9 +60,9 @@ Plug 'Valloric/YouCompleteMe'
 
 " Postamble -------------------------------------------------------------- {{{
 
-let g:sitebundles=expand('~/.vim/bundles-site.vim')
-if filereadable(g:sitebundles)
-    execute 'source' g:sitebundles
+let g:siteplug=expand('~/.vim/plug-site.vim')
+if filereadable(g:siteplug)
+    execute 'source' g:siteplug
 endif
 
 call plug#end()

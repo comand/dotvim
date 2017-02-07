@@ -1,8 +1,6 @@
 autoload/plug.vim
-bin/python
-bin/rebuild-ycmd.sh
-bundles/*
-bundles-site.vim
+plugdir/*
+plug-site.vim
 .netrwhist
 spell/*
 tmp/*

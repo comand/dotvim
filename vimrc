@@ -1,6 +1,6 @@
 " Preamble --------------------------------------------------------------- {{{
 
-source ~/.vim/bundles.vim
+source ~/.vim/plug.vim
 filetype plugin indent on
 syntax enable
 
@@ -297,12 +297,6 @@ elseif !empty(findfile('Makefile', '.'))
     set makeprg=gmake
 endif
 
-command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
-nnoremap <F6> :Make<CR>
-"augroup QuickFix
-"    autocmd User AsyncRunStart call asyncrun#quickfix_toggle(8, 1)
-"augroup END
-
 " }}}
 " Keystrokes: General ---------------------------------------------------- {{{
 
@@ -397,6 +391,12 @@ nmap <F8> <Plug>QfLtoggle
 " }}}
 " Plugin Configuration --------------------------------------------------- {{{
 
+" Asyncrun {{{
+
+command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
+nnoremap <F6> :Make<CR>
+
+" }}}
 " Airline {{{
 
 let g:airline_detect_spell = 0
@@ -414,15 +414,6 @@ let g:airline#extensions#branch#enabled = 0
 
 " Turn on others.
 let g:airline#extensions#unite#enabled = 1
-
-"let g:airline_symbols = {}
-"let g:airline_left_sep = '⮀'
-"let g:airline_left_alt_sep = '⮁'
-"let g:airline_right_sep = '⮂'
-"let g:airline_right_alt_sep = '⮃'
-"let g:airline_symbols.branch = '⭠'
-"let g:airline_symbols.readonly = '⭤'
-"let g:airline_symbols.linenr = '⭡'
 
 " }}}
 " Alternate {{{
@@ -455,12 +446,6 @@ let g:vim_json_syntax_conceal = 0
 let g:vim_json_warnings = 0
 
 " }}}
-" ListToggle {{{
-
-let g:lt_location_list_toggle_map = '<leader>l'
-let g:lt_quickfix_list_toggle_map = '<leader>f'
-
-" }}}
 " Python-syntax {{{
 
 let b:python_version_2 = 1
@@ -474,6 +459,11 @@ let python_highlight_string_templates = 1
 let python_highlight_indent_errors = 1
 let python_highlight_space_errors = 0
 let python_print_as_function = 1
+
+" }}}
+" Quickfix {{{
+
+let g:qf_max_height = 10
 
 " }}}
 " Syntastic {{{
@@ -498,6 +488,7 @@ let g:unite_split_rule = 'botright'
 let g:unite_prompt = '» '
 let g:unite_marked_icon = '+'
 
+if exists('g:loaded_unite')
 " Always use the fuzzy matcher.
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
@@ -508,6 +499,7 @@ call unite#custom#source(
 " Ignore patterns
 call unite#custom#source('file', 'ignore_pattern',
     \ '\.\(git\|gitignore\|gdb_history\)$')
+endif " g:loaded_unite
 
 " Disable mru
 let g:unite_source_mru_do_validate=0
