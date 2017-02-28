@@ -461,11 +461,6 @@ let python_highlight_space_errors = 0
 let python_print_as_function = 1
 
 " }}}
-" Vim-Qf {{{
-
-let g:qf_max_height = 10
-
-" }}}
 " Syntastic {{{
 
 let g:syntastic_mode_map = { 'passive_filetypes' : ['cpp', 'spec'] }

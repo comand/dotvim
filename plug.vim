@@ -33,7 +33,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'szw/vim-g'
 Plug 'jiangmiao/auto-pairs'
 Plug 'skywind3000/asyncrun.vim'
-Plug 'romainl/vim-qf', {'branch': 'issue#34'}
+Plug 'romainl/vim-qf'
 
 Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
@@ -45,10 +45,11 @@ Plug 'kana/vim-textobj-user'
 Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
 
-Plug 'Shougo/unite.vim'
-  Plug 'Shougo/unite-outline'
-  Plug 'junkblocker/unite-tasklist'
-  Plug 'tsukkee/unite-tag'
+Plug 'Shougo/vimproc.vim', {'do': 'make'}
+  Plug 'Shougo/unite.vim'
+    Plug 'Shougo/unite-outline'
+    Plug 'junkblocker/unite-tasklist'
+    Plug 'tsukkee/unite-tag'
 
 Plug 'bps/vim-textobj-python', {'for': 'python'}
 Plug 'hdima/python-syntax', {'for': 'python'}
