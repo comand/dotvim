@@ -483,29 +483,34 @@ let g:unite_split_rule = 'botright'
 let g:unite_prompt = '» '
 let g:unite_marked_icon = '+'
 
-if exists('g:loaded_unite')
-" Always use the fuzzy matcher.
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
-call unite#custom#source(
-    \ 'file,file/new,buffer,line',
-    \ 'matchers', 'matcher_fuzzy')
-
-" Ignore patterns
-call unite#custom#source('file', 'ignore_pattern',
-    \ '\.\(git\|gitignore\|gdb_history\)$')
-endif " g:loaded_unite
-
 " Disable mru
 let g:unite_source_mru_do_validate=0
 let g:unite_source_mru_update_interval=0
 
-if executable('ag')
+if executable('rg')
+    let g:unite_source_grep_command = 'rg'
+    let g:unite_source_grep_default_opts =
+        \ '--hidden --no-heading --vimgrep --smart-case'
+elseif executable('ag')
     let g:unite_source_grep_command = 'ag'
     let g:unite_source_grep_default_opts =
-        \ '--nogroup --nocolor --column --hidden'
-    let g:unite_source_grep_recursive_opt = ''
+        \ '--hidden --nogroup --nocolor --column'
 endif
+
+let g:unite_source_grep_recursive_opt = ''
+
+if exists('g:loaded_unite')
+    " Always use the fuzzy matcher.
+    call unite#filters#matcher_default#use(['matcher_fuzzy'])
+    call unite#filters#sorter_default#use(['sorter_rank'])
+    call unite#custom#source(
+        \ 'file,file/new,buffer,line',
+        \ 'matchers', 'matcher_fuzzy')
+
+    " Ignore patterns
+    call unite#custom#source('file', 'ignore_pattern',
+        \ '\.\(git\|gitignore\|gdb_history\)$')
+endif " g:loaded_unite
 
 "nnoremap <C-e> :<C-u>Unite file_rec/async<CR>
 nnoremap <C-e> :<C-u>Unite file<CR>
@@ -513,6 +518,7 @@ nnoremap <C-e> :<C-u>Unite file<CR>
 nnoremap <C-f> :<C-u>Unite grep:$buffers -start-insert<CR>
 nnoremap <C-b> :<C-u>Unite buffer<CR>
 nnoremap <C-g> :<C-u>Unite grep:.<CR>
+nnoremap <Leader>m :<C-u>Unite mapping<CR>
 nnoremap <Leader>t :<C-u>Unite tasklist<CR>
 nnoremap <Leader>o :<C-u>Unite outline<CR>
 nnoremap <Leader>* :execute
@@ -547,6 +553,35 @@ let g:SuperTabContextDefaultCompletionType = '<C-n>'
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+" }}}
+" Vim-Plug {{{
+
+let g:plug_window = '-tabnew'
+let g:plug_pwindow = 'vertical rightbelow new'
+
+function! s:scroll_preview(down)
+  silent! wincmd P
+  if &previewwindow
+    execute 'normal!' a:down ? "\<c-e>" : "\<c-y>"
+    wincmd p
+  endif
+endfunction
+
+function! s:setup_extra_keys()
+  nnoremap <silent> <buffer> J :call <sid>scroll_preview(1)<cr>
+  nnoremap <silent> <buffer> K :call <sid>scroll_preview(0)<cr>
+  nnoremap <silent> <buffer> <c-n> :call search('^  \X*\zs\x')<cr>
+  nnoremap <silent> <buffer> <c-p> :call search('^  \X*\zs\x', 'b')<cr>
+  nmap <silent> <buffer> <c-j> <c-n>o
+  nmap <silent> <buffer> <c-k> <c-p>o
+  nmap <silent> <buffer> q tabclose
+endfunction
+
+augroup PlugDiffExtra
+  autocmd!
+  autocmd FileType vim-plug call s:setup_extra_keys()
+augroup END
 
 " }}}
 " Vim-G {{{
