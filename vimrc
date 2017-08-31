@@ -421,6 +421,12 @@ let g:airline#extensions#unite#enabled = 1
 nmap <C-H> :A<CR>
 
 " }}}
+" AutoPairs {{{
+
+" Don't interfere with trying to close blocks within blocks...
+let g:AutoPairsMultilineClose=0
+
+" }}}
 " Diff Mode {{{
 
 if &diff
