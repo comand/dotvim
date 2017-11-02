@@ -34,6 +34,10 @@ Plug 'szw/vim-g'
 Plug 'jiangmiao/auto-pairs'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'romainl/vim-qf'
+Plug 'haya14busa/incsearch.vim'
+
+Plug '~/.fzf'
+  Plug 'junegunn/fzf.vim'
 
 Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
@@ -41,22 +45,17 @@ Plug 'vim-airline/vim-airline'
 Plug 'kana/vim-textobj-user'
   Plug 'kana/vim-textobj-function'
   Plug 'sgur/vim-textobj-parameter'
+  Plug 'bps/vim-textobj-python', {'for': 'python'}
 
 Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
 
-Plug 'Shougo/vimproc.vim', {'do': 'make'}
-  Plug 'Shougo/unite.vim'
-    Plug 'Shougo/unite-outline'
-    Plug 'junkblocker/unite-tasklist'
-    Plug 'tsukkee/unite-tag'
-
-Plug 'bps/vim-textobj-python', {'for': 'python'}
 Plug 'hdima/python-syntax', {'for': 'python'}
 Plug 'elzr/vim-json', {'for': 'json'}
 Plug 'Mizuchi/STL-Syntax', {'for': 'cpp'}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 Plug 'lepture/vim-jinja', {'for': ['html', 'jinja']}
+
 Plug 'Valloric/YouCompleteMe'
 
 " Postamble -------------------------------------------------------------- {{{

@@ -239,6 +239,14 @@ augroup ft_quickfix
     autocmd FileType qf setlocal colorcolumn=0 nolist nocursorline nowrap tw=0
 augroup END
 
+augroup ft_xml
+    autocmd!
+    autocmd FileType xml let g:xml_syntax_folding=1
+    autocmd FileType xml setlocal foldmethod=syntax
+    autocmd FileType xml :syntax on
+    autocmd FileType xml :%foldopen!
+augroup END
+
 function! VimrcFold()
     let nucolwidth = &fdc + &number * &numberwidth
     let windowwidth = winwidth(0) - nucolwidth
@@ -340,7 +348,7 @@ map! <F1> <C-C><F1>
 noremap Y y$
 
 " Search and replace word under cursor.
-nnoremap <C-S> :%s/\<<C-R><C-W>\>/
+nnoremap <C-s> :%s/\<<C-R><C-W>\>/
 
 " }}}
 " Keystrokes: Toggles ---------------------------------------------------- {{{
@@ -438,6 +446,34 @@ if &diff
 endif
 
 " }}}
+" Fzf {{{
+
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+nnoremap <C-e> :<C-u>Files<CR>
+nnoremap <C-b> :<C-u>Buffers<CR>
+nnoremap <C-f> :<C-u>Lines<CR>
+nnoremap <C-g> :<C-u>Rg<CR>
+nnoremap <Leader>m :<C-u>Maps<CR>
+nnoremap <Leader>n :<C-u>Snippets<CR>
+
+nnoremap <Leader>s  :<C-u>Rg <C-R><C-W><CR>
+nnoremap <Leader>sb :<C-u>Lines <C-R><C-W><CR>
+nnoremap <Leader>sx  :<C-u>Rg XXX<CR>
+
+" }}}
+" Incsearch {{{
+
+"map / <Plug>(incsearch-forward)
+"map ? <Plug>(incsearch-backward)
+"map / <Plug>(gincsearch-stay)
+
+" }}}
 " IndentLine {{{
 
 let g:indentLine_char = "|"
@@ -481,84 +517,10 @@ let g:syntastic_warning_symbol = "⚠"
 let g:syntastic_style_warning_symbol = "⚠"
 
 " }}}
-" Unite {{{
+" Vim-G {{{
 
-let g:unite_enable_start_insert = 1
-let g:unite_winheight = 10
-let g:unite_split_rule = 'botright'
-let g:unite_prompt = '» '
-let g:unite_marked_icon = '+'
-
-" Disable mru
-let g:unite_source_mru_do_validate=0
-let g:unite_source_mru_update_interval=0
-
-if executable('rg')
-    let g:unite_source_grep_command = 'rg'
-    let g:unite_source_grep_default_opts =
-        \ '--hidden --no-heading --vimgrep --smart-case'
-elseif executable('ag')
-    let g:unite_source_grep_command = 'ag'
-    let g:unite_source_grep_default_opts =
-        \ '--hidden --nogroup --nocolor --column'
-endif
-
-let g:unite_source_grep_recursive_opt = ''
-
-if exists('g:loaded_unite')
-    " Always use the fuzzy matcher.
-    call unite#filters#matcher_default#use(['matcher_fuzzy'])
-    call unite#filters#sorter_default#use(['sorter_rank'])
-    call unite#custom#source(
-        \ 'file,file/new,buffer,line',
-        \ 'matchers', 'matcher_fuzzy')
-
-    " Ignore patterns
-    call unite#custom#source('file', 'ignore_pattern',
-        \ '\.\(git\|gitignore\|gdb_history\)$')
-endif " g:loaded_unite
-
-"nnoremap <C-e> :<C-u>Unite file_rec/async<CR>
-nnoremap <C-e> :<C-u>Unite file<CR>
-"nnoremap <C-f> :<C-u>Unite -buffer-name=search -start-insert line<CR>
-nnoremap <C-f> :<C-u>Unite grep:$buffers -start-insert<CR>
-nnoremap <C-b> :<C-u>Unite buffer<CR>
-nnoremap <C-g> :<C-u>Unite grep:.<CR>
-nnoremap <Leader>m :<C-u>Unite mapping<CR>
-nnoremap <Leader>t :<C-u>Unite tasklist<CR>
-nnoremap <Leader>o :<C-u>Unite outline<CR>
-nnoremap <Leader>* :execute
-    \ 'Unite grep:$buffers::' . expand("<cword>") . ' -start-insert'<CR>
-
-" }}}
-" YouCompleteMe {{{
-
-" debugging flags
-"let g:ycm_server_use_vim_stdout = 1
-"let g:ycm_server_log_level = 'debug'
-"let g:ycm_server_keep_logfiles = 1
-
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_always_populate_location_list = 1
-let g:ycm_complete_in_comments = 1
-let g:ycm_max_diagnostics_to_display = 100
-
-nnoremap <Leader>gd :YcmCompleter GetDoc<CR>
-nnoremap <Leader>jd :YcmCompleter GoToImprecise<CR>
-nnoremap <Leader>yf :YcmCompleter FixIt<CR>
-nnoremap <Leader>dd :YcmDiags<CR>
-
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-"let g:SuperTabDefaultCompletionType = '<C-n>'
-let g:SuperTabDefaultCompletionType = 'context'
-let g:SuperTabContextDefaultCompletionType = '<C-n>'
-
-" better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+nnoremap <Leader>gg :Google<CR>
+vnoremap <Leader>gg :Google<CR>
 
 " }}}
 " Vim-Plug {{{
@@ -590,10 +552,34 @@ augroup PlugDiffExtra
 augroup END
 
 " }}}
-" Vim-G {{{
+" YouCompleteMe {{{
 
-nnoremap <Leader>gg :Google<CR>
-vnoremap <Leader>gg :Google<CR>
+" debugging flags
+"let g:ycm_server_use_vim_stdout = 1
+"let g:ycm_server_log_level = 'debug'
+"let g:ycm_server_keep_logfiles = 1
+
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_always_populate_location_list = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_max_diagnostics_to_display = 100
+
+nnoremap <Leader>gd :YcmCompleter GetDoc<CR>
+nnoremap <Leader>jd :YcmCompleter GoToImprecise<CR>
+nnoremap <Leader>yf :YcmCompleter FixIt<CR>
+nnoremap <Leader>dd :YcmDiags<CR>
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+"let g:SuperTabDefaultCompletionType = '<C-n>'
+let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabContextDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " }}}
 
