@@ -56,7 +56,9 @@ Plug 'Mizuchi/STL-Syntax', {'for': 'cpp'}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 Plug 'lepture/vim-jinja', {'for': ['html', 'jinja']}
 
+if v:version > 704
 Plug 'Valloric/YouCompleteMe'
+endif
 
 " Postamble -------------------------------------------------------------- {{{
 
