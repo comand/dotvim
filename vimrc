@@ -420,9 +420,6 @@ let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#branch#enabled = 0
 
-" Turn on others.
-let g:airline#extensions#unite#enabled = 1
-
 " }}}
 " Alternate {{{
 
