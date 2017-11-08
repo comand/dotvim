@@ -37,7 +37,6 @@ let g:is_posix = 1
 "set synmaxcol=160
 
 " Color scheme
-"colorscheme comand
 let g:solarized_termcolors=256
 set t_Co=256
 colorscheme solarized
@@ -296,16 +295,6 @@ augroup ft_cpp
 augroup END
 
 " }}}
-" Build Configuration ---------------------------------------------------- {{{
-
-" Make program
-if !empty(findfile('SConscript', '.;')) || !empty(findfile('SConstruct', '.;'))
-    set makeprg=scons
-elseif !empty(findfile('Makefile', '.'))
-    set makeprg=gmake
-endif
-
-" }}}
 " Keystrokes: General ---------------------------------------------------- {{{
 
 " Leader
@@ -466,7 +455,7 @@ nnoremap <Leader>sx  :<C-u>Rg XXX<CR>
 " }}}
 " Incsearch {{{
 
-"map / <Plug>(incsearch-forward)
+map / <Plug>(incsearch-forward)
 "map ? <Plug>(incsearch-backward)
 "map / <Plug>(gincsearch-stay)
 

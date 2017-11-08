@@ -35,6 +35,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'romainl/vim-qf'
 Plug 'haya14busa/incsearch.vim'
+Plug 'bogado/file-line'
 
 Plug '~/.fzf'
   Plug 'junegunn/fzf.vim'
