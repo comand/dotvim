@@ -34,12 +34,7 @@ endif
 set encoding=utf-8
 
 let g:is_posix = 1
-"set synmaxcol=160
-
-" Color scheme
-let g:solarized_termcolors=256
 set t_Co=256
-colorscheme solarized
 
 " No highlight search by default
 set nohlsearch
@@ -118,7 +113,6 @@ if has('gui_running')
     if has('win32')
         set guifont=Consolas:h11
     else
-        "set guifont=Consolas\ 11
         set guifont=Inconsolata\ for\ Powerline\ 12
     endif
 
@@ -487,6 +481,16 @@ let python_highlight_string_templates = 1
 let python_highlight_indent_errors = 1
 let python_highlight_space_errors = 0
 let python_print_as_function = 1
+
+" }}}
+" Solarized {{{
+
+" Color scheme
+let g:solarized_termcolors=256
+colorscheme solarized
+
+" Set the sign column to the solarized background color
+highlight! link SignColumn Normal
 
 " }}}
 " Syntastic {{{
