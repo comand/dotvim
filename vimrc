@@ -375,10 +375,6 @@ nnoremap <Leader>w :bdelete<CR>
 nmap <F7> <Plug>QfCtoggle
 nmap <F8> <Plug>QfLtoggle
 
-" Always use magic regexes
-"nnoremap / /\v
-"vnoremap / /\v
-
 " }}}
 " Plugin Configuration --------------------------------------------------- {{{
 
@@ -450,8 +446,11 @@ nnoremap <Leader>sx  :<C-u>Rg XXX<CR>
 " Incsearch {{{
 
 map / <Plug>(incsearch-forward)
-"map ? <Plug>(incsearch-backward)
-"map / <Plug>(gincsearch-stay)
+map ? <Plug>(incsearch-backward)
+map g/ <Plug>(gincsearch-stay)
+
+" Very.
+let g:incsearch#magic = '\v'
 
 " }}}
 " IndentLine {{{
