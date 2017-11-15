@@ -488,8 +488,8 @@ let python_print_as_function = 1
 let g:solarized_termcolors=256
 colorscheme solarized
 
-" Set the sign column to the solarized background color
-highlight! link SignColumn Normal
+" Set the sign column to the solarized line number column background.
+highlight! link SignColumn LineNr
 
 " }}}
 " Syntastic {{{
