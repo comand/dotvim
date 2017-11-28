@@ -61,6 +61,9 @@ if v:version > 704
 Plug 'Valloric/YouCompleteMe'
 endif
 
+Plug 'scrooloose/nerdtree'
+  Plug 'ryanoasis/vim-devicons'
+
 " Postamble -------------------------------------------------------------- {{{
 
 let g:siteplug=expand('~/.vim/plug-site.vim')

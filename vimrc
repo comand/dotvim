@@ -35,6 +35,9 @@ set encoding=utf-8
 
 let g:is_posix = 1
 set t_Co=256
+if (has("termguicolors"))
+    set termguicolors
+endif
 
 " No highlight search by default
 set nohlsearch
@@ -113,7 +116,7 @@ if has('gui_running')
     if has('win32')
         set guifont=Consolas:h11
     else
-        set guifont=Inconsolata\ for\ Powerline\ 12
+        set guifont=Inconsolata\ Nerd\ Font\ 12
     endif
 
     " Enable spell checking.
@@ -352,10 +355,6 @@ nmap <F4> \tp
 imap <F4> <C-O>\tp
 set pastetoggle=<F4>
 
-" Toggle highlighting of search matches, and report the change.
-nnoremap \th :set invhls hlsearch?<CR>
-nmap <F5> \th
-
 " Toggle fold open/close
 nnoremap <space> za
 vnoremap <space> zf
@@ -431,11 +430,18 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 
+command! CmdHist call fzf#vim#command_history()
+nnoremap q: :CmdHist<CR>
+cnoremap <C-f> :CmdHist<CR>
+
+command! QHist call fzf#vim#search_history()
+nnoremap q/ :QHist<CR>
+
 nnoremap <C-e> :<C-u>Files<CR>
 nnoremap <C-b> :<C-u>Buffers<CR>
 nnoremap <C-f> :<C-u>Lines<CR>
 nnoremap <C-g> :<C-u>Rg<CR>
-nnoremap <Leader>m :<C-u>Maps<CR>
+nnoremap <C-m> :<C-u>Maps<CR>
 nnoremap <Leader>n :<C-u>Snippets<CR>
 
 nnoremap <Leader>s  :<C-u>Rg <C-R><C-W><CR>
@@ -465,6 +471,12 @@ let g:indentLine_color_gui = "Grey85"
 
 let g:vim_json_syntax_conceal = 0
 let g:vim_json_warnings = 0
+
+" }}}
+" NERDTree {{{
+
+map <F5> :NERDTreeToggle<CR>
+let NERDTreeQuitOnOpen=1
 
 " }}}
 " Python-syntax {{{
@@ -500,10 +512,10 @@ let g:syntastic_python_checkers = ['frosted']
 let g:syntastic_stl_format = "%E{Err: %e(%fe)}%B{, }%W{Warn: %w(%fw)}"
 
 let g:syntastic_enable_signs = 1
-let g:syntastic_error_symbol = "➤"
-let g:syntastic_style_error_symbol = "▷"
-let g:syntastic_warning_symbol = "⚠"
-let g:syntastic_style_warning_symbol = "⚠"
+let g:syntastic_error_symbol = "\uF101"
+let g:syntastic_style_error_symbol = "\uF101"
+let g:syntastic_warning_symbol = "\uF105"
+let g:syntastic_style_warning_symbol = "\uF105"
 
 " }}}
 " Vim-G {{{
