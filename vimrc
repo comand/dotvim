@@ -423,6 +423,27 @@ endif
 " }}}
 " Fzf {{{
 
+" Customize fzf colors
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
@@ -439,13 +460,13 @@ nnoremap q/ :QHist<CR>
 
 nnoremap <C-e> :<C-u>Files<CR>
 nnoremap <C-b> :<C-u>Buffers<CR>
-nnoremap <C-f> :<C-u>Lines<CR>
 nnoremap <C-g> :<C-u>Rg<CR>
-nnoremap <C-m> :<C-u>Maps<CR>
-nnoremap <Leader>n :<C-u>Snippets<CR>
 
-nnoremap <Leader>s  :<C-u>Rg <C-R><C-W><CR>
-nnoremap <Leader>sb :<C-u>Lines <C-R><C-W><CR>
+nnoremap <Leader>fl :<C-u>Lines<CR>
+nnoremap <Leader>fm :<C-u>Maps<CR>
+nnoremap <Leader>fs :<C-u>Snippets<CR>
+nnoremap <Leader>sd :<C-u>Rg <C-R><C-W><CR>
+nnoremap <Leader>sl :<C-u>Lines <C-R><C-W><CR>
 nnoremap <Leader>sx  :<C-u>Rg XXX<CR>
 
 " }}}
