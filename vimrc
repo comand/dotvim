@@ -163,11 +163,13 @@ set nowrap
 
 " When in list mode, keep tabs normal width, display arrows,
 " trailing spaces display '-' characters.
-"set listchars+=tab:>>,trail:-
 set listchars=tab:\ ·,eol:¬
 set listchars+=trail:·
 set listchars+=extends:»,precedes:«
 set showbreak=↪
+
+" Use heavy vertical line for vsplits (U2503), middle dot for folds.
+set fillchars=vert:┃,fold:·
 
 " Indents of 4 spaces, have them copied down lines
 set tabstop=4
@@ -235,23 +237,15 @@ augroup ft_quickfix
     autocmd FileType qf setlocal colorcolumn=0 nolist nocursorline nowrap tw=0
 augroup END
 
-augroup ft_xml
-    autocmd!
-    autocmd FileType xml let g:xml_syntax_folding=1
-    autocmd FileType xml setlocal foldmethod=syntax
-    autocmd FileType xml :syntax on
-    autocmd FileType xml :%foldopen!
-augroup END
-
 function! VimrcFold()
     let nucolwidth = &fdc + &number * &numberwidth
     let windowwidth = winwidth(0) - nucolwidth
     let foldedlinecount = v:foldend - v:foldstart
 
     let line = getline(v:foldstart)
-    let line = '+ ' . substitute(strpart(line, 2), '\s-\+.*$', '', '')
-    let rcount = windowwidth - len(line) - len(foldedlinecount) - 2
-    let line = line . repeat(' ', rcount) . foldedlinecount .  ' »'
+    let line = '» ' . substitute(strpart(line, 2), '\s-\+.*$', '', '')
+    let rcount = windowwidth - len(line) - len(foldedlinecount) - 1
+    let line = line . repeat(' ', rcount) . foldedlinecount .  ' «'
 
     return line
 endfunction
