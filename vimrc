@@ -321,7 +321,6 @@ set matchpairs+=<:>
 
 " have <F1> prompt for a help topic, rather than displaying the introduction
 " page.  Have it do this from any mode:
-nnoremap <F1> :help<Space>
 vmap <F1> <C-C><F1>
 omap <F1> <C-C><F1>
 map! <F1> <C-C><F1>
@@ -423,6 +422,8 @@ endif
 " }}}
 " Fzf {{{
 
+let g:fzf_command_prefix = 'Fzf'
+
 " Customize fzf colors
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
@@ -451,23 +452,22 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 
-command! CmdHist call fzf#vim#command_history()
-nnoremap q: :CmdHist<CR>
-cnoremap <C-f> :CmdHist<CR>
+nnoremap <F1> :FzfHelptags<CR>
 
-command! QHist call fzf#vim#search_history()
-nnoremap q/ :QHist<CR>
+cnoremap <C-f> :FzfHistory:<CR>
+nnoremap q: :FzfHistory:<CR>
+nnoremap q/ :FzfHistory/<CR>
 
-nnoremap <C-e> :<C-u>Files<CR>
-nnoremap <C-b> :<C-u>Buffers<CR>
+nnoremap <C-e> :<C-u>FzfFiles<CR>
+nnoremap <C-b> :<C-u>FzfBuffers<CR>
 nnoremap <C-g> :<C-u>Rg<CR>
 
-nnoremap <Leader>fl :<C-u>Lines<CR>
-nnoremap <Leader>fm :<C-u>Maps<CR>
-nnoremap <Leader>fs :<C-u>Snippets<CR>
-nnoremap <Leader>sd :<C-u>Rg <C-R><C-W><CR>
-nnoremap <Leader>sl :<C-u>Lines <C-R><C-W><CR>
-nnoremap <Leader>sx  :<C-u>Rg XXX<CR>
+nnoremap <Leader>fl :<C-u>FzfLines<CR>
+nnoremap <Leader>fm :<C-u>FzfMaps<CR>
+nnoremap <Leader>fs :<C-u>FzfSnippets<CR>
+nnoremap <Leader>ft :<C-u>Rg <C-R><C-W><CR>
+nnoremap <Leader>fb :<C-u>FzfLines <C-R><C-W><CR>
+nnoremap <Leader>fx  :<C-u>Rg XXX<CR>
 
 " }}}
 " Incsearch {{{
