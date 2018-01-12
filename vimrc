@@ -600,3 +600,14 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 " }}}
 
 " }}}
+" Custom Functions ------------------------------------------------------- {{{
+
+" https://github.com/stoeffel/.dotfiles/blob/master/vim/visual-at.vim
+function! ExecuteMacroOverVisualRange()
+    echo "@".getcmdline()
+    execute ":'<,'>normal @".nr2char(getchar())
+endfunction
+
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+
+" }}}
