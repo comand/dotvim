@@ -172,7 +172,8 @@ set showbreak=↪
 set fillchars=vert:┃,fold:·
 
 " Indents of 4 spaces, have them copied down lines
-set tabstop=4
+set tabstop=8
+set softtabstop=4
 set shiftwidth=4
 set shiftround
 set expandtab
@@ -200,6 +201,14 @@ set backspace=eol,start,indent
 
 " Join sentences with one space, not two.
 set nojoinspaces
+
+" }}}
+" Misc ------------------------------------------------------------------- {{{
+
+if executable("rg")
+    set grepprg=rg\ --vimgrep\ --no-heading
+    set grepformat="%f:%l:%c:%m,%f:%l:%m
+endif
 
 " }}}
 " File Format Options ---------------------------------------------------- {{{
@@ -275,7 +284,7 @@ augroup END
 
 augroup ft_cpp
     autocmd!
-    autocmd FileType cpp setlocal cindent cinoptions=':0,g0,l1,t0,(0,W4,M1'
+    "autocmd FileType cpp setlocal cindent cinoptions=':0,g0,l1,t0,(0,W4,M1'
     autocmd FileType cpp setlocal formatoptions=croql
     autocmd FileType cpp setlocal colorcolumn=+3
 
@@ -397,12 +406,6 @@ let g:airline#extensions#branch#enabled = 0
 nmap <C-H> :A<CR>
 
 " }}}
-" AutoPairs {{{
-
-" Don't interfere with trying to close blocks within blocks...
-let g:AutoPairsMultilineClose=0
-
-" }}}
 " Diff Mode {{{
 
 if &diff
@@ -486,12 +489,6 @@ let g:indentLine_color_gui = "Grey85"
 
 let g:vim_json_syntax_conceal = 0
 let g:vim_json_warnings = 0
-
-" }}}
-" NERDTree {{{
-
-map <F5> :NERDTreeToggle<CR>
-let NERDTreeQuitOnOpen=1
 
 " }}}
 " Python-syntax {{{
