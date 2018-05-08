@@ -31,7 +31,6 @@ Plug 'tpope/vim-repeat'
 Plug 'vim-scripts/a.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'szw/vim-g'
-Plug 'jiangmiao/auto-pairs'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'romainl/vim-qf'
 Plug 'haya14busa/incsearch.vim'
@@ -56,13 +55,14 @@ Plug 'elzr/vim-json', {'for': 'json'}
 Plug 'Mizuchi/STL-Syntax', {'for': 'cpp'}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 Plug 'lepture/vim-jinja', {'for': ['html', 'jinja']}
+Plug 'rust-lang/rust.vim', {'for': ['rust']}
+Plug 'racer-rust/vim-racer', {'for': ['rust']}
 
 if v:version > 704
 Plug 'Valloric/YouCompleteMe'
 endif
 
-Plug 'scrooloose/nerdtree'
-  Plug 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons'
 
 " Postamble -------------------------------------------------------------- {{{
 
