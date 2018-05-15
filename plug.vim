@@ -58,6 +58,8 @@ Plug 'lepture/vim-jinja', {'for': ['html', 'jinja']}
 Plug 'rust-lang/rust.vim', {'for': ['rust']}
 Plug 'racer-rust/vim-racer', {'for': ['rust']}
 
+Plug 'shime/vim-livedown', {'for': ['markdown']}
+
 if v:version > 704
 Plug 'Valloric/YouCompleteMe'
 endif
