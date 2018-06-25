@@ -386,6 +386,9 @@ nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR>
 " Close the current buffer
 nnoremap <Leader>w :bdelete<CR>
 
+" Escape to leave terminal input mode.
+tnoremap <Esc> <C-\><C-n>
+
 " }}}
 " Plugin Configuration --------------------------------------------------- {{{
 
@@ -450,7 +453,7 @@ omap <leader><tab> <plug>(fzf-maps-o)
 
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   'rg --column --line-number --no-heading --color=always --fixed-strings --smart-case '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
