@@ -126,12 +126,22 @@ if has('gui_running')
     set mousemodel=popup_setpos
 
     " Default window size
-    set lines=60 columns=83
+    set lines=80 columns=120
 
     " Remove GUI cruft.
     set guioptions-=m
     set guioptions-=T
     set guioptions-=r
+endif
+
+if exists('g:gui_oni')
+    set number
+    set noswapfile
+    set smartcase
+    set noshowmode
+    set noruler
+    set laststatus=0
+    set noshowcmd
 endif
 
 " http://vim.wikia.com/wiki/Automatically_quit_Vim_if_quickfix_window_is_the_last
@@ -210,6 +220,9 @@ if executable("rg")
     set grepformat="%f:%l:%c:%m,%f:%l:%m
 endif
 
+let g:error_symbol = '✗'
+let g:warning_symbol = '◆'
+
 " }}}
 " File Format Options ---------------------------------------------------- {{{
 
@@ -243,7 +256,7 @@ augroup END
 
 augroup ft_quickfix
     autocmd!
-    autocmd FileType qf setlocal colorcolumn=0 nolist nocursorline nowrap tw=0
+    autocmd FileType qf setlocal colorcolumn=0 nolist nocursorline wrap tw=0
 augroup END
 
 function! VimrcFold()
@@ -373,23 +386,13 @@ nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR>
 " Close the current buffer
 nnoremap <Leader>w :bdelete<CR>
 
-nmap <F7> <Plug>QfCtoggle
-nmap <F8> <Plug>QfLtoggle
-
 " }}}
 " Plugin Configuration --------------------------------------------------- {{{
 
-" Asyncrun {{{
-
-command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
-nnoremap <F6> :Make<CR>
-
-" }}}
 " Airline {{{
 
 let g:airline_detect_spell = 0
 let g:airline_powerline_fonts = 1
-"let g:airline_theme = 'light'
 
 " Turn off extensions I won't use.
 let g:airline#extensions#bufferline#enabled = 0
@@ -398,7 +401,9 @@ let g:airline#extensions#tagbar#enabled = 0
 let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#enabled = 0
-let g:airline#extensions#branch#enabled = 0
+let g:airline#extensions#ycm#enabled = 0
+let g:airline#extensions#syntastic#enabled = 0
+let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 
 " }}}
 " Alternate {{{
@@ -420,6 +425,7 @@ endif
 " Fzf {{{
 
 let g:fzf_command_prefix = 'Fzf'
+let g:fzf_buffers_jump = 1
 
 " Customize fzf colors
 let g:fzf_colors =
@@ -444,7 +450,7 @@ omap <leader><tab> <plug>(fzf-maps-o)
 
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
@@ -460,7 +466,6 @@ nnoremap <C-b> :<C-u>FzfBuffers<CR>
 nnoremap <C-g> :<C-u>Rg<CR>
 
 nnoremap <Leader>fl :<C-u>FzfLines<CR>
-nnoremap <Leader>fm :<C-u>FzfMaps<CR>
 nnoremap <Leader>fs :<C-u>FzfSnippets<CR>
 nnoremap <Leader>ft :<C-u>Rg <C-R><C-W><CR>
 nnoremap <Leader>fb :<C-u>FzfLines <C-R><C-W><CR>
@@ -510,7 +515,9 @@ let python_print_as_function = 1
 
 " Color scheme
 let g:solarized_termcolors=256
+if !exists('g:gui_oni')
 colorscheme solarized
+endif
 
 " Set the sign column to the solarized line number column background.
 highlight! link SignColumn LineNr
@@ -521,13 +528,12 @@ highlight! link SignColumn LineNr
 let g:syntastic_mode_map = { 'passive_filetypes' : ['cpp', 'spec'] }
 let g:syntastic_check_on_open = 1
 let g:syntastic_python_checkers = ['frosted']
-let g:syntastic_stl_format = "%E{Err: %e(%fe)}%B{, }%W{Warn: %w(%fw)}"
 
 let g:syntastic_enable_signs = 1
-let g:syntastic_error_symbol = "\uF101"
-let g:syntastic_style_error_symbol = "\uF101"
-let g:syntastic_warning_symbol = "\uF105"
-let g:syntastic_style_warning_symbol = "\uF105"
+let g:syntastic_error_symbol = g:error_symbol
+let g:syntastic_style_error_symbol = g:error_symbol
+let g:syntastic_warning_symbol = g:warning_symbol
+let g:syntastic_style_warning_symbol = g:warning_symbol
 
 " }}}
 " Vim-G {{{
@@ -565,6 +571,16 @@ augroup PlugDiffExtra
 augroup END
 
 " }}}
+" Vim-Signify {{{
+
+let g:signify_symbol = '⚫'
+let g:signify_sign_add = g:signify_symbol
+let g:signify_sign_delete = g:signify_symbol
+let g:signify_sign_delete_first_line = g:signify_symbol
+let g:signify_sign_change = g:signify_symbol
+let g:signify_sign_show_count = 0
+
+" }}}
 " YouCompleteMe {{{
 
 " debugging flags
@@ -576,6 +592,14 @@ let g:ycm_confirm_extra_conf = 0
 let g:ycm_always_populate_location_list = 1
 let g:ycm_complete_in_comments = 1
 let g:ycm_max_diagnostics_to_display = 100
+let g:ycm_error_symbol = g:error_symbol
+let g:ycm_warning_symbol = g:warning_symbol
+
+let g:ycm_filter_diagnostics = {
+    \ "cpp": {
+    \     "regex": ["must specify at least one argument for.*parameter of variadic macro"],
+    \     }
+    \ }
 
 nnoremap <Leader>gd :YcmCompleter GetDoc<CR>
 nnoremap <Leader>jd :YcmCompleter GoToImprecise<CR>

@@ -28,19 +28,23 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-surround'
+Plug 'mhinz/vim-signify'
 Plug 'vim-scripts/a.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'szw/vim-g'
-Plug 'skywind3000/asyncrun.vim'
-Plug 'romainl/vim-qf'
 Plug 'haya14busa/incsearch.vim'
 Plug 'bogado/file-line'
 
 Plug '~/.fzf'
   Plug 'junegunn/fzf.vim'
 
+if !exists('g:gui_oni')
 Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
+endif
 
 Plug 'kana/vim-textobj-user'
   Plug 'kana/vim-textobj-function'
