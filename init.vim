@@ -48,9 +48,8 @@ set lazyredraw
 " History
 set history=1000
 
-" Undo
-"set undofile
-"set undoreload=10000
+" Persistent Undo
+set undofile
 
 " Allow buffer switch without saving
 set hidden
@@ -497,6 +496,14 @@ let g:indentLine_color_gui = "Grey85"
 
 let g:vim_json_syntax_conceal = 0
 let g:vim_json_warnings = 0
+
+" }}}
+" Mundo {{{
+
+let g:mundo_width = 30
+let g:mundo_preview_height = 40
+let g:mundo_preview_bottom = 1
+nnoremap <Leader>u :MundoToggle<CR>
 
 " }}}
 " Python-syntax {{{
