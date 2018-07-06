@@ -317,7 +317,6 @@ let g:maplocalleader = ','
 
 " Map QQ to quit, like ZQ, only easier to type.
 map QQ ZQ
-map Q q
 
 " }}}
 " Keystrokes: Movement --------------------------------------------------- {{{
@@ -369,10 +368,6 @@ nmap <F4> \tp
 imap <F4> <C-O>\tp
 set pastetoggle=<F4>
 
-" Toggle fold open/close
-nnoremap <space> za
-vnoremap <space> zf
-
 " }}}
 " Keystrokes: Misc ------------------------------------------------------- {{{
 
@@ -385,8 +380,8 @@ nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR>
 " Close the current buffer
 nnoremap <Leader>w :bdelete<CR>
 
-" Escape to leave terminal input mode.
-tnoremap <Esc> <C-\><C-n>
+" Leave terminal input mode.
+tnoremap <Leader><Esc> <C-\><C-n>
 
 " }}}
 " Plugin Configuration --------------------------------------------------- {{{
