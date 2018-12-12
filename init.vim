@@ -115,7 +115,8 @@ if has('gui_running')
     if has('win32')
         set guifont=Consolas:h11
     else
-        set guifont=Inconsolata\ Nerd\ Font\ 12
+        "set guifont=Inconsolata\ Nerd\ Font\ 12
+        set guifont=Input\ Mono\ Compressed\ Medium\ 11
     endif
 
     " Enable spell checking.
