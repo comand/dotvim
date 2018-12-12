@@ -2,6 +2,8 @@
 cd plugdir/YouCompleteMe
 CC=clang CXX=clang++ ./install.py \
     --clang-completer \
-    --tern-completer \
-    --gocode-completer \
-    --rust-completer
+    --go-completer \
+    --rust-completer \
+    --java-completer \
+    --ts-completer \
+    --clang-tidy
