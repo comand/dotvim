@@ -412,10 +412,12 @@ nmap <C-H> :A<CR>
 " Diff Mode {{{
 
 if &diff
+    set diffopt+=internal,algorithm:patience
+    set shortmess+=A
     nnoremap <C-R> :diffupdate<CR>
     nnoremap <C-N> ]c<CR>
     nnoremap <C-P> [c<CR>
-    nnoremap <C-Q> :confirm qa<CR>
+    nnoremap QQ :confirm qa<CR>
     nnoremap <C-O> do
 endif
 
