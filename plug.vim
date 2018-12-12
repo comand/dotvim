@@ -49,6 +49,7 @@ endif
 
 Plug 'kana/vim-textobj-user'
   Plug 'kana/vim-textobj-function'
+  Plug 'kana/vim-textobj-indent'
   Plug 'sgur/vim-textobj-parameter'
   Plug 'bps/vim-textobj-python', {'for': 'python'}
 
