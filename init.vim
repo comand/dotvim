@@ -599,7 +599,10 @@ let g:ycm_warning_symbol = g:warning_symbol
 
 let g:ycm_filter_diagnostics = {
     \ "cpp": {
-    \     "regex": ["must specify at least one argument for.*parameter of variadic macro"],
+    \     "regex": [
+    \       "must specify at least one argument for.*parameter of variadic macro",
+    \       "XOPEN_SOURCE"
+    \       ],
     \     }
     \ }
 
