@@ -498,7 +498,7 @@ nnoremap <Leader>u :MundoToggle<CR>
 " }}}
 " Python-syntax {{{
 
-let b:python_version_2 = 1
+"let b:python_version_2 = 1
 let python_highlight_builtins = 1
 let python_highlight_builtin_objs = 1
 let python_highlight_builtin_funcs = 1
