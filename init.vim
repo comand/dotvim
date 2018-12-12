@@ -448,28 +448,20 @@ nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)
 omap <leader><tab> <plug>(fzf-maps-o)
 
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --fixed-strings --smart-case '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
-
 nnoremap <F1> :FzfHelptags<CR>
-
 cnoremap <C-f> :FzfHistory:<CR>
 nnoremap q: :FzfHistory:<CR>
 nnoremap q/ :FzfHistory/<CR>
 
 nnoremap <C-e> :<C-u>FzfFiles<CR>
 nnoremap <C-b> :<C-u>FzfBuffers<CR>
-nnoremap <C-g> :<C-u>Rg<CR>
+nnoremap <C-g> :<C-u>FzfRg<CR>
 
 nnoremap <Leader>fl :<C-u>FzfLines<CR>
 nnoremap <Leader>fs :<C-u>FzfSnippets<CR>
-nnoremap <Leader>ft :<C-u>Rg <C-R><C-W><CR>
+nnoremap <Leader>ft :<C-u>FzfRg <C-R><C-W><CR>
 nnoremap <Leader>fb :<C-u>FzfLines <C-R><C-W><CR>
-nnoremap <Leader>fx  :<C-u>Rg XXX<CR>
+nnoremap <Leader>fx  :<C-u>FzfRg XXX<CR>
 
 " }}}
 " Incsearch {{{
