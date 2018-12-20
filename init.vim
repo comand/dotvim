@@ -319,6 +319,9 @@ let g:maplocalleader = ','
 " Map QQ to quit, like ZQ, only easier to type.
 map QQ ZQ
 
+" Disable Ex mode
+map Q <Nop>
+
 " }}}
 " Keystrokes: Movement --------------------------------------------------- {{{
 
@@ -339,6 +342,22 @@ set matchpairs+=<:>
 vmap <F1> <C-C><F1>
 omap <F1> <C-C><F1>
 map! <F1> <C-C><F1>
+
+" Scroll wheel up to enter normal mode in terminal, RMB to exit.
+function! ExitNormalMode()
+    unmap <buffer> <silent> <RightMouse>
+    call feedkeys("a")
+endfunction
+
+function! EnterNormalMode()
+    if &buftype == 'terminal' && mode('') == 't'
+        call feedkeys("\<c-w>N")
+        call feedkeys("\<c-y>")
+        map <buffer> <silent> <RightMouse> :call ExitNormalMode()<CR>
+    endif
+endfunction
+
+tmap <silent> <ScrollWheelUp> <c-w>:call EnterNormalMode()<CR>
 
 " }}}
 " Keystrokes: Formatting ------------------------------------------------- {{{
@@ -453,15 +472,16 @@ cnoremap <C-f> :FzfHistory:<CR>
 nnoremap q: :FzfHistory:<CR>
 nnoremap q/ :FzfHistory/<CR>
 
-nnoremap <C-e> :<C-u>FzfFiles<CR>
-nnoremap <C-b> :<C-u>FzfBuffers<CR>
-nnoremap <C-g> :<C-u>FzfRg<CR>
+"nnoremap <C-e> :<C-u>FzfFiles<CR>
+nnoremap <silent> <C-e> :call fzf#run({'sink': 'e', 'window': 'rightbelow new'})<CR>
+nnoremap <silent> <C-b> :<C-u>FzfBuffers<CR>
+nnoremap <silent> <C-g> :<C-u>FzfRg<CR>
 
-nnoremap <Leader>fl :<C-u>FzfLines<CR>
-nnoremap <Leader>fs :<C-u>FzfSnippets<CR>
-nnoremap <Leader>ft :<C-u>FzfRg <C-R><C-W><CR>
-nnoremap <Leader>fb :<C-u>FzfLines <C-R><C-W><CR>
-nnoremap <Leader>fx  :<C-u>FzfRg XXX<CR>
+nnoremap <silent> <Leader>fl :<C-u>FzfLines<CR>
+nnoremap <silent> <Leader>fs :<C-u>FzfSnippets<CR>
+nnoremap <silent> <Leader>ft :<C-u>FzfRg <C-R><C-W><CR>
+nnoremap <silent> <Leader>fb :<C-u>FzfLines <C-R><C-W><CR>
+nnoremap <silent> <Leader>fx  :<C-u>FzfRg XXX<CR>
 
 " }}}
 " Incsearch {{{
