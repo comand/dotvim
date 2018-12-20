@@ -320,7 +320,7 @@ let g:maplocalleader = ','
 map QQ ZQ
 
 " Disable Ex mode
-map Q <Nop>
+nnoremap Q <Nop>
 
 " }}}
 " Keystrokes: Movement --------------------------------------------------- {{{
