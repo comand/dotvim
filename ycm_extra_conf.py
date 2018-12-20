@@ -1,9 +1,7 @@
 import os
 import os.path
-import fnmatch
 import logging
 import ycm_core
-import re
 
 C_BASE_FLAGS = [
         '-Wall',
@@ -89,6 +87,14 @@ def GetCompilationInfoForFile(database, filename):
                         compilation_info = database.GetCompilationInfoForFile(src_file)
                         if compilation_info.compiler_flags_:
                             return compilation_info
+        # Just return the flags for some other source in the same directory.
+        for f in sorted(os.listdir(os.getcwd())):
+            if IsSourceFile(f):
+                filepath = os.path.abspath(f)
+                compilation_info = database.GetCompilationInfoForFile(filepath)
+                if compilation_info.compiler_flags_:
+                    return compilation_info
+
         return None
     return database.GetCompilationInfoForFile(filename)
 
@@ -196,6 +202,7 @@ def FlagsForFile(filename):
         clang_flags = FlagsForClangComplete(root)
         if clang_flags:
             final_flags = final_flags + clang_flags
+
         include_flags = FlagsForInclude(root)
         if include_flags:
             final_flags = final_flags + include_flags
