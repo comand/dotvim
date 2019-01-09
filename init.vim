@@ -550,10 +550,12 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_python_checkers = ['frosted']
 
 let g:syntastic_enable_signs = 1
-let g:syntastic_error_symbol = g:error_symbol
-let g:syntastic_style_error_symbol = g:error_symbol
-let g:syntastic_warning_symbol = g:warning_symbol
-let g:syntastic_style_warning_symbol = g:warning_symbol
+if has('gui_running')
+    let g:syntastic_error_symbol = g:error_symbol
+    let g:syntastic_style_error_symbol = g:error_symbol
+    let g:syntastic_warning_symbol = g:warning_symbol
+    let g:syntastic_style_warning_symbol = g:warning_symbol
+endif
 
 " }}}
 " Vim-G {{{
@@ -614,8 +616,11 @@ let g:ycm_confirm_extra_conf = 0
 let g:ycm_always_populate_location_list = 1
 let g:ycm_complete_in_comments = 1
 let g:ycm_max_diagnostics_to_display = 100
-let g:ycm_error_symbol = g:error_symbol
-let g:ycm_warning_symbol = g:warning_symbol
+
+if has('gui_running')
+    let g:ycm_error_symbol = g:error_symbol
+    let g:ycm_warning_symbol = g:warning_symbol
+endif
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
 
