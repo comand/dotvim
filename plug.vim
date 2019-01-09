@@ -45,6 +45,7 @@ Plug '~/.fzf'
 if !exists('g:gui_oni')
 Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
+  Plug 'ryanoasis/vim-devicons'
 endif
 
 Plug 'kana/vim-textobj-user'
@@ -63,14 +64,11 @@ Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 Plug 'lepture/vim-jinja', {'for': ['html', 'jinja']}
 Plug 'rust-lang/rust.vim', {'for': ['rust']}
 Plug 'racer-rust/vim-racer', {'for': ['rust']}
-
 Plug 'shime/vim-livedown', {'for': ['markdown']}
 
 if v:version > 704
 Plug 'Valloric/YouCompleteMe'
 endif
-
-Plug 'ryanoasis/vim-devicons'
 
 " Postamble -------------------------------------------------------------- {{{
 
