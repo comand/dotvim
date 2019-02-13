@@ -633,15 +633,14 @@ let g:ycm_filter_diagnostics = {
     \     }
     \ }
 
-nnoremap <Leader>gd :YcmCompleter GetDoc<CR>
-nnoremap <Leader>jd :YcmCompleter GoToImprecise<CR>
+nnoremap <Leader>yg :YcmCompleter GoToImprecise<CR>
 nnoremap <Leader>yf :YcmCompleter FixIt<CR>
-nnoremap <Leader>dd :YcmDiags<CR>
+nnoremap <Leader>yd :YcmDiags<CR>
+nnoremap <Leader>yt :YcmCompleter GetType<CR>
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-"let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:SuperTabDefaultCompletionType = 'context'
 let g:SuperTabContextDefaultCompletionType = '<C-n>'
 
