@@ -15,14 +15,10 @@ else
 endif
 
 set undodir=~/.vim/tmp/undo//
-set backupdir=~/.vim/tmp/backup//
 set directory=~/.vim/tmp/swap//
 
 if !isdirectory(expand(&undodir))
     call mkdir(expand(&undodir), "p")
-endif
-if !isdirectory(expand(&backupdir))
-    call mkdir(expand(&backupdir), "p")
 endif
 if !isdirectory(expand(&directory))
     call mkdir(expand(&directory), "p")
@@ -51,8 +47,15 @@ set history=1000
 " Persistent Undo
 set undofile
 
+" Don't do backups.
+set nobackup
+set nowritebackup
+
 " Allow buffer switch without saving
 set hidden
+
+" Always show sign column.
+set signcolumn=yes
 
 " Status line configuration
 set report=0
@@ -403,6 +406,9 @@ nnoremap <Leader>w :bdelete<CR>
 " Leave terminal input mode.
 tnoremap <Leader><Esc> <C-\><C-n>
 
+" Build
+nnoremap <Leader>m :make<CR>
+
 " }}}
 " Plugin Configuration --------------------------------------------------- {{{
 
@@ -596,7 +602,7 @@ augroup END
 " Vim-Signify {{{
 
 if has('gui_running')
-    let g:signify_symbol = '⚫'
+    let g:signify_symbol = '·'
     let g:signify_sign_add = g:signify_symbol
     let g:signify_sign_delete = g:signify_symbol
     let g:signify_sign_delete_first_line = g:signify_symbol
