@@ -35,6 +35,8 @@ if (has("termguicolors"))
     set termguicolors
 endif
 
+set bg=light
+
 " No highlight search by default
 set nohlsearch
 
