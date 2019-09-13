@@ -312,6 +312,11 @@ augroup ft_cpp
     autocmd FileType cpp let g:load_doxygen_syntax = 1
 augroup END
 
+augroup ft_yaml
+    autocmd!
+    autocmd FileType yaml setlocal sw=2 ts=2 sts=2
+augroup END
+
 " }}}
 " Keystrokes: General ---------------------------------------------------- {{{
 
@@ -449,6 +454,11 @@ if &diff
 endif
 
 " }}}
+" Fugitive {{{
+
+set diffopt+=vertical
+
+" }}}
 " Fzf {{{
 
 let g:fzf_command_prefix = 'Fzf'
@@ -484,6 +494,7 @@ nnoremap q/ :FzfHistory/<CR>
 nnoremap <silent> <C-e> :call fzf#run({'sink': 'e', 'window': 'rightbelow new'})<CR>
 nnoremap <silent> <C-b> :<C-u>FzfBuffers<CR>
 nnoremap <silent> <C-g> :<C-u>FzfRg<CR>
+nnoremap <silent> <C-t> :<C-u>FzfBTags<CR>
 
 nnoremap <silent> <Leader>fl :<C-u>FzfLines<CR>
 nnoremap <silent> <Leader>fs :<C-u>FzfSnippets<CR>
