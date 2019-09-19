@@ -32,12 +32,12 @@ echo -n "Checking ycm_core RPATH... "
 ycm_core_dir=${ycm_core%/*}
 libclang_dir=${libclang%/*}
 libclang_rpath=${libclang_dir#$ycm_core_dir/}
-rpath=$(patchelf --print-rpath third_party/ycmd/ycm_core.so)
+rpath=$(patchelf --print-rpath $ycm_core)
 if [[ $rpath =~ $libclang_rpath ]]; then
     echo "OK"
 else
     echo -n "patching... "
-    patchelf --set-rpath "$rpath:\$ORIGIN/$libclang_rpath"
+    patchelf --set-rpath "$rpath:\$ORIGIN/$libclang_rpath" $ycm_core
     echo "OK"
 fi
 
