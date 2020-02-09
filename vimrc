@@ -121,7 +121,9 @@ if has('gui_running')
         set guifont=Consolas:h11
     else
         "set guifont=Inconsolata\ Nerd\ Font\ 12
-        set guifont=Input\ Mono\ Compressed\ Medium\ 11
+        "set guifont=Input\ Mono\ Compressed\ Medium\ 11
+        "set guifont="Cascadia Code PL 10"
+        set guifont="JetBrainsMono Nerd Font Medium 10"
     endif
 
     " Enable spell checking.
@@ -480,6 +482,12 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
+if has('popupwin')
+    let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.5 } }
+else
+    let g:fzf_layout = { 'window': 'rightbelow new' }
+endif
+
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)
@@ -490,8 +498,7 @@ cnoremap <C-f> :FzfHistory:<CR>
 nnoremap q: :FzfHistory:<CR>
 nnoremap q/ :FzfHistory/<CR>
 
-"nnoremap <C-e> :<C-u>FzfFiles<CR>
-nnoremap <silent> <C-e> :call fzf#run({'sink': 'e', 'window': 'rightbelow new'})<CR>
+nnoremap <C-e> :<C-u>FzfFiles<CR>
 nnoremap <silent> <C-b> :<C-u>FzfBuffers<CR>
 nnoremap <silent> <C-g> :<C-u>FzfRg<CR>
 nnoremap <silent> <C-t> :<C-u>FzfBTags<CR>

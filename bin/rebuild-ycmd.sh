@@ -1,8 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 cd plugdir/YouCompleteMe
 
+if [[ -d /opt/rt/devtoolset-8 ]]; then
+    . /opt/rh/devtoolset-8/enable
+fi
+
 if [[ $1 != patch ]]; then
-    CC=clang CXX=clang++ ./install.py \
+    CC=gcc CXX=g++ ./install.py \
         --clang-completer \
         --go-completer \
         --rust-completer \
