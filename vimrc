@@ -116,15 +116,10 @@ if has('gui_running')
     highlight Comment gui=italic
     highlight doxygenBrief gui=italic
 
-    " Oooooh... pretty fonts.
-    if has('win32')
-        set guifont=Consolas:h11
-    else
-        "set guifont=Inconsolata\ Nerd\ Font\ 12
-        "set guifont=Input\ Mono\ Compressed\ Medium\ 11
-        "set guifont="Cascadia Code PL 10"
-        set guifont="JetBrainsMono Nerd Font Medium 10"
-    endif
+    "set guifont=Inconsolata\ Nerd\ Font\ 12
+    "set guifont=Input\ Mono\ Compressed\ Medium\ 11
+    "set guifont="Cascadia Code PL 10"
+    set guifont=JetBrainsMono\ Nerd\ Font\ Medium\ 10
 
     " Enable spell checking.
     set spell
@@ -134,6 +129,9 @@ if has('gui_running')
 
     " Default window size
     set lines=80 columns=120
+    if !empty($WSL_DISTRO_NAME)
+        set lines=60
+    endif
 
     " Remove GUI cruft.
     set guioptions-=m
