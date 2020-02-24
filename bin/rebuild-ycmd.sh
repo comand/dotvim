@@ -1,7 +1,7 @@
 #!/bin/bash
 cd plugdir/YouCompleteMe
 
-if [[ -d /opt/rt/devtoolset-8 ]]; then
+if [[ -d /opt/rh/devtoolset-8 ]]; then
     . /opt/rh/devtoolset-8/enable
 fi
 
