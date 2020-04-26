@@ -68,7 +68,7 @@ Plug 'lepture/vim-jinja', {'for': ['html', 'jinja']}
 Plug 'rust-lang/rust.vim', {'for': ['rust']}
 
 if v:version > 704
-Plug 'Valloric/YouCompleteMe', {'branch': 'legacy_py2'}
+Plug 'Valloric/YouCompleteMe', {'branch': 'legacy-py2'}
 endif
 
 " Postamble -------------------------------------------------------------- {{{
