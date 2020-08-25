@@ -257,6 +257,10 @@ set whichwrap+=h,l,~,[,]
 nnoremap <C-N> :bnext<CR>
 nnoremap <C-P> :bprev<CR>
 
+" use <Ctrl>+J/<Ctrl>+K to cycle through quickfix:
+map <C-j> :cn<CR>
+map <C-k> :cp<CR>
+
 " have % bounce between angled brackets, as well as the default kinds:
 set matchpairs+=<:>
 
