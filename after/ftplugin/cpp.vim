@@ -6,3 +6,5 @@ setlocal colorcolumn=+3
 setlocal comments-=://
 setlocal comments+=://!,:///,://
 let g:load_doxygen_syntax = 1
+
+let b:ale_linters = ['clangtidy']
