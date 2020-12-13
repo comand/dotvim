@@ -29,8 +29,11 @@ endif
 
 set encoding=utf-8
 
+" Turn off modifyOtherKeys
+" See https://vi.stackexchange.com/a/27400
+set t_TI= t_TE=
+
 let g:is_posix = 1
-"set t_Co=256
 if (has("termguicolors"))
     set termguicolors
 endif
