@@ -3,7 +3,7 @@
 "let g:ycm_server_log_level = 'debug'
 "let g:ycm_server_keep_logfiles = 1
 
-let g:ycm_confirm_extra_conf = 0
+"let g:ycm_confirm_extra_conf = 0
 let g:ycm_always_populate_location_list = 1
 let g:ycm_complete_in_comments = 1
 let g:ycm_max_diagnostics_to_display = 100
@@ -13,7 +13,7 @@ if has('gui_running')
     let g:ycm_warning_symbol = g:warning_symbol
 endif
 
-let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
+"let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
 
 let g:ycm_filter_diagnostics = {
     \ "cpp": {
