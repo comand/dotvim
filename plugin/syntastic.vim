@@ -1,6 +1,6 @@
 let g:syntastic_mode_map = { 'passive_filetypes' : ['cpp', 'spec'] }
 let g:syntastic_check_on_open = 1
-let g:syntastic_python_checkers = ['frosted']
+let g:syntastic_python_checkers = ['pyflakes']
 
 let g:syntastic_enable_signs = 1
 if has('gui_running')
