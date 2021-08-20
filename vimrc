@@ -144,16 +144,6 @@ if has('gui_running')
     set guioptions-=r
 endif
 
-if exists('g:gui_oni')
-    set number
-    set noswapfile
-    set smartcase
-    set noshowmode
-    set noruler
-    set laststatus=0
-    set noshowcmd
-endif
-
 " http://vim.wikia.com/wiki/Automatically_quit_Vim_if_quickfix_window_is_the_last
 au BufEnter * call MyLastWindow()
 function! MyLastWindow()
