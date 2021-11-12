@@ -21,7 +21,7 @@ call plug#begin('~/.vim/plugdir')
 
 " }}}
 
-Plug 'altercation/vim-colors-solarized'
+Plug 'lifepillar/vim-solarized8'
 Plug 'chrisbra/Recover.vim'
 Plug 'ervandew/supertab'
 Plug 'scrooloose/nerdcommenter'
@@ -34,11 +34,13 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 Plug 'mhinz/vim-signify'
 Plug 'vim-scripts/a.vim'
+Plug 'vim-scripts/BufOnly.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'haya14busa/incsearch.vim'
 Plug 'wsdjeg/vim-fetch'
 Plug 'RRethy/vim-illuminate'
 Plug 'junegunn/vim-peekaboo'
+Plug 'tweekmonster/startuptime.vim'
 
 Plug '~/.fzf'
   Plug 'junegunn/fzf.vim'
@@ -62,9 +64,10 @@ Plug 'Mizuchi/STL-Syntax', {'for': 'cpp'}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 Plug 'lepture/vim-jinja', {'for': ['html', 'jinja']}
 Plug 'rust-lang/rust.vim', {'for': ['rust']}
+Plug 'JamshedVesuna/vim-markdown-preview', {'for': 'markdown'}
 
 if v:version > 704
-Plug 'Valloric/YouCompleteMe', {'branch': 'legacy-py2'}
+Plug 'Valloric/YouCompleteMe'
 endif
 
 " Postamble -------------------------------------------------------------- {{{
